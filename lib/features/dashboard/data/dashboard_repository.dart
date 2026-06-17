@@ -23,6 +23,21 @@ class DashboardRepository {
     return result.parsedData?.properties ?? [];
   }
 
+  Future<List<Query$GetBookings$bookings>> getBookings(String propertyId) async {
+    final result = await _client.query$GetBookings(
+      Options$Query$GetBookings(
+        variables: Variables$Query$GetBookings(propertyId: propertyId),
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
+    );
+
+    if (result.hasException) {
+      throw Exception(result.exception.toString());
+    }
+
+    return result.parsedData?.bookings ?? [];
+  }
+
   Future<DashboardStats> getStats(String propertyId) async {
     // 1. Fetch Rooms
     final roomsResult = await _client.query$GetRooms(

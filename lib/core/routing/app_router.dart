@@ -8,6 +8,7 @@ import 'package:pms_admin/features/auth/presentation/auth_controller.dart';
 import 'package:pms_admin/features/auth/presentation/login_screen.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:pms_admin/features/housekeeping/presentation/housekeeping_screen.dart';
+import 'package:pms_admin/features/calendar/presentation/calendar_screen.dart';
 
 // Helper class to convert a Riverpod stream/provider into a Listenable for GoRouter
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -68,8 +69,7 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/bookings',
-            builder: (context, state) =>
-                const PlaceholderScreen(title: 'Bookings & Calendar'),
+            builder: (context, state) => const CalendarScreen(),
           ),
           GoRoute(
             path: '/housekeeping',
