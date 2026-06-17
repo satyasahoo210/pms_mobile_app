@@ -1,0 +1,110 @@
+query GetProperties {
+  properties {
+    id
+    name
+    timezone
+    tenantId
+    taxPercentage
+  }
+}
+
+query GetRooms($propertyId: String!) {
+  rooms(propertyId: $propertyId) {
+    id
+    roomNumber
+    status
+    housekeepingStatus
+    priorityCleaning
+    RoomType {
+      id
+      name
+      capacity
+      defaultPrice
+    }
+  }
+}
+
+query GetBookings($propertyId: String, $guestId: String) {
+  bookings(propertyId: $propertyId, guestId: $guestId) {
+    id
+    guestId
+    propertyId
+    status
+    checkInDate
+    checkOutDate
+    adults
+    children
+    totalAmount
+    notes
+    Guest {
+      id
+      name
+      phone
+      email
+    }
+    Payment {
+      id
+      amount
+      method
+      status
+      createdAt
+    }
+    BookingRoom {
+      id
+      roomId
+      roomTypeId
+      status
+      checkInDate
+      checkOutDate
+      Room {
+        id
+        roomNumber
+      }
+      RoomType {
+        id
+        name
+      }
+    }
+  }
+}
+
+query GetUsers {
+  users {
+    id
+    name
+    email
+    role
+  }
+}
+
+query GetRecentActivities($propertyId: String!) {
+  recentActivities(propertyId: $propertyId) {
+    id
+    propertyId
+    tenantId
+    title
+    type
+    staffName
+    createdAt
+    updatedAt
+  }
+}
+
+mutation UpdateRoomStatus($id: ID!, $status: HousekeepingStatus!) {
+  updateRoomStatus(id: $id, status: $status) {
+    id
+    roomNumber
+    housekeepingStatus
+    status
+  }
+}
+
+mutation UpdateRoom($id: ID!, $input: UpdateRoomInput!) {
+  updateRoom(id: $id, input: $input) {
+    id
+    roomNumber
+    status
+    housekeepingStatus
+    priorityCleaning
+  }
+}

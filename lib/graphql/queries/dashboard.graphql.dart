@@ -1,0 +1,6588 @@
+import '../schema.graphql.dart';
+import 'dart:async';
+import 'package:flutter/widgets.dart' as widgets;
+import 'package:gql/ast.dart';
+import 'package:graphql/client.dart' as graphql;
+import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
+
+class Query$GetProperties {
+  Query$GetProperties({
+    required this.properties,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetProperties.fromJson(Map<String, dynamic> json) {
+    final l$properties = json['properties'];
+    final l$$__typename = json['__typename'];
+    return Query$GetProperties(
+      properties: (l$properties as List<dynamic>)
+          .map((e) => Query$GetProperties$properties.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetProperties$properties> properties;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$properties = properties;
+    _resultData['properties'] = l$properties.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$properties = properties;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$properties.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetProperties) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$properties = properties;
+    final lOther$properties = other.properties;
+    if (l$properties.length != lOther$properties.length) {
+      return false;
+    }
+    for (int i = 0; i < l$properties.length; i++) {
+      final l$properties$entry = l$properties[i];
+      final lOther$properties$entry = lOther$properties[i];
+      if (l$properties$entry != lOther$properties$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetProperties on Query$GetProperties {
+  CopyWith$Query$GetProperties<Query$GetProperties> get copyWith =>
+      CopyWith$Query$GetProperties(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetProperties<TRes> {
+  factory CopyWith$Query$GetProperties(
+    Query$GetProperties instance,
+    TRes Function(Query$GetProperties) then,
+  ) = _CopyWithImpl$Query$GetProperties;
+
+  factory CopyWith$Query$GetProperties.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetProperties;
+
+  TRes call({
+    List<Query$GetProperties$properties>? properties,
+    String? $__typename,
+  });
+  TRes properties(
+      Iterable<Query$GetProperties$properties> Function(
+              Iterable<
+                  CopyWith$Query$GetProperties$properties<
+                      Query$GetProperties$properties>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetProperties<TRes>
+    implements CopyWith$Query$GetProperties<TRes> {
+  _CopyWithImpl$Query$GetProperties(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetProperties _instance;
+
+  final TRes Function(Query$GetProperties) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? properties = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetProperties(
+        properties: properties == _undefined || properties == null
+            ? _instance.properties
+            : (properties as List<Query$GetProperties$properties>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes properties(
+          Iterable<Query$GetProperties$properties> Function(
+                  Iterable<
+                      CopyWith$Query$GetProperties$properties<
+                          Query$GetProperties$properties>>)
+              _fn) =>
+      call(
+          properties: _fn(_instance.properties
+              .map((e) => CopyWith$Query$GetProperties$properties(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$GetProperties<TRes>
+    implements CopyWith$Query$GetProperties<TRes> {
+  _CopyWithStubImpl$Query$GetProperties(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetProperties$properties>? properties,
+    String? $__typename,
+  }) =>
+      _res;
+
+  properties(_fn) => _res;
+}
+
+const documentNodeQueryGetProperties = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetProperties'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'properties'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'timezone'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'tenantId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'taxPercentage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetProperties _parserFn$Query$GetProperties(Map<String, dynamic> data) =>
+    Query$GetProperties.fromJson(data);
+typedef OnQueryComplete$Query$GetProperties = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetProperties?,
+);
+
+class Options$Query$GetProperties
+    extends graphql.QueryOptions<Query$GetProperties> {
+  Options$Query$GetProperties({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetProperties? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetProperties? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$GetProperties(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetProperties,
+          parserFn: _parserFn$Query$GetProperties,
+        );
+
+  final OnQueryComplete$Query$GetProperties? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetProperties
+    extends graphql.WatchQueryOptions<Query$GetProperties> {
+  WatchOptions$Query$GetProperties({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetProperties? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetProperties,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetProperties,
+        );
+}
+
+class FetchMoreOptions$Query$GetProperties extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetProperties(
+      {required graphql.UpdateQuery updateQuery})
+      : super(
+          updateQuery: updateQuery,
+          document: documentNodeQueryGetProperties,
+        );
+}
+
+extension ClientExtension$Query$GetProperties on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetProperties>> query$GetProperties(
+          [Options$Query$GetProperties? options]) async =>
+      await this.query(options ?? Options$Query$GetProperties());
+
+  graphql.ObservableQuery<Query$GetProperties> watchQuery$GetProperties(
+          [WatchOptions$Query$GetProperties? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$GetProperties());
+
+  void writeQuery$GetProperties({
+    required Query$GetProperties data,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+            operation:
+                graphql.Operation(document: documentNodeQueryGetProperties)),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+
+  Query$GetProperties? readQuery$GetProperties({bool optimistic = true}) {
+    final result = this.readQuery(
+      graphql.Request(
+          operation:
+              graphql.Operation(document: documentNodeQueryGetProperties)),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$GetProperties.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetProperties> useQuery$GetProperties(
+        [Options$Query$GetProperties? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$GetProperties());
+graphql.ObservableQuery<Query$GetProperties> useWatchQuery$GetProperties(
+        [WatchOptions$Query$GetProperties? options]) =>
+    graphql_flutter
+        .useWatchQuery(options ?? WatchOptions$Query$GetProperties());
+
+class Query$GetProperties$Widget
+    extends graphql_flutter.Query<Query$GetProperties> {
+  Query$GetProperties$Widget({
+    widgets.Key? key,
+    Options$Query$GetProperties? options,
+    required graphql_flutter.QueryBuilder<Query$GetProperties> builder,
+  }) : super(
+          key: key,
+          options: options ?? Options$Query$GetProperties(),
+          builder: builder,
+        );
+}
+
+class Query$GetProperties$properties {
+  Query$GetProperties$properties({
+    required this.id,
+    required this.name,
+    required this.timezone,
+    required this.tenantId,
+    this.taxPercentage,
+    this.$__typename = 'Property',
+  });
+
+  factory Query$GetProperties$properties.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$timezone = json['timezone'];
+    final l$tenantId = json['tenantId'];
+    final l$taxPercentage = json['taxPercentage'];
+    final l$$__typename = json['__typename'];
+    return Query$GetProperties$properties(
+      id: (l$id as String),
+      name: (l$name as String),
+      timezone: (l$timezone as String),
+      tenantId: (l$tenantId as String),
+      taxPercentage: (l$taxPercentage as num?)?.toDouble(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final String timezone;
+
+  final String tenantId;
+
+  final double? taxPercentage;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$timezone = timezone;
+    _resultData['timezone'] = l$timezone;
+    final l$tenantId = tenantId;
+    _resultData['tenantId'] = l$tenantId;
+    final l$taxPercentage = taxPercentage;
+    _resultData['taxPercentage'] = l$taxPercentage;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$timezone = timezone;
+    final l$tenantId = tenantId;
+    final l$taxPercentage = taxPercentage;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$timezone,
+      l$tenantId,
+      l$taxPercentage,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetProperties$properties) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$timezone = timezone;
+    final lOther$timezone = other.timezone;
+    if (l$timezone != lOther$timezone) {
+      return false;
+    }
+    final l$tenantId = tenantId;
+    final lOther$tenantId = other.tenantId;
+    if (l$tenantId != lOther$tenantId) {
+      return false;
+    }
+    final l$taxPercentage = taxPercentage;
+    final lOther$taxPercentage = other.taxPercentage;
+    if (l$taxPercentage != lOther$taxPercentage) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetProperties$properties
+    on Query$GetProperties$properties {
+  CopyWith$Query$GetProperties$properties<Query$GetProperties$properties>
+      get copyWith => CopyWith$Query$GetProperties$properties(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetProperties$properties<TRes> {
+  factory CopyWith$Query$GetProperties$properties(
+    Query$GetProperties$properties instance,
+    TRes Function(Query$GetProperties$properties) then,
+  ) = _CopyWithImpl$Query$GetProperties$properties;
+
+  factory CopyWith$Query$GetProperties$properties.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetProperties$properties;
+
+  TRes call({
+    String? id,
+    String? name,
+    String? timezone,
+    String? tenantId,
+    double? taxPercentage,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetProperties$properties<TRes>
+    implements CopyWith$Query$GetProperties$properties<TRes> {
+  _CopyWithImpl$Query$GetProperties$properties(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetProperties$properties _instance;
+
+  final TRes Function(Query$GetProperties$properties) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? timezone = _undefined,
+    Object? tenantId = _undefined,
+    Object? taxPercentage = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetProperties$properties(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        timezone: timezone == _undefined || timezone == null
+            ? _instance.timezone
+            : (timezone as String),
+        tenantId: tenantId == _undefined || tenantId == null
+            ? _instance.tenantId
+            : (tenantId as String),
+        taxPercentage: taxPercentage == _undefined
+            ? _instance.taxPercentage
+            : (taxPercentage as double?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetProperties$properties<TRes>
+    implements CopyWith$Query$GetProperties$properties<TRes> {
+  _CopyWithStubImpl$Query$GetProperties$properties(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    String? timezone,
+    String? tenantId,
+    double? taxPercentage,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Query$GetRooms {
+  factory Variables$Query$GetRooms({required String propertyId}) =>
+      Variables$Query$GetRooms._({
+        r'propertyId': propertyId,
+      });
+
+  Variables$Query$GetRooms._(this._$data);
+
+  factory Variables$Query$GetRooms.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$propertyId = data['propertyId'];
+    result$data['propertyId'] = (l$propertyId as String);
+    return Variables$Query$GetRooms._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get propertyId => (_$data['propertyId'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$propertyId = propertyId;
+    result$data['propertyId'] = l$propertyId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$GetRooms<Variables$Query$GetRooms> get copyWith =>
+      CopyWith$Variables$Query$GetRooms(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$GetRooms) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$propertyId = propertyId;
+    return Object.hashAll([l$propertyId]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$GetRooms<TRes> {
+  factory CopyWith$Variables$Query$GetRooms(
+    Variables$Query$GetRooms instance,
+    TRes Function(Variables$Query$GetRooms) then,
+  ) = _CopyWithImpl$Variables$Query$GetRooms;
+
+  factory CopyWith$Variables$Query$GetRooms.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$GetRooms;
+
+  TRes call({String? propertyId});
+}
+
+class _CopyWithImpl$Variables$Query$GetRooms<TRes>
+    implements CopyWith$Variables$Query$GetRooms<TRes> {
+  _CopyWithImpl$Variables$Query$GetRooms(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$GetRooms _instance;
+
+  final TRes Function(Variables$Query$GetRooms) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? propertyId = _undefined}) =>
+      _then(Variables$Query$GetRooms._({
+        ..._instance._$data,
+        if (propertyId != _undefined && propertyId != null)
+          'propertyId': (propertyId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$GetRooms<TRes>
+    implements CopyWith$Variables$Query$GetRooms<TRes> {
+  _CopyWithStubImpl$Variables$Query$GetRooms(this._res);
+
+  TRes _res;
+
+  call({String? propertyId}) => _res;
+}
+
+class Query$GetRooms {
+  Query$GetRooms({
+    required this.rooms,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetRooms.fromJson(Map<String, dynamic> json) {
+    final l$rooms = json['rooms'];
+    final l$$__typename = json['__typename'];
+    return Query$GetRooms(
+      rooms: (l$rooms as List<dynamic>)
+          .map(
+              (e) => Query$GetRooms$rooms.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetRooms$rooms> rooms;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$rooms = rooms;
+    _resultData['rooms'] = l$rooms.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$rooms = rooms;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$rooms.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetRooms) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$rooms = rooms;
+    final lOther$rooms = other.rooms;
+    if (l$rooms.length != lOther$rooms.length) {
+      return false;
+    }
+    for (int i = 0; i < l$rooms.length; i++) {
+      final l$rooms$entry = l$rooms[i];
+      final lOther$rooms$entry = lOther$rooms[i];
+      if (l$rooms$entry != lOther$rooms$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetRooms on Query$GetRooms {
+  CopyWith$Query$GetRooms<Query$GetRooms> get copyWith =>
+      CopyWith$Query$GetRooms(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetRooms<TRes> {
+  factory CopyWith$Query$GetRooms(
+    Query$GetRooms instance,
+    TRes Function(Query$GetRooms) then,
+  ) = _CopyWithImpl$Query$GetRooms;
+
+  factory CopyWith$Query$GetRooms.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetRooms;
+
+  TRes call({
+    List<Query$GetRooms$rooms>? rooms,
+    String? $__typename,
+  });
+  TRes rooms(
+      Iterable<Query$GetRooms$rooms> Function(
+              Iterable<CopyWith$Query$GetRooms$rooms<Query$GetRooms$rooms>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetRooms<TRes>
+    implements CopyWith$Query$GetRooms<TRes> {
+  _CopyWithImpl$Query$GetRooms(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetRooms _instance;
+
+  final TRes Function(Query$GetRooms) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? rooms = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetRooms(
+        rooms: rooms == _undefined || rooms == null
+            ? _instance.rooms
+            : (rooms as List<Query$GetRooms$rooms>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes rooms(
+          Iterable<Query$GetRooms$rooms> Function(
+                  Iterable<CopyWith$Query$GetRooms$rooms<Query$GetRooms$rooms>>)
+              _fn) =>
+      call(
+          rooms: _fn(_instance.rooms.map((e) => CopyWith$Query$GetRooms$rooms(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$GetRooms<TRes>
+    implements CopyWith$Query$GetRooms<TRes> {
+  _CopyWithStubImpl$Query$GetRooms(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetRooms$rooms>? rooms,
+    String? $__typename,
+  }) =>
+      _res;
+
+  rooms(_fn) => _res;
+}
+
+const documentNodeQueryGetRooms = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetRooms'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'propertyId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'rooms'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'propertyId'),
+            value: VariableNode(name: NameNode(value: 'propertyId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'roomNumber'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'housekeepingStatus'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'priorityCleaning'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'RoomType'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'capacity'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'defaultPrice'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetRooms _parserFn$Query$GetRooms(Map<String, dynamic> data) =>
+    Query$GetRooms.fromJson(data);
+typedef OnQueryComplete$Query$GetRooms = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetRooms?,
+);
+
+class Options$Query$GetRooms extends graphql.QueryOptions<Query$GetRooms> {
+  Options$Query$GetRooms({
+    String? operationName,
+    required Variables$Query$GetRooms variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetRooms? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetRooms? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$GetRooms(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetRooms,
+          parserFn: _parserFn$Query$GetRooms,
+        );
+
+  final OnQueryComplete$Query$GetRooms? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetRooms
+    extends graphql.WatchQueryOptions<Query$GetRooms> {
+  WatchOptions$Query$GetRooms({
+    String? operationName,
+    required Variables$Query$GetRooms variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetRooms? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetRooms,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetRooms,
+        );
+}
+
+class FetchMoreOptions$Query$GetRooms extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetRooms({
+    required graphql.UpdateQuery updateQuery,
+    required Variables$Query$GetRooms variables,
+  }) : super(
+          updateQuery: updateQuery,
+          variables: variables.toJson(),
+          document: documentNodeQueryGetRooms,
+        );
+}
+
+extension ClientExtension$Query$GetRooms on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetRooms>> query$GetRooms(
+          Options$Query$GetRooms options) async =>
+      await this.query(options);
+
+  graphql.ObservableQuery<Query$GetRooms> watchQuery$GetRooms(
+          WatchOptions$Query$GetRooms options) =>
+      this.watchQuery(options);
+
+  void writeQuery$GetRooms({
+    required Query$GetRooms data,
+    required Variables$Query$GetRooms variables,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+          operation: graphql.Operation(document: documentNodeQueryGetRooms),
+          variables: variables.toJson(),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+
+  Query$GetRooms? readQuery$GetRooms({
+    required Variables$Query$GetRooms variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation: graphql.Operation(document: documentNodeQueryGetRooms),
+        variables: variables.toJson(),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$GetRooms.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetRooms> useQuery$GetRooms(
+        Options$Query$GetRooms options) =>
+    graphql_flutter.useQuery(options);
+graphql.ObservableQuery<Query$GetRooms> useWatchQuery$GetRooms(
+        WatchOptions$Query$GetRooms options) =>
+    graphql_flutter.useWatchQuery(options);
+
+class Query$GetRooms$Widget extends graphql_flutter.Query<Query$GetRooms> {
+  Query$GetRooms$Widget({
+    widgets.Key? key,
+    required Options$Query$GetRooms options,
+    required graphql_flutter.QueryBuilder<Query$GetRooms> builder,
+  }) : super(
+          key: key,
+          options: options,
+          builder: builder,
+        );
+}
+
+class Query$GetRooms$rooms {
+  Query$GetRooms$rooms({
+    required this.id,
+    required this.roomNumber,
+    required this.status,
+    required this.housekeepingStatus,
+    required this.priorityCleaning,
+    this.RoomType,
+    this.$__typename = 'Room',
+  });
+
+  factory Query$GetRooms$rooms.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$roomNumber = json['roomNumber'];
+    final l$status = json['status'];
+    final l$housekeepingStatus = json['housekeepingStatus'];
+    final l$priorityCleaning = json['priorityCleaning'];
+    final l$RoomType = json['RoomType'];
+    final l$$__typename = json['__typename'];
+    return Query$GetRooms$rooms(
+      id: (l$id as String),
+      roomNumber: (l$roomNumber as String),
+      status: fromJson$Enum$RoomStatus((l$status as String)),
+      housekeepingStatus:
+          fromJson$Enum$HousekeepingStatus((l$housekeepingStatus as String)),
+      priorityCleaning: (l$priorityCleaning as bool),
+      RoomType: l$RoomType == null
+          ? null
+          : Query$GetRooms$rooms$RoomType.fromJson(
+              (l$RoomType as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String roomNumber;
+
+  final Enum$RoomStatus status;
+
+  final Enum$HousekeepingStatus housekeepingStatus;
+
+  final bool priorityCleaning;
+
+  final Query$GetRooms$rooms$RoomType? RoomType;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$roomNumber = roomNumber;
+    _resultData['roomNumber'] = l$roomNumber;
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$RoomStatus(l$status);
+    final l$housekeepingStatus = housekeepingStatus;
+    _resultData['housekeepingStatus'] =
+        toJson$Enum$HousekeepingStatus(l$housekeepingStatus);
+    final l$priorityCleaning = priorityCleaning;
+    _resultData['priorityCleaning'] = l$priorityCleaning;
+    final l$RoomType = RoomType;
+    _resultData['RoomType'] = l$RoomType?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$roomNumber = roomNumber;
+    final l$status = status;
+    final l$housekeepingStatus = housekeepingStatus;
+    final l$priorityCleaning = priorityCleaning;
+    final l$RoomType = RoomType;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$roomNumber,
+      l$status,
+      l$housekeepingStatus,
+      l$priorityCleaning,
+      l$RoomType,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetRooms$rooms) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$roomNumber = roomNumber;
+    final lOther$roomNumber = other.roomNumber;
+    if (l$roomNumber != lOther$roomNumber) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$housekeepingStatus = housekeepingStatus;
+    final lOther$housekeepingStatus = other.housekeepingStatus;
+    if (l$housekeepingStatus != lOther$housekeepingStatus) {
+      return false;
+    }
+    final l$priorityCleaning = priorityCleaning;
+    final lOther$priorityCleaning = other.priorityCleaning;
+    if (l$priorityCleaning != lOther$priorityCleaning) {
+      return false;
+    }
+    final l$RoomType = RoomType;
+    final lOther$RoomType = other.RoomType;
+    if (l$RoomType != lOther$RoomType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetRooms$rooms on Query$GetRooms$rooms {
+  CopyWith$Query$GetRooms$rooms<Query$GetRooms$rooms> get copyWith =>
+      CopyWith$Query$GetRooms$rooms(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetRooms$rooms<TRes> {
+  factory CopyWith$Query$GetRooms$rooms(
+    Query$GetRooms$rooms instance,
+    TRes Function(Query$GetRooms$rooms) then,
+  ) = _CopyWithImpl$Query$GetRooms$rooms;
+
+  factory CopyWith$Query$GetRooms$rooms.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetRooms$rooms;
+
+  TRes call({
+    String? id,
+    String? roomNumber,
+    Enum$RoomStatus? status,
+    Enum$HousekeepingStatus? housekeepingStatus,
+    bool? priorityCleaning,
+    Query$GetRooms$rooms$RoomType? RoomType,
+    String? $__typename,
+  });
+  CopyWith$Query$GetRooms$rooms$RoomType<TRes> get RoomType;
+}
+
+class _CopyWithImpl$Query$GetRooms$rooms<TRes>
+    implements CopyWith$Query$GetRooms$rooms<TRes> {
+  _CopyWithImpl$Query$GetRooms$rooms(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetRooms$rooms _instance;
+
+  final TRes Function(Query$GetRooms$rooms) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? roomNumber = _undefined,
+    Object? status = _undefined,
+    Object? housekeepingStatus = _undefined,
+    Object? priorityCleaning = _undefined,
+    Object? RoomType = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetRooms$rooms(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        roomNumber: roomNumber == _undefined || roomNumber == null
+            ? _instance.roomNumber
+            : (roomNumber as String),
+        status: status == _undefined || status == null
+            ? _instance.status
+            : (status as Enum$RoomStatus),
+        housekeepingStatus:
+            housekeepingStatus == _undefined || housekeepingStatus == null
+                ? _instance.housekeepingStatus
+                : (housekeepingStatus as Enum$HousekeepingStatus),
+        priorityCleaning:
+            priorityCleaning == _undefined || priorityCleaning == null
+                ? _instance.priorityCleaning
+                : (priorityCleaning as bool),
+        RoomType: RoomType == _undefined
+            ? _instance.RoomType
+            : (RoomType as Query$GetRooms$rooms$RoomType?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetRooms$rooms$RoomType<TRes> get RoomType {
+    final local$RoomType = _instance.RoomType;
+    return local$RoomType == null
+        ? CopyWith$Query$GetRooms$rooms$RoomType.stub(_then(_instance))
+        : CopyWith$Query$GetRooms$rooms$RoomType(
+            local$RoomType, (e) => call(RoomType: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetRooms$rooms<TRes>
+    implements CopyWith$Query$GetRooms$rooms<TRes> {
+  _CopyWithStubImpl$Query$GetRooms$rooms(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? roomNumber,
+    Enum$RoomStatus? status,
+    Enum$HousekeepingStatus? housekeepingStatus,
+    bool? priorityCleaning,
+    Query$GetRooms$rooms$RoomType? RoomType,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetRooms$rooms$RoomType<TRes> get RoomType =>
+      CopyWith$Query$GetRooms$rooms$RoomType.stub(_res);
+}
+
+class Query$GetRooms$rooms$RoomType {
+  Query$GetRooms$rooms$RoomType({
+    required this.id,
+    required this.name,
+    required this.capacity,
+    this.defaultPrice,
+    this.$__typename = 'RoomType',
+  });
+
+  factory Query$GetRooms$rooms$RoomType.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$capacity = json['capacity'];
+    final l$defaultPrice = json['defaultPrice'];
+    final l$$__typename = json['__typename'];
+    return Query$GetRooms$rooms$RoomType(
+      id: (l$id as String),
+      name: (l$name as String),
+      capacity: (l$capacity as int),
+      defaultPrice: (l$defaultPrice as num?)?.toDouble(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final int capacity;
+
+  final double? defaultPrice;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$capacity = capacity;
+    _resultData['capacity'] = l$capacity;
+    final l$defaultPrice = defaultPrice;
+    _resultData['defaultPrice'] = l$defaultPrice;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$capacity = capacity;
+    final l$defaultPrice = defaultPrice;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$capacity,
+      l$defaultPrice,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetRooms$rooms$RoomType) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$capacity = capacity;
+    final lOther$capacity = other.capacity;
+    if (l$capacity != lOther$capacity) {
+      return false;
+    }
+    final l$defaultPrice = defaultPrice;
+    final lOther$defaultPrice = other.defaultPrice;
+    if (l$defaultPrice != lOther$defaultPrice) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetRooms$rooms$RoomType
+    on Query$GetRooms$rooms$RoomType {
+  CopyWith$Query$GetRooms$rooms$RoomType<Query$GetRooms$rooms$RoomType>
+      get copyWith => CopyWith$Query$GetRooms$rooms$RoomType(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetRooms$rooms$RoomType<TRes> {
+  factory CopyWith$Query$GetRooms$rooms$RoomType(
+    Query$GetRooms$rooms$RoomType instance,
+    TRes Function(Query$GetRooms$rooms$RoomType) then,
+  ) = _CopyWithImpl$Query$GetRooms$rooms$RoomType;
+
+  factory CopyWith$Query$GetRooms$rooms$RoomType.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetRooms$rooms$RoomType;
+
+  TRes call({
+    String? id,
+    String? name,
+    int? capacity,
+    double? defaultPrice,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetRooms$rooms$RoomType<TRes>
+    implements CopyWith$Query$GetRooms$rooms$RoomType<TRes> {
+  _CopyWithImpl$Query$GetRooms$rooms$RoomType(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetRooms$rooms$RoomType _instance;
+
+  final TRes Function(Query$GetRooms$rooms$RoomType) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? capacity = _undefined,
+    Object? defaultPrice = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetRooms$rooms$RoomType(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        capacity: capacity == _undefined || capacity == null
+            ? _instance.capacity
+            : (capacity as int),
+        defaultPrice: defaultPrice == _undefined
+            ? _instance.defaultPrice
+            : (defaultPrice as double?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetRooms$rooms$RoomType<TRes>
+    implements CopyWith$Query$GetRooms$rooms$RoomType<TRes> {
+  _CopyWithStubImpl$Query$GetRooms$rooms$RoomType(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    int? capacity,
+    double? defaultPrice,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Query$GetBookings {
+  factory Variables$Query$GetBookings({
+    String? propertyId,
+    String? guestId,
+  }) =>
+      Variables$Query$GetBookings._({
+        if (propertyId != null) r'propertyId': propertyId,
+        if (guestId != null) r'guestId': guestId,
+      });
+
+  Variables$Query$GetBookings._(this._$data);
+
+  factory Variables$Query$GetBookings.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('propertyId')) {
+      final l$propertyId = data['propertyId'];
+      result$data['propertyId'] = (l$propertyId as String?);
+    }
+    if (data.containsKey('guestId')) {
+      final l$guestId = data['guestId'];
+      result$data['guestId'] = (l$guestId as String?);
+    }
+    return Variables$Query$GetBookings._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get propertyId => (_$data['propertyId'] as String?);
+
+  String? get guestId => (_$data['guestId'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('propertyId')) {
+      final l$propertyId = propertyId;
+      result$data['propertyId'] = l$propertyId;
+    }
+    if (_$data.containsKey('guestId')) {
+      final l$guestId = guestId;
+      result$data['guestId'] = l$guestId;
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$GetBookings<Variables$Query$GetBookings>
+      get copyWith => CopyWith$Variables$Query$GetBookings(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$GetBookings) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (_$data.containsKey('propertyId') !=
+        other._$data.containsKey('propertyId')) {
+      return false;
+    }
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    final l$guestId = guestId;
+    final lOther$guestId = other.guestId;
+    if (_$data.containsKey('guestId') != other._$data.containsKey('guestId')) {
+      return false;
+    }
+    if (l$guestId != lOther$guestId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$propertyId = propertyId;
+    final l$guestId = guestId;
+    return Object.hashAll([
+      _$data.containsKey('propertyId') ? l$propertyId : const {},
+      _$data.containsKey('guestId') ? l$guestId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$GetBookings<TRes> {
+  factory CopyWith$Variables$Query$GetBookings(
+    Variables$Query$GetBookings instance,
+    TRes Function(Variables$Query$GetBookings) then,
+  ) = _CopyWithImpl$Variables$Query$GetBookings;
+
+  factory CopyWith$Variables$Query$GetBookings.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$GetBookings;
+
+  TRes call({
+    String? propertyId,
+    String? guestId,
+  });
+}
+
+class _CopyWithImpl$Variables$Query$GetBookings<TRes>
+    implements CopyWith$Variables$Query$GetBookings<TRes> {
+  _CopyWithImpl$Variables$Query$GetBookings(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$GetBookings _instance;
+
+  final TRes Function(Variables$Query$GetBookings) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? propertyId = _undefined,
+    Object? guestId = _undefined,
+  }) =>
+      _then(Variables$Query$GetBookings._({
+        ..._instance._$data,
+        if (propertyId != _undefined) 'propertyId': (propertyId as String?),
+        if (guestId != _undefined) 'guestId': (guestId as String?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$GetBookings<TRes>
+    implements CopyWith$Variables$Query$GetBookings<TRes> {
+  _CopyWithStubImpl$Variables$Query$GetBookings(this._res);
+
+  TRes _res;
+
+  call({
+    String? propertyId,
+    String? guestId,
+  }) =>
+      _res;
+}
+
+class Query$GetBookings {
+  Query$GetBookings({
+    required this.bookings,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetBookings.fromJson(Map<String, dynamic> json) {
+    final l$bookings = json['bookings'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings(
+      bookings: (l$bookings as List<dynamic>)
+          .map((e) =>
+              Query$GetBookings$bookings.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetBookings$bookings> bookings;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$bookings = bookings;
+    _resultData['bookings'] = l$bookings.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$bookings = bookings;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$bookings.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$bookings = bookings;
+    final lOther$bookings = other.bookings;
+    if (l$bookings.length != lOther$bookings.length) {
+      return false;
+    }
+    for (int i = 0; i < l$bookings.length; i++) {
+      final l$bookings$entry = l$bookings[i];
+      final lOther$bookings$entry = lOther$bookings[i];
+      if (l$bookings$entry != lOther$bookings$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings on Query$GetBookings {
+  CopyWith$Query$GetBookings<Query$GetBookings> get copyWith =>
+      CopyWith$Query$GetBookings(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetBookings<TRes> {
+  factory CopyWith$Query$GetBookings(
+    Query$GetBookings instance,
+    TRes Function(Query$GetBookings) then,
+  ) = _CopyWithImpl$Query$GetBookings;
+
+  factory CopyWith$Query$GetBookings.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetBookings;
+
+  TRes call({
+    List<Query$GetBookings$bookings>? bookings,
+    String? $__typename,
+  });
+  TRes bookings(
+      Iterable<Query$GetBookings$bookings> Function(
+              Iterable<
+                  CopyWith$Query$GetBookings$bookings<
+                      Query$GetBookings$bookings>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetBookings<TRes>
+    implements CopyWith$Query$GetBookings<TRes> {
+  _CopyWithImpl$Query$GetBookings(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings _instance;
+
+  final TRes Function(Query$GetBookings) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? bookings = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings(
+        bookings: bookings == _undefined || bookings == null
+            ? _instance.bookings
+            : (bookings as List<Query$GetBookings$bookings>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes bookings(
+          Iterable<Query$GetBookings$bookings> Function(
+                  Iterable<
+                      CopyWith$Query$GetBookings$bookings<
+                          Query$GetBookings$bookings>>)
+              _fn) =>
+      call(
+          bookings: _fn(
+              _instance.bookings.map((e) => CopyWith$Query$GetBookings$bookings(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$GetBookings<TRes>
+    implements CopyWith$Query$GetBookings<TRes> {
+  _CopyWithStubImpl$Query$GetBookings(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetBookings$bookings>? bookings,
+    String? $__typename,
+  }) =>
+      _res;
+
+  bookings(_fn) => _res;
+}
+
+const documentNodeQueryGetBookings = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetBookings'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'propertyId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'guestId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'bookings'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'propertyId'),
+            value: VariableNode(name: NameNode(value: 'propertyId')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'guestId'),
+            value: VariableNode(name: NameNode(value: 'guestId')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'guestId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'propertyId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkInDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkOutDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'adults'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'children'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'totalAmount'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'notes'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'Guest'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'phone'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'email'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'Payment'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'amount'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'method'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'status'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'createdAt'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'BookingRoom'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'roomId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'roomTypeId'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'status'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'checkInDate'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'checkOutDate'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'Room'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'id'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'roomNumber'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: 'RoomType'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'id'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'name'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetBookings _parserFn$Query$GetBookings(Map<String, dynamic> data) =>
+    Query$GetBookings.fromJson(data);
+typedef OnQueryComplete$Query$GetBookings = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetBookings?,
+);
+
+class Options$Query$GetBookings
+    extends graphql.QueryOptions<Query$GetBookings> {
+  Options$Query$GetBookings({
+    String? operationName,
+    Variables$Query$GetBookings? variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetBookings? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetBookings? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$GetBookings(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetBookings,
+          parserFn: _parserFn$Query$GetBookings,
+        );
+
+  final OnQueryComplete$Query$GetBookings? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetBookings
+    extends graphql.WatchQueryOptions<Query$GetBookings> {
+  WatchOptions$Query$GetBookings({
+    String? operationName,
+    Variables$Query$GetBookings? variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetBookings? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables?.toJson() ?? {},
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetBookings,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetBookings,
+        );
+}
+
+class FetchMoreOptions$Query$GetBookings extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetBookings({
+    required graphql.UpdateQuery updateQuery,
+    Variables$Query$GetBookings? variables,
+  }) : super(
+          updateQuery: updateQuery,
+          variables: variables?.toJson() ?? {},
+          document: documentNodeQueryGetBookings,
+        );
+}
+
+extension ClientExtension$Query$GetBookings on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetBookings>> query$GetBookings(
+          [Options$Query$GetBookings? options]) async =>
+      await this.query(options ?? Options$Query$GetBookings());
+
+  graphql.ObservableQuery<Query$GetBookings> watchQuery$GetBookings(
+          [WatchOptions$Query$GetBookings? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$GetBookings());
+
+  void writeQuery$GetBookings({
+    required Query$GetBookings data,
+    Variables$Query$GetBookings? variables,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+          operation: graphql.Operation(document: documentNodeQueryGetBookings),
+          variables: variables?.toJson() ?? const {},
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+
+  Query$GetBookings? readQuery$GetBookings({
+    Variables$Query$GetBookings? variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation: graphql.Operation(document: documentNodeQueryGetBookings),
+        variables: variables?.toJson() ?? const {},
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$GetBookings.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetBookings> useQuery$GetBookings(
+        [Options$Query$GetBookings? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$GetBookings());
+graphql.ObservableQuery<Query$GetBookings> useWatchQuery$GetBookings(
+        [WatchOptions$Query$GetBookings? options]) =>
+    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$GetBookings());
+
+class Query$GetBookings$Widget
+    extends graphql_flutter.Query<Query$GetBookings> {
+  Query$GetBookings$Widget({
+    widgets.Key? key,
+    Options$Query$GetBookings? options,
+    required graphql_flutter.QueryBuilder<Query$GetBookings> builder,
+  }) : super(
+          key: key,
+          options: options ?? Options$Query$GetBookings(),
+          builder: builder,
+        );
+}
+
+class Query$GetBookings$bookings {
+  Query$GetBookings$bookings({
+    required this.id,
+    required this.guestId,
+    required this.propertyId,
+    this.status,
+    required this.checkInDate,
+    required this.checkOutDate,
+    this.adults,
+    this.children,
+    this.totalAmount,
+    this.notes,
+    this.Guest,
+    this.Payment,
+    this.BookingRoom,
+    this.$__typename = 'Booking',
+  });
+
+  factory Query$GetBookings$bookings.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$guestId = json['guestId'];
+    final l$propertyId = json['propertyId'];
+    final l$status = json['status'];
+    final l$checkInDate = json['checkInDate'];
+    final l$checkOutDate = json['checkOutDate'];
+    final l$adults = json['adults'];
+    final l$children = json['children'];
+    final l$totalAmount = json['totalAmount'];
+    final l$notes = json['notes'];
+    final l$Guest = json['Guest'];
+    final l$Payment = json['Payment'];
+    final l$BookingRoom = json['BookingRoom'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings$bookings(
+      id: (l$id as String),
+      guestId: (l$guestId as String),
+      propertyId: (l$propertyId as String),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$BookingStatus((l$status as String)),
+      checkInDate: (l$checkInDate as String),
+      checkOutDate: (l$checkOutDate as String),
+      adults: (l$adults as int?),
+      children: (l$children as int?),
+      totalAmount: (l$totalAmount as num?)?.toDouble(),
+      notes: (l$notes as String?),
+      Guest: l$Guest == null
+          ? null
+          : Query$GetBookings$bookings$Guest.fromJson(
+              (l$Guest as Map<String, dynamic>)),
+      Payment: (l$Payment as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$GetBookings$bookings$Payment.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      BookingRoom: (l$BookingRoom as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : Query$GetBookings$bookings$BookingRoom.fromJson(
+                  (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String guestId;
+
+  final String propertyId;
+
+  final Enum$BookingStatus? status;
+
+  final String checkInDate;
+
+  final String checkOutDate;
+
+  final int? adults;
+
+  final int? children;
+
+  final double? totalAmount;
+
+  final String? notes;
+
+  final Query$GetBookings$bookings$Guest? Guest;
+
+  final List<Query$GetBookings$bookings$Payment?>? Payment;
+
+  final List<Query$GetBookings$bookings$BookingRoom?>? BookingRoom;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$guestId = guestId;
+    _resultData['guestId'] = l$guestId;
+    final l$propertyId = propertyId;
+    _resultData['propertyId'] = l$propertyId;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$BookingStatus(l$status);
+    final l$checkInDate = checkInDate;
+    _resultData['checkInDate'] = l$checkInDate;
+    final l$checkOutDate = checkOutDate;
+    _resultData['checkOutDate'] = l$checkOutDate;
+    final l$adults = adults;
+    _resultData['adults'] = l$adults;
+    final l$children = children;
+    _resultData['children'] = l$children;
+    final l$totalAmount = totalAmount;
+    _resultData['totalAmount'] = l$totalAmount;
+    final l$notes = notes;
+    _resultData['notes'] = l$notes;
+    final l$Guest = Guest;
+    _resultData['Guest'] = l$Guest?.toJson();
+    final l$Payment = Payment;
+    _resultData['Payment'] = l$Payment?.map((e) => e?.toJson()).toList();
+    final l$BookingRoom = BookingRoom;
+    _resultData['BookingRoom'] =
+        l$BookingRoom?.map((e) => e?.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$guestId = guestId;
+    final l$propertyId = propertyId;
+    final l$status = status;
+    final l$checkInDate = checkInDate;
+    final l$checkOutDate = checkOutDate;
+    final l$adults = adults;
+    final l$children = children;
+    final l$totalAmount = totalAmount;
+    final l$notes = notes;
+    final l$Guest = Guest;
+    final l$Payment = Payment;
+    final l$BookingRoom = BookingRoom;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$guestId,
+      l$propertyId,
+      l$status,
+      l$checkInDate,
+      l$checkOutDate,
+      l$adults,
+      l$children,
+      l$totalAmount,
+      l$notes,
+      l$Guest,
+      l$Payment == null ? null : Object.hashAll(l$Payment.map((v) => v)),
+      l$BookingRoom == null
+          ? null
+          : Object.hashAll(l$BookingRoom.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings$bookings) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$guestId = guestId;
+    final lOther$guestId = other.guestId;
+    if (l$guestId != lOther$guestId) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$checkInDate = checkInDate;
+    final lOther$checkInDate = other.checkInDate;
+    if (l$checkInDate != lOther$checkInDate) {
+      return false;
+    }
+    final l$checkOutDate = checkOutDate;
+    final lOther$checkOutDate = other.checkOutDate;
+    if (l$checkOutDate != lOther$checkOutDate) {
+      return false;
+    }
+    final l$adults = adults;
+    final lOther$adults = other.adults;
+    if (l$adults != lOther$adults) {
+      return false;
+    }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (l$children != lOther$children) {
+      return false;
+    }
+    final l$totalAmount = totalAmount;
+    final lOther$totalAmount = other.totalAmount;
+    if (l$totalAmount != lOther$totalAmount) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$Guest = Guest;
+    final lOther$Guest = other.Guest;
+    if (l$Guest != lOther$Guest) {
+      return false;
+    }
+    final l$Payment = Payment;
+    final lOther$Payment = other.Payment;
+    if (l$Payment != null && lOther$Payment != null) {
+      if (l$Payment.length != lOther$Payment.length) {
+        return false;
+      }
+      for (int i = 0; i < l$Payment.length; i++) {
+        final l$Payment$entry = l$Payment[i];
+        final lOther$Payment$entry = lOther$Payment[i];
+        if (l$Payment$entry != lOther$Payment$entry) {
+          return false;
+        }
+      }
+    } else if (l$Payment != lOther$Payment) {
+      return false;
+    }
+    final l$BookingRoom = BookingRoom;
+    final lOther$BookingRoom = other.BookingRoom;
+    if (l$BookingRoom != null && lOther$BookingRoom != null) {
+      if (l$BookingRoom.length != lOther$BookingRoom.length) {
+        return false;
+      }
+      for (int i = 0; i < l$BookingRoom.length; i++) {
+        final l$BookingRoom$entry = l$BookingRoom[i];
+        final lOther$BookingRoom$entry = lOther$BookingRoom[i];
+        if (l$BookingRoom$entry != lOther$BookingRoom$entry) {
+          return false;
+        }
+      }
+    } else if (l$BookingRoom != lOther$BookingRoom) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings$bookings
+    on Query$GetBookings$bookings {
+  CopyWith$Query$GetBookings$bookings<Query$GetBookings$bookings>
+      get copyWith => CopyWith$Query$GetBookings$bookings(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetBookings$bookings<TRes> {
+  factory CopyWith$Query$GetBookings$bookings(
+    Query$GetBookings$bookings instance,
+    TRes Function(Query$GetBookings$bookings) then,
+  ) = _CopyWithImpl$Query$GetBookings$bookings;
+
+  factory CopyWith$Query$GetBookings$bookings.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetBookings$bookings;
+
+  TRes call({
+    String? id,
+    String? guestId,
+    String? propertyId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    int? adults,
+    int? children,
+    double? totalAmount,
+    String? notes,
+    Query$GetBookings$bookings$Guest? Guest,
+    List<Query$GetBookings$bookings$Payment?>? Payment,
+    List<Query$GetBookings$bookings$BookingRoom?>? BookingRoom,
+    String? $__typename,
+  });
+  CopyWith$Query$GetBookings$bookings$Guest<TRes> get Guest;
+  TRes Payment(
+      Iterable<Query$GetBookings$bookings$Payment?>? Function(
+              Iterable<
+                  CopyWith$Query$GetBookings$bookings$Payment<
+                      Query$GetBookings$bookings$Payment>?>?)
+          _fn);
+  TRes BookingRoom(
+      Iterable<Query$GetBookings$bookings$BookingRoom?>? Function(
+              Iterable<
+                  CopyWith$Query$GetBookings$bookings$BookingRoom<
+                      Query$GetBookings$bookings$BookingRoom>?>?)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetBookings$bookings<TRes>
+    implements CopyWith$Query$GetBookings$bookings<TRes> {
+  _CopyWithImpl$Query$GetBookings$bookings(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings$bookings _instance;
+
+  final TRes Function(Query$GetBookings$bookings) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? guestId = _undefined,
+    Object? propertyId = _undefined,
+    Object? status = _undefined,
+    Object? checkInDate = _undefined,
+    Object? checkOutDate = _undefined,
+    Object? adults = _undefined,
+    Object? children = _undefined,
+    Object? totalAmount = _undefined,
+    Object? notes = _undefined,
+    Object? Guest = _undefined,
+    Object? Payment = _undefined,
+    Object? BookingRoom = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings$bookings(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        guestId: guestId == _undefined || guestId == null
+            ? _instance.guestId
+            : (guestId as String),
+        propertyId: propertyId == _undefined || propertyId == null
+            ? _instance.propertyId
+            : (propertyId as String),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$BookingStatus?),
+        checkInDate: checkInDate == _undefined || checkInDate == null
+            ? _instance.checkInDate
+            : (checkInDate as String),
+        checkOutDate: checkOutDate == _undefined || checkOutDate == null
+            ? _instance.checkOutDate
+            : (checkOutDate as String),
+        adults: adults == _undefined ? _instance.adults : (adults as int?),
+        children:
+            children == _undefined ? _instance.children : (children as int?),
+        totalAmount: totalAmount == _undefined
+            ? _instance.totalAmount
+            : (totalAmount as double?),
+        notes: notes == _undefined ? _instance.notes : (notes as String?),
+        Guest: Guest == _undefined
+            ? _instance.Guest
+            : (Guest as Query$GetBookings$bookings$Guest?),
+        Payment: Payment == _undefined
+            ? _instance.Payment
+            : (Payment as List<Query$GetBookings$bookings$Payment?>?),
+        BookingRoom: BookingRoom == _undefined
+            ? _instance.BookingRoom
+            : (BookingRoom as List<Query$GetBookings$bookings$BookingRoom?>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetBookings$bookings$Guest<TRes> get Guest {
+    final local$Guest = _instance.Guest;
+    return local$Guest == null
+        ? CopyWith$Query$GetBookings$bookings$Guest.stub(_then(_instance))
+        : CopyWith$Query$GetBookings$bookings$Guest(
+            local$Guest, (e) => call(Guest: e));
+  }
+
+  TRes Payment(
+          Iterable<Query$GetBookings$bookings$Payment?>? Function(
+                  Iterable<
+                      CopyWith$Query$GetBookings$bookings$Payment<
+                          Query$GetBookings$bookings$Payment>?>?)
+              _fn) =>
+      call(
+          Payment: _fn(_instance.Payment?.map((e) => e == null
+              ? null
+              : CopyWith$Query$GetBookings$bookings$Payment(
+                  e,
+                  (i) => i,
+                )))?.toList());
+
+  TRes BookingRoom(
+          Iterable<Query$GetBookings$bookings$BookingRoom?>? Function(
+                  Iterable<
+                      CopyWith$Query$GetBookings$bookings$BookingRoom<
+                          Query$GetBookings$bookings$BookingRoom>?>?)
+              _fn) =>
+      call(
+          BookingRoom: _fn(_instance.BookingRoom?.map((e) => e == null
+              ? null
+              : CopyWith$Query$GetBookings$bookings$BookingRoom(
+                  e,
+                  (i) => i,
+                )))?.toList());
+}
+
+class _CopyWithStubImpl$Query$GetBookings$bookings<TRes>
+    implements CopyWith$Query$GetBookings$bookings<TRes> {
+  _CopyWithStubImpl$Query$GetBookings$bookings(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? guestId,
+    String? propertyId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    int? adults,
+    int? children,
+    double? totalAmount,
+    String? notes,
+    Query$GetBookings$bookings$Guest? Guest,
+    List<Query$GetBookings$bookings$Payment?>? Payment,
+    List<Query$GetBookings$bookings$BookingRoom?>? BookingRoom,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetBookings$bookings$Guest<TRes> get Guest =>
+      CopyWith$Query$GetBookings$bookings$Guest.stub(_res);
+
+  Payment(_fn) => _res;
+
+  BookingRoom(_fn) => _res;
+}
+
+class Query$GetBookings$bookings$Guest {
+  Query$GetBookings$bookings$Guest({
+    required this.id,
+    required this.name,
+    this.phone,
+    this.email,
+    this.$__typename = 'Guest',
+  });
+
+  factory Query$GetBookings$bookings$Guest.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$phone = json['phone'];
+    final l$email = json['email'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings$bookings$Guest(
+      id: (l$id as String),
+      name: (l$name as String),
+      phone: (l$phone as String?),
+      email: (l$email as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final String? phone;
+
+  final String? email;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$phone = phone;
+    _resultData['phone'] = l$phone;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$phone = phone;
+    final l$email = email;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$phone,
+      l$email,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings$bookings$Guest) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings$bookings$Guest
+    on Query$GetBookings$bookings$Guest {
+  CopyWith$Query$GetBookings$bookings$Guest<Query$GetBookings$bookings$Guest>
+      get copyWith => CopyWith$Query$GetBookings$bookings$Guest(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetBookings$bookings$Guest<TRes> {
+  factory CopyWith$Query$GetBookings$bookings$Guest(
+    Query$GetBookings$bookings$Guest instance,
+    TRes Function(Query$GetBookings$bookings$Guest) then,
+  ) = _CopyWithImpl$Query$GetBookings$bookings$Guest;
+
+  factory CopyWith$Query$GetBookings$bookings$Guest.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetBookings$bookings$Guest;
+
+  TRes call({
+    String? id,
+    String? name,
+    String? phone,
+    String? email,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetBookings$bookings$Guest<TRes>
+    implements CopyWith$Query$GetBookings$bookings$Guest<TRes> {
+  _CopyWithImpl$Query$GetBookings$bookings$Guest(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings$bookings$Guest _instance;
+
+  final TRes Function(Query$GetBookings$bookings$Guest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? phone = _undefined,
+    Object? email = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings$bookings$Guest(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        phone: phone == _undefined ? _instance.phone : (phone as String?),
+        email: email == _undefined ? _instance.email : (email as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetBookings$bookings$Guest<TRes>
+    implements CopyWith$Query$GetBookings$bookings$Guest<TRes> {
+  _CopyWithStubImpl$Query$GetBookings$bookings$Guest(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    String? phone,
+    String? email,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetBookings$bookings$Payment {
+  Query$GetBookings$bookings$Payment({
+    required this.id,
+    required this.amount,
+    required this.method,
+    this.status,
+    this.createdAt,
+    this.$__typename = 'Payment',
+  });
+
+  factory Query$GetBookings$bookings$Payment.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$amount = json['amount'];
+    final l$method = json['method'];
+    final l$status = json['status'];
+    final l$createdAt = json['createdAt'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings$bookings$Payment(
+      id: (l$id as String),
+      amount: (l$amount as num).toDouble(),
+      method: (l$method as String),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$PaymentStatus((l$status as String)),
+      createdAt: (l$createdAt as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final double amount;
+
+  final String method;
+
+  final Enum$PaymentStatus? status;
+
+  final String? createdAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$amount = amount;
+    _resultData['amount'] = l$amount;
+    final l$method = method;
+    _resultData['method'] = l$method;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$PaymentStatus(l$status);
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$amount = amount;
+    final l$method = method;
+    final l$status = status;
+    final l$createdAt = createdAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$amount,
+      l$method,
+      l$status,
+      l$createdAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings$bookings$Payment) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$amount = amount;
+    final lOther$amount = other.amount;
+    if (l$amount != lOther$amount) {
+      return false;
+    }
+    final l$method = method;
+    final lOther$method = other.method;
+    if (l$method != lOther$method) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings$bookings$Payment
+    on Query$GetBookings$bookings$Payment {
+  CopyWith$Query$GetBookings$bookings$Payment<
+          Query$GetBookings$bookings$Payment>
+      get copyWith => CopyWith$Query$GetBookings$bookings$Payment(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetBookings$bookings$Payment<TRes> {
+  factory CopyWith$Query$GetBookings$bookings$Payment(
+    Query$GetBookings$bookings$Payment instance,
+    TRes Function(Query$GetBookings$bookings$Payment) then,
+  ) = _CopyWithImpl$Query$GetBookings$bookings$Payment;
+
+  factory CopyWith$Query$GetBookings$bookings$Payment.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetBookings$bookings$Payment;
+
+  TRes call({
+    String? id,
+    double? amount,
+    String? method,
+    Enum$PaymentStatus? status,
+    String? createdAt,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetBookings$bookings$Payment<TRes>
+    implements CopyWith$Query$GetBookings$bookings$Payment<TRes> {
+  _CopyWithImpl$Query$GetBookings$bookings$Payment(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings$bookings$Payment _instance;
+
+  final TRes Function(Query$GetBookings$bookings$Payment) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? amount = _undefined,
+    Object? method = _undefined,
+    Object? status = _undefined,
+    Object? createdAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings$bookings$Payment(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        amount: amount == _undefined || amount == null
+            ? _instance.amount
+            : (amount as double),
+        method: method == _undefined || method == null
+            ? _instance.method
+            : (method as String),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$PaymentStatus?),
+        createdAt: createdAt == _undefined
+            ? _instance.createdAt
+            : (createdAt as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetBookings$bookings$Payment<TRes>
+    implements CopyWith$Query$GetBookings$bookings$Payment<TRes> {
+  _CopyWithStubImpl$Query$GetBookings$bookings$Payment(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    double? amount,
+    String? method,
+    Enum$PaymentStatus? status,
+    String? createdAt,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetBookings$bookings$BookingRoom {
+  Query$GetBookings$bookings$BookingRoom({
+    required this.id,
+    this.roomId,
+    required this.roomTypeId,
+    required this.status,
+    this.checkInDate,
+    this.checkOutDate,
+    this.Room,
+    this.RoomType,
+    this.$__typename = 'BookingRoom',
+  });
+
+  factory Query$GetBookings$bookings$BookingRoom.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$roomId = json['roomId'];
+    final l$roomTypeId = json['roomTypeId'];
+    final l$status = json['status'];
+    final l$checkInDate = json['checkInDate'];
+    final l$checkOutDate = json['checkOutDate'];
+    final l$Room = json['Room'];
+    final l$RoomType = json['RoomType'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings$bookings$BookingRoom(
+      id: (l$id as String),
+      roomId: (l$roomId as String?),
+      roomTypeId: (l$roomTypeId as String),
+      status: fromJson$Enum$BookingStatus((l$status as String)),
+      checkInDate: (l$checkInDate as String?),
+      checkOutDate: (l$checkOutDate as String?),
+      Room: l$Room == null
+          ? null
+          : Query$GetBookings$bookings$BookingRoom$Room.fromJson(
+              (l$Room as Map<String, dynamic>)),
+      RoomType: l$RoomType == null
+          ? null
+          : Query$GetBookings$bookings$BookingRoom$RoomType.fromJson(
+              (l$RoomType as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String? roomId;
+
+  final String roomTypeId;
+
+  final Enum$BookingStatus status;
+
+  final String? checkInDate;
+
+  final String? checkOutDate;
+
+  final Query$GetBookings$bookings$BookingRoom$Room? Room;
+
+  final Query$GetBookings$bookings$BookingRoom$RoomType? RoomType;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$roomId = roomId;
+    _resultData['roomId'] = l$roomId;
+    final l$roomTypeId = roomTypeId;
+    _resultData['roomTypeId'] = l$roomTypeId;
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$BookingStatus(l$status);
+    final l$checkInDate = checkInDate;
+    _resultData['checkInDate'] = l$checkInDate;
+    final l$checkOutDate = checkOutDate;
+    _resultData['checkOutDate'] = l$checkOutDate;
+    final l$Room = Room;
+    _resultData['Room'] = l$Room?.toJson();
+    final l$RoomType = RoomType;
+    _resultData['RoomType'] = l$RoomType?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$roomId = roomId;
+    final l$roomTypeId = roomTypeId;
+    final l$status = status;
+    final l$checkInDate = checkInDate;
+    final l$checkOutDate = checkOutDate;
+    final l$Room = Room;
+    final l$RoomType = RoomType;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$roomId,
+      l$roomTypeId,
+      l$status,
+      l$checkInDate,
+      l$checkOutDate,
+      l$Room,
+      l$RoomType,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings$bookings$BookingRoom) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$roomId = roomId;
+    final lOther$roomId = other.roomId;
+    if (l$roomId != lOther$roomId) {
+      return false;
+    }
+    final l$roomTypeId = roomTypeId;
+    final lOther$roomTypeId = other.roomTypeId;
+    if (l$roomTypeId != lOther$roomTypeId) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$checkInDate = checkInDate;
+    final lOther$checkInDate = other.checkInDate;
+    if (l$checkInDate != lOther$checkInDate) {
+      return false;
+    }
+    final l$checkOutDate = checkOutDate;
+    final lOther$checkOutDate = other.checkOutDate;
+    if (l$checkOutDate != lOther$checkOutDate) {
+      return false;
+    }
+    final l$Room = Room;
+    final lOther$Room = other.Room;
+    if (l$Room != lOther$Room) {
+      return false;
+    }
+    final l$RoomType = RoomType;
+    final lOther$RoomType = other.RoomType;
+    if (l$RoomType != lOther$RoomType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings$bookings$BookingRoom
+    on Query$GetBookings$bookings$BookingRoom {
+  CopyWith$Query$GetBookings$bookings$BookingRoom<
+          Query$GetBookings$bookings$BookingRoom>
+      get copyWith => CopyWith$Query$GetBookings$bookings$BookingRoom(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetBookings$bookings$BookingRoom<TRes> {
+  factory CopyWith$Query$GetBookings$bookings$BookingRoom(
+    Query$GetBookings$bookings$BookingRoom instance,
+    TRes Function(Query$GetBookings$bookings$BookingRoom) then,
+  ) = _CopyWithImpl$Query$GetBookings$bookings$BookingRoom;
+
+  factory CopyWith$Query$GetBookings$bookings$BookingRoom.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom;
+
+  TRes call({
+    String? id,
+    String? roomId,
+    String? roomTypeId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    Query$GetBookings$bookings$BookingRoom$Room? Room,
+    Query$GetBookings$bookings$BookingRoom$RoomType? RoomType,
+    String? $__typename,
+  });
+  CopyWith$Query$GetBookings$bookings$BookingRoom$Room<TRes> get Room;
+  CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> get RoomType;
+}
+
+class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom<TRes>
+    implements CopyWith$Query$GetBookings$bookings$BookingRoom<TRes> {
+  _CopyWithImpl$Query$GetBookings$bookings$BookingRoom(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings$bookings$BookingRoom _instance;
+
+  final TRes Function(Query$GetBookings$bookings$BookingRoom) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? roomId = _undefined,
+    Object? roomTypeId = _undefined,
+    Object? status = _undefined,
+    Object? checkInDate = _undefined,
+    Object? checkOutDate = _undefined,
+    Object? Room = _undefined,
+    Object? RoomType = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings$bookings$BookingRoom(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        roomId: roomId == _undefined ? _instance.roomId : (roomId as String?),
+        roomTypeId: roomTypeId == _undefined || roomTypeId == null
+            ? _instance.roomTypeId
+            : (roomTypeId as String),
+        status: status == _undefined || status == null
+            ? _instance.status
+            : (status as Enum$BookingStatus),
+        checkInDate: checkInDate == _undefined
+            ? _instance.checkInDate
+            : (checkInDate as String?),
+        checkOutDate: checkOutDate == _undefined
+            ? _instance.checkOutDate
+            : (checkOutDate as String?),
+        Room: Room == _undefined
+            ? _instance.Room
+            : (Room as Query$GetBookings$bookings$BookingRoom$Room?),
+        RoomType: RoomType == _undefined
+            ? _instance.RoomType
+            : (RoomType as Query$GetBookings$bookings$BookingRoom$RoomType?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Query$GetBookings$bookings$BookingRoom$Room<TRes> get Room {
+    final local$Room = _instance.Room;
+    return local$Room == null
+        ? CopyWith$Query$GetBookings$bookings$BookingRoom$Room.stub(
+            _then(_instance))
+        : CopyWith$Query$GetBookings$bookings$BookingRoom$Room(
+            local$Room, (e) => call(Room: e));
+  }
+
+  CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> get RoomType {
+    final local$RoomType = _instance.RoomType;
+    return local$RoomType == null
+        ? CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType.stub(
+            _then(_instance))
+        : CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType(
+            local$RoomType, (e) => call(RoomType: e));
+  }
+}
+
+class _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom<TRes>
+    implements CopyWith$Query$GetBookings$bookings$BookingRoom<TRes> {
+  _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? roomId,
+    String? roomTypeId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    Query$GetBookings$bookings$BookingRoom$Room? Room,
+    Query$GetBookings$bookings$BookingRoom$RoomType? RoomType,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Query$GetBookings$bookings$BookingRoom$Room<TRes> get Room =>
+      CopyWith$Query$GetBookings$bookings$BookingRoom$Room.stub(_res);
+
+  CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> get RoomType =>
+      CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType.stub(_res);
+}
+
+class Query$GetBookings$bookings$BookingRoom$Room {
+  Query$GetBookings$bookings$BookingRoom$Room({
+    required this.id,
+    required this.roomNumber,
+    this.$__typename = 'Room',
+  });
+
+  factory Query$GetBookings$bookings$BookingRoom$Room.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$roomNumber = json['roomNumber'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings$bookings$BookingRoom$Room(
+      id: (l$id as String),
+      roomNumber: (l$roomNumber as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String roomNumber;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$roomNumber = roomNumber;
+    _resultData['roomNumber'] = l$roomNumber;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$roomNumber = roomNumber;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$roomNumber,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings$bookings$BookingRoom$Room) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$roomNumber = roomNumber;
+    final lOther$roomNumber = other.roomNumber;
+    if (l$roomNumber != lOther$roomNumber) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings$bookings$BookingRoom$Room
+    on Query$GetBookings$bookings$BookingRoom$Room {
+  CopyWith$Query$GetBookings$bookings$BookingRoom$Room<
+          Query$GetBookings$bookings$BookingRoom$Room>
+      get copyWith => CopyWith$Query$GetBookings$bookings$BookingRoom$Room(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetBookings$bookings$BookingRoom$Room<TRes> {
+  factory CopyWith$Query$GetBookings$bookings$BookingRoom$Room(
+    Query$GetBookings$bookings$BookingRoom$Room instance,
+    TRes Function(Query$GetBookings$bookings$BookingRoom$Room) then,
+  ) = _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$Room;
+
+  factory CopyWith$Query$GetBookings$bookings$BookingRoom$Room.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$Room;
+
+  TRes call({
+    String? id,
+    String? roomNumber,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$Room<TRes>
+    implements CopyWith$Query$GetBookings$bookings$BookingRoom$Room<TRes> {
+  _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$Room(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings$bookings$BookingRoom$Room _instance;
+
+  final TRes Function(Query$GetBookings$bookings$BookingRoom$Room) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? roomNumber = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings$bookings$BookingRoom$Room(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        roomNumber: roomNumber == _undefined || roomNumber == null
+            ? _instance.roomNumber
+            : (roomNumber as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$Room<TRes>
+    implements CopyWith$Query$GetBookings$bookings$BookingRoom$Room<TRes> {
+  _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$Room(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? roomNumber,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetBookings$bookings$BookingRoom$RoomType {
+  Query$GetBookings$bookings$BookingRoom$RoomType({
+    required this.id,
+    required this.name,
+    this.$__typename = 'RoomType',
+  });
+
+  factory Query$GetBookings$bookings$BookingRoom$RoomType.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Query$GetBookings$bookings$BookingRoom$RoomType(
+      id: (l$id as String),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetBookings$bookings$BookingRoom$RoomType) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetBookings$bookings$BookingRoom$RoomType
+    on Query$GetBookings$bookings$BookingRoom$RoomType {
+  CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<
+          Query$GetBookings$bookings$BookingRoom$RoomType>
+      get copyWith => CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> {
+  factory CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType(
+    Query$GetBookings$bookings$BookingRoom$RoomType instance,
+    TRes Function(Query$GetBookings$bookings$BookingRoom$RoomType) then,
+  ) = _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$RoomType;
+
+  factory CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType.stub(
+          TRes res) =
+      _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$RoomType;
+
+  TRes call({
+    String? id,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$RoomType<TRes>
+    implements CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> {
+  _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$RoomType(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetBookings$bookings$BookingRoom$RoomType _instance;
+
+  final TRes Function(Query$GetBookings$bookings$BookingRoom$RoomType) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetBookings$bookings$BookingRoom$RoomType(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$RoomType<TRes>
+    implements CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> {
+  _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$RoomType(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetUsers {
+  Query$GetUsers({
+    required this.users,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetUsers.fromJson(Map<String, dynamic> json) {
+    final l$users = json['users'];
+    final l$$__typename = json['__typename'];
+    return Query$GetUsers(
+      users: (l$users as List<dynamic>)
+          .map(
+              (e) => Query$GetUsers$users.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetUsers$users> users;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$users = users;
+    _resultData['users'] = l$users.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$users = users;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$users.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetUsers) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$users = users;
+    final lOther$users = other.users;
+    if (l$users.length != lOther$users.length) {
+      return false;
+    }
+    for (int i = 0; i < l$users.length; i++) {
+      final l$users$entry = l$users[i];
+      final lOther$users$entry = lOther$users[i];
+      if (l$users$entry != lOther$users$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetUsers on Query$GetUsers {
+  CopyWith$Query$GetUsers<Query$GetUsers> get copyWith =>
+      CopyWith$Query$GetUsers(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetUsers<TRes> {
+  factory CopyWith$Query$GetUsers(
+    Query$GetUsers instance,
+    TRes Function(Query$GetUsers) then,
+  ) = _CopyWithImpl$Query$GetUsers;
+
+  factory CopyWith$Query$GetUsers.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetUsers;
+
+  TRes call({
+    List<Query$GetUsers$users>? users,
+    String? $__typename,
+  });
+  TRes users(
+      Iterable<Query$GetUsers$users> Function(
+              Iterable<CopyWith$Query$GetUsers$users<Query$GetUsers$users>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetUsers<TRes>
+    implements CopyWith$Query$GetUsers<TRes> {
+  _CopyWithImpl$Query$GetUsers(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetUsers _instance;
+
+  final TRes Function(Query$GetUsers) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? users = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetUsers(
+        users: users == _undefined || users == null
+            ? _instance.users
+            : (users as List<Query$GetUsers$users>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes users(
+          Iterable<Query$GetUsers$users> Function(
+                  Iterable<CopyWith$Query$GetUsers$users<Query$GetUsers$users>>)
+              _fn) =>
+      call(
+          users: _fn(_instance.users.map((e) => CopyWith$Query$GetUsers$users(
+                e,
+                (i) => i,
+              ))).toList());
+}
+
+class _CopyWithStubImpl$Query$GetUsers<TRes>
+    implements CopyWith$Query$GetUsers<TRes> {
+  _CopyWithStubImpl$Query$GetUsers(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetUsers$users>? users,
+    String? $__typename,
+  }) =>
+      _res;
+
+  users(_fn) => _res;
+}
+
+const documentNodeQueryGetUsers = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetUsers'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'users'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'role'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetUsers _parserFn$Query$GetUsers(Map<String, dynamic> data) =>
+    Query$GetUsers.fromJson(data);
+typedef OnQueryComplete$Query$GetUsers = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetUsers?,
+);
+
+class Options$Query$GetUsers extends graphql.QueryOptions<Query$GetUsers> {
+  Options$Query$GetUsers({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetUsers? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetUsers? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$GetUsers(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetUsers,
+          parserFn: _parserFn$Query$GetUsers,
+        );
+
+  final OnQueryComplete$Query$GetUsers? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetUsers
+    extends graphql.WatchQueryOptions<Query$GetUsers> {
+  WatchOptions$Query$GetUsers({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetUsers? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetUsers,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetUsers,
+        );
+}
+
+class FetchMoreOptions$Query$GetUsers extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetUsers({required graphql.UpdateQuery updateQuery})
+      : super(
+          updateQuery: updateQuery,
+          document: documentNodeQueryGetUsers,
+        );
+}
+
+extension ClientExtension$Query$GetUsers on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetUsers>> query$GetUsers(
+          [Options$Query$GetUsers? options]) async =>
+      await this.query(options ?? Options$Query$GetUsers());
+
+  graphql.ObservableQuery<Query$GetUsers> watchQuery$GetUsers(
+          [WatchOptions$Query$GetUsers? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$GetUsers());
+
+  void writeQuery$GetUsers({
+    required Query$GetUsers data,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+            operation: graphql.Operation(document: documentNodeQueryGetUsers)),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+
+  Query$GetUsers? readQuery$GetUsers({bool optimistic = true}) {
+    final result = this.readQuery(
+      graphql.Request(
+          operation: graphql.Operation(document: documentNodeQueryGetUsers)),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$GetUsers.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetUsers> useQuery$GetUsers(
+        [Options$Query$GetUsers? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$GetUsers());
+graphql.ObservableQuery<Query$GetUsers> useWatchQuery$GetUsers(
+        [WatchOptions$Query$GetUsers? options]) =>
+    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$GetUsers());
+
+class Query$GetUsers$Widget extends graphql_flutter.Query<Query$GetUsers> {
+  Query$GetUsers$Widget({
+    widgets.Key? key,
+    Options$Query$GetUsers? options,
+    required graphql_flutter.QueryBuilder<Query$GetUsers> builder,
+  }) : super(
+          key: key,
+          options: options ?? Options$Query$GetUsers(),
+          builder: builder,
+        );
+}
+
+class Query$GetUsers$users {
+  Query$GetUsers$users({
+    required this.id,
+    this.name,
+    required this.email,
+    required this.role,
+    this.$__typename = 'User',
+  });
+
+  factory Query$GetUsers$users.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$email = json['email'];
+    final l$role = json['role'];
+    final l$$__typename = json['__typename'];
+    return Query$GetUsers$users(
+      id: (l$id as String),
+      name: (l$name as String?),
+      email: (l$email as String),
+      role: fromJson$Enum$UserRole((l$role as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String? name;
+
+  final String email;
+
+  final Enum$UserRole role;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$role = role;
+    _resultData['role'] = toJson$Enum$UserRole(l$role);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$email = email;
+    final l$role = role;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$email,
+      l$role,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetUsers$users) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$role = role;
+    final lOther$role = other.role;
+    if (l$role != lOther$role) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetUsers$users on Query$GetUsers$users {
+  CopyWith$Query$GetUsers$users<Query$GetUsers$users> get copyWith =>
+      CopyWith$Query$GetUsers$users(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetUsers$users<TRes> {
+  factory CopyWith$Query$GetUsers$users(
+    Query$GetUsers$users instance,
+    TRes Function(Query$GetUsers$users) then,
+  ) = _CopyWithImpl$Query$GetUsers$users;
+
+  factory CopyWith$Query$GetUsers$users.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetUsers$users;
+
+  TRes call({
+    String? id,
+    String? name,
+    String? email,
+    Enum$UserRole? role,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetUsers$users<TRes>
+    implements CopyWith$Query$GetUsers$users<TRes> {
+  _CopyWithImpl$Query$GetUsers$users(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetUsers$users _instance;
+
+  final TRes Function(Query$GetUsers$users) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? email = _undefined,
+    Object? role = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetUsers$users(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined ? _instance.name : (name as String?),
+        email: email == _undefined || email == null
+            ? _instance.email
+            : (email as String),
+        role: role == _undefined || role == null
+            ? _instance.role
+            : (role as Enum$UserRole),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetUsers$users<TRes>
+    implements CopyWith$Query$GetUsers$users<TRes> {
+  _CopyWithStubImpl$Query$GetUsers$users(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    String? email,
+    Enum$UserRole? role,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Query$GetRecentActivities {
+  factory Variables$Query$GetRecentActivities({required String propertyId}) =>
+      Variables$Query$GetRecentActivities._({
+        r'propertyId': propertyId,
+      });
+
+  Variables$Query$GetRecentActivities._(this._$data);
+
+  factory Variables$Query$GetRecentActivities.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$propertyId = data['propertyId'];
+    result$data['propertyId'] = (l$propertyId as String);
+    return Variables$Query$GetRecentActivities._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get propertyId => (_$data['propertyId'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$propertyId = propertyId;
+    result$data['propertyId'] = l$propertyId;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$GetRecentActivities<
+          Variables$Query$GetRecentActivities>
+      get copyWith => CopyWith$Variables$Query$GetRecentActivities(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Query$GetRecentActivities) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$propertyId = propertyId;
+    return Object.hashAll([l$propertyId]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$GetRecentActivities<TRes> {
+  factory CopyWith$Variables$Query$GetRecentActivities(
+    Variables$Query$GetRecentActivities instance,
+    TRes Function(Variables$Query$GetRecentActivities) then,
+  ) = _CopyWithImpl$Variables$Query$GetRecentActivities;
+
+  factory CopyWith$Variables$Query$GetRecentActivities.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$GetRecentActivities;
+
+  TRes call({String? propertyId});
+}
+
+class _CopyWithImpl$Variables$Query$GetRecentActivities<TRes>
+    implements CopyWith$Variables$Query$GetRecentActivities<TRes> {
+  _CopyWithImpl$Variables$Query$GetRecentActivities(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Query$GetRecentActivities _instance;
+
+  final TRes Function(Variables$Query$GetRecentActivities) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? propertyId = _undefined}) =>
+      _then(Variables$Query$GetRecentActivities._({
+        ..._instance._$data,
+        if (propertyId != _undefined && propertyId != null)
+          'propertyId': (propertyId as String),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Query$GetRecentActivities<TRes>
+    implements CopyWith$Variables$Query$GetRecentActivities<TRes> {
+  _CopyWithStubImpl$Variables$Query$GetRecentActivities(this._res);
+
+  TRes _res;
+
+  call({String? propertyId}) => _res;
+}
+
+class Query$GetRecentActivities {
+  Query$GetRecentActivities({
+    required this.recentActivities,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetRecentActivities.fromJson(Map<String, dynamic> json) {
+    final l$recentActivities = json['recentActivities'];
+    final l$$__typename = json['__typename'];
+    return Query$GetRecentActivities(
+      recentActivities: (l$recentActivities as List<dynamic>)
+          .map((e) => Query$GetRecentActivities$recentActivities.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetRecentActivities$recentActivities> recentActivities;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$recentActivities = recentActivities;
+    _resultData['recentActivities'] =
+        l$recentActivities.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$recentActivities = recentActivities;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$recentActivities.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetRecentActivities) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$recentActivities = recentActivities;
+    final lOther$recentActivities = other.recentActivities;
+    if (l$recentActivities.length != lOther$recentActivities.length) {
+      return false;
+    }
+    for (int i = 0; i < l$recentActivities.length; i++) {
+      final l$recentActivities$entry = l$recentActivities[i];
+      final lOther$recentActivities$entry = lOther$recentActivities[i];
+      if (l$recentActivities$entry != lOther$recentActivities$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetRecentActivities
+    on Query$GetRecentActivities {
+  CopyWith$Query$GetRecentActivities<Query$GetRecentActivities> get copyWith =>
+      CopyWith$Query$GetRecentActivities(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetRecentActivities<TRes> {
+  factory CopyWith$Query$GetRecentActivities(
+    Query$GetRecentActivities instance,
+    TRes Function(Query$GetRecentActivities) then,
+  ) = _CopyWithImpl$Query$GetRecentActivities;
+
+  factory CopyWith$Query$GetRecentActivities.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetRecentActivities;
+
+  TRes call({
+    List<Query$GetRecentActivities$recentActivities>? recentActivities,
+    String? $__typename,
+  });
+  TRes recentActivities(
+      Iterable<Query$GetRecentActivities$recentActivities> Function(
+              Iterable<
+                  CopyWith$Query$GetRecentActivities$recentActivities<
+                      Query$GetRecentActivities$recentActivities>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetRecentActivities<TRes>
+    implements CopyWith$Query$GetRecentActivities<TRes> {
+  _CopyWithImpl$Query$GetRecentActivities(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetRecentActivities _instance;
+
+  final TRes Function(Query$GetRecentActivities) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? recentActivities = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetRecentActivities(
+        recentActivities:
+            recentActivities == _undefined || recentActivities == null
+                ? _instance.recentActivities
+                : (recentActivities
+                    as List<Query$GetRecentActivities$recentActivities>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes recentActivities(
+          Iterable<Query$GetRecentActivities$recentActivities> Function(
+                  Iterable<
+                      CopyWith$Query$GetRecentActivities$recentActivities<
+                          Query$GetRecentActivities$recentActivities>>)
+              _fn) =>
+      call(
+          recentActivities: _fn(_instance.recentActivities
+              .map((e) => CopyWith$Query$GetRecentActivities$recentActivities(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$GetRecentActivities<TRes>
+    implements CopyWith$Query$GetRecentActivities<TRes> {
+  _CopyWithStubImpl$Query$GetRecentActivities(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetRecentActivities$recentActivities>? recentActivities,
+    String? $__typename,
+  }) =>
+      _res;
+
+  recentActivities(_fn) => _res;
+}
+
+const documentNodeQueryGetRecentActivities = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetRecentActivities'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'propertyId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'String'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'recentActivities'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'propertyId'),
+            value: VariableNode(name: NameNode(value: 'propertyId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'propertyId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'tenantId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'title'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'type'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'staffName'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'createdAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'updatedAt'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetRecentActivities _parserFn$Query$GetRecentActivities(
+        Map<String, dynamic> data) =>
+    Query$GetRecentActivities.fromJson(data);
+typedef OnQueryComplete$Query$GetRecentActivities = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetRecentActivities?,
+);
+
+class Options$Query$GetRecentActivities
+    extends graphql.QueryOptions<Query$GetRecentActivities> {
+  Options$Query$GetRecentActivities({
+    String? operationName,
+    required Variables$Query$GetRecentActivities variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetRecentActivities? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetRecentActivities? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Query$GetRecentActivities(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetRecentActivities,
+          parserFn: _parserFn$Query$GetRecentActivities,
+        );
+
+  final OnQueryComplete$Query$GetRecentActivities? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetRecentActivities
+    extends graphql.WatchQueryOptions<Query$GetRecentActivities> {
+  WatchOptions$Query$GetRecentActivities({
+    String? operationName,
+    required Variables$Query$GetRecentActivities variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetRecentActivities? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetRecentActivities,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetRecentActivities,
+        );
+}
+
+class FetchMoreOptions$Query$GetRecentActivities
+    extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetRecentActivities({
+    required graphql.UpdateQuery updateQuery,
+    required Variables$Query$GetRecentActivities variables,
+  }) : super(
+          updateQuery: updateQuery,
+          variables: variables.toJson(),
+          document: documentNodeQueryGetRecentActivities,
+        );
+}
+
+extension ClientExtension$Query$GetRecentActivities on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetRecentActivities>>
+      query$GetRecentActivities(
+              Options$Query$GetRecentActivities options) async =>
+          await this.query(options);
+
+  graphql.ObservableQuery<Query$GetRecentActivities>
+      watchQuery$GetRecentActivities(
+              WatchOptions$Query$GetRecentActivities options) =>
+          this.watchQuery(options);
+
+  void writeQuery$GetRecentActivities({
+    required Query$GetRecentActivities data,
+    required Variables$Query$GetRecentActivities variables,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+          operation:
+              graphql.Operation(document: documentNodeQueryGetRecentActivities),
+          variables: variables.toJson(),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+
+  Query$GetRecentActivities? readQuery$GetRecentActivities({
+    required Variables$Query$GetRecentActivities variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation:
+            graphql.Operation(document: documentNodeQueryGetRecentActivities),
+        variables: variables.toJson(),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$GetRecentActivities.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetRecentActivities>
+    useQuery$GetRecentActivities(Options$Query$GetRecentActivities options) =>
+        graphql_flutter.useQuery(options);
+graphql.ObservableQuery<Query$GetRecentActivities>
+    useWatchQuery$GetRecentActivities(
+            WatchOptions$Query$GetRecentActivities options) =>
+        graphql_flutter.useWatchQuery(options);
+
+class Query$GetRecentActivities$Widget
+    extends graphql_flutter.Query<Query$GetRecentActivities> {
+  Query$GetRecentActivities$Widget({
+    widgets.Key? key,
+    required Options$Query$GetRecentActivities options,
+    required graphql_flutter.QueryBuilder<Query$GetRecentActivities> builder,
+  }) : super(
+          key: key,
+          options: options,
+          builder: builder,
+        );
+}
+
+class Query$GetRecentActivities$recentActivities {
+  Query$GetRecentActivities$recentActivities({
+    required this.id,
+    required this.propertyId,
+    required this.tenantId,
+    required this.title,
+    required this.type,
+    required this.staffName,
+    required this.createdAt,
+    required this.updatedAt,
+    this.$__typename = 'RecentActivity',
+  });
+
+  factory Query$GetRecentActivities$recentActivities.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$propertyId = json['propertyId'];
+    final l$tenantId = json['tenantId'];
+    final l$title = json['title'];
+    final l$type = json['type'];
+    final l$staffName = json['staffName'];
+    final l$createdAt = json['createdAt'];
+    final l$updatedAt = json['updatedAt'];
+    final l$$__typename = json['__typename'];
+    return Query$GetRecentActivities$recentActivities(
+      id: (l$id as String),
+      propertyId: (l$propertyId as String),
+      tenantId: (l$tenantId as String),
+      title: (l$title as String),
+      type: (l$type as String),
+      staffName: (l$staffName as String),
+      createdAt: (l$createdAt as String),
+      updatedAt: (l$updatedAt as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String propertyId;
+
+  final String tenantId;
+
+  final String title;
+
+  final String type;
+
+  final String staffName;
+
+  final String createdAt;
+
+  final String updatedAt;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$propertyId = propertyId;
+    _resultData['propertyId'] = l$propertyId;
+    final l$tenantId = tenantId;
+    _resultData['tenantId'] = l$tenantId;
+    final l$title = title;
+    _resultData['title'] = l$title;
+    final l$type = type;
+    _resultData['type'] = l$type;
+    final l$staffName = staffName;
+    _resultData['staffName'] = l$staffName;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = l$createdAt;
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = l$updatedAt;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$propertyId = propertyId;
+    final l$tenantId = tenantId;
+    final l$title = title;
+    final l$type = type;
+    final l$staffName = staffName;
+    final l$createdAt = createdAt;
+    final l$updatedAt = updatedAt;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$propertyId,
+      l$tenantId,
+      l$title,
+      l$type,
+      l$staffName,
+      l$createdAt,
+      l$updatedAt,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetRecentActivities$recentActivities) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    final l$tenantId = tenantId;
+    final lOther$tenantId = other.tenantId;
+    if (l$tenantId != lOther$tenantId) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$staffName = staffName;
+    final lOther$staffName = other.staffName;
+    if (l$staffName != lOther$staffName) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetRecentActivities$recentActivities
+    on Query$GetRecentActivities$recentActivities {
+  CopyWith$Query$GetRecentActivities$recentActivities<
+          Query$GetRecentActivities$recentActivities>
+      get copyWith => CopyWith$Query$GetRecentActivities$recentActivities(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Query$GetRecentActivities$recentActivities<TRes> {
+  factory CopyWith$Query$GetRecentActivities$recentActivities(
+    Query$GetRecentActivities$recentActivities instance,
+    TRes Function(Query$GetRecentActivities$recentActivities) then,
+  ) = _CopyWithImpl$Query$GetRecentActivities$recentActivities;
+
+  factory CopyWith$Query$GetRecentActivities$recentActivities.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetRecentActivities$recentActivities;
+
+  TRes call({
+    String? id,
+    String? propertyId,
+    String? tenantId,
+    String? title,
+    String? type,
+    String? staffName,
+    String? createdAt,
+    String? updatedAt,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetRecentActivities$recentActivities<TRes>
+    implements CopyWith$Query$GetRecentActivities$recentActivities<TRes> {
+  _CopyWithImpl$Query$GetRecentActivities$recentActivities(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetRecentActivities$recentActivities _instance;
+
+  final TRes Function(Query$GetRecentActivities$recentActivities) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? propertyId = _undefined,
+    Object? tenantId = _undefined,
+    Object? title = _undefined,
+    Object? type = _undefined,
+    Object? staffName = _undefined,
+    Object? createdAt = _undefined,
+    Object? updatedAt = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetRecentActivities$recentActivities(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        propertyId: propertyId == _undefined || propertyId == null
+            ? _instance.propertyId
+            : (propertyId as String),
+        tenantId: tenantId == _undefined || tenantId == null
+            ? _instance.tenantId
+            : (tenantId as String),
+        title: title == _undefined || title == null
+            ? _instance.title
+            : (title as String),
+        type: type == _undefined || type == null
+            ? _instance.type
+            : (type as String),
+        staffName: staffName == _undefined || staffName == null
+            ? _instance.staffName
+            : (staffName as String),
+        createdAt: createdAt == _undefined || createdAt == null
+            ? _instance.createdAt
+            : (createdAt as String),
+        updatedAt: updatedAt == _undefined || updatedAt == null
+            ? _instance.updatedAt
+            : (updatedAt as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetRecentActivities$recentActivities<TRes>
+    implements CopyWith$Query$GetRecentActivities$recentActivities<TRes> {
+  _CopyWithStubImpl$Query$GetRecentActivities$recentActivities(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? propertyId,
+    String? tenantId,
+    String? title,
+    String? type,
+    String? staffName,
+    String? createdAt,
+    String? updatedAt,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$UpdateRoomStatus {
+  factory Variables$Mutation$UpdateRoomStatus({
+    required String id,
+    required Enum$HousekeepingStatus status,
+  }) =>
+      Variables$Mutation$UpdateRoomStatus._({
+        r'id': id,
+        r'status': status,
+      });
+
+  Variables$Mutation$UpdateRoomStatus._(this._$data);
+
+  factory Variables$Mutation$UpdateRoomStatus.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = (l$id as String);
+    final l$status = data['status'];
+    result$data['status'] =
+        fromJson$Enum$HousekeepingStatus((l$status as String));
+    return Variables$Mutation$UpdateRoomStatus._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get id => (_$data['id'] as String);
+
+  Enum$HousekeepingStatus get status =>
+      (_$data['status'] as Enum$HousekeepingStatus);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = l$id;
+    final l$status = status;
+    result$data['status'] = toJson$Enum$HousekeepingStatus(l$status);
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UpdateRoomStatus<
+          Variables$Mutation$UpdateRoomStatus>
+      get copyWith => CopyWith$Variables$Mutation$UpdateRoomStatus(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UpdateRoomStatus) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$status = status;
+    return Object.hashAll([
+      l$id,
+      l$status,
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UpdateRoomStatus<TRes> {
+  factory CopyWith$Variables$Mutation$UpdateRoomStatus(
+    Variables$Mutation$UpdateRoomStatus instance,
+    TRes Function(Variables$Mutation$UpdateRoomStatus) then,
+  ) = _CopyWithImpl$Variables$Mutation$UpdateRoomStatus;
+
+  factory CopyWith$Variables$Mutation$UpdateRoomStatus.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UpdateRoomStatus;
+
+  TRes call({
+    String? id,
+    Enum$HousekeepingStatus? status,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$UpdateRoomStatus<TRes>
+    implements CopyWith$Variables$Mutation$UpdateRoomStatus<TRes> {
+  _CopyWithImpl$Variables$Mutation$UpdateRoomStatus(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UpdateRoomStatus _instance;
+
+  final TRes Function(Variables$Mutation$UpdateRoomStatus) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? status = _undefined,
+  }) =>
+      _then(Variables$Mutation$UpdateRoomStatus._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as String),
+        if (status != _undefined && status != null)
+          'status': (status as Enum$HousekeepingStatus),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UpdateRoomStatus<TRes>
+    implements CopyWith$Variables$Mutation$UpdateRoomStatus<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UpdateRoomStatus(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    Enum$HousekeepingStatus? status,
+  }) =>
+      _res;
+}
+
+class Mutation$UpdateRoomStatus {
+  Mutation$UpdateRoomStatus({
+    required this.updateRoomStatus,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UpdateRoomStatus.fromJson(Map<String, dynamic> json) {
+    final l$updateRoomStatus = json['updateRoomStatus'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateRoomStatus(
+      updateRoomStatus: Mutation$UpdateRoomStatus$updateRoomStatus.fromJson(
+          (l$updateRoomStatus as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$UpdateRoomStatus$updateRoomStatus updateRoomStatus;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateRoomStatus = updateRoomStatus;
+    _resultData['updateRoomStatus'] = l$updateRoomStatus.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateRoomStatus = updateRoomStatus;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateRoomStatus,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateRoomStatus) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateRoomStatus = updateRoomStatus;
+    final lOther$updateRoomStatus = other.updateRoomStatus;
+    if (l$updateRoomStatus != lOther$updateRoomStatus) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateRoomStatus
+    on Mutation$UpdateRoomStatus {
+  CopyWith$Mutation$UpdateRoomStatus<Mutation$UpdateRoomStatus> get copyWith =>
+      CopyWith$Mutation$UpdateRoomStatus(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$UpdateRoomStatus<TRes> {
+  factory CopyWith$Mutation$UpdateRoomStatus(
+    Mutation$UpdateRoomStatus instance,
+    TRes Function(Mutation$UpdateRoomStatus) then,
+  ) = _CopyWithImpl$Mutation$UpdateRoomStatus;
+
+  factory CopyWith$Mutation$UpdateRoomStatus.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateRoomStatus;
+
+  TRes call({
+    Mutation$UpdateRoomStatus$updateRoomStatus? updateRoomStatus,
+    String? $__typename,
+  });
+  CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<TRes>
+      get updateRoomStatus;
+}
+
+class _CopyWithImpl$Mutation$UpdateRoomStatus<TRes>
+    implements CopyWith$Mutation$UpdateRoomStatus<TRes> {
+  _CopyWithImpl$Mutation$UpdateRoomStatus(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateRoomStatus _instance;
+
+  final TRes Function(Mutation$UpdateRoomStatus) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateRoomStatus = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateRoomStatus(
+        updateRoomStatus: updateRoomStatus == _undefined ||
+                updateRoomStatus == null
+            ? _instance.updateRoomStatus
+            : (updateRoomStatus as Mutation$UpdateRoomStatus$updateRoomStatus),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<TRes>
+      get updateRoomStatus {
+    final local$updateRoomStatus = _instance.updateRoomStatus;
+    return CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus(
+        local$updateRoomStatus, (e) => call(updateRoomStatus: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$UpdateRoomStatus<TRes>
+    implements CopyWith$Mutation$UpdateRoomStatus<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateRoomStatus(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$UpdateRoomStatus$updateRoomStatus? updateRoomStatus,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<TRes>
+      get updateRoomStatus =>
+          CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus.stub(_res);
+}
+
+const documentNodeMutationUpdateRoomStatus = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UpdateRoomStatus'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'status')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'HousekeepingStatus'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateRoomStatus'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'status'),
+            value: VariableNode(name: NameNode(value: 'status')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'roomNumber'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'housekeepingStatus'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Mutation$UpdateRoomStatus _parserFn$Mutation$UpdateRoomStatus(
+        Map<String, dynamic> data) =>
+    Mutation$UpdateRoomStatus.fromJson(data);
+typedef OnMutationCompleted$Mutation$UpdateRoomStatus = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$UpdateRoomStatus?,
+);
+
+class Options$Mutation$UpdateRoomStatus
+    extends graphql.MutationOptions<Mutation$UpdateRoomStatus> {
+  Options$Mutation$UpdateRoomStatus({
+    String? operationName,
+    required Variables$Mutation$UpdateRoomStatus variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateRoomStatus? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UpdateRoomStatus? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UpdateRoomStatus>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$UpdateRoomStatus(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationUpdateRoomStatus,
+          parserFn: _parserFn$Mutation$UpdateRoomStatus,
+        );
+
+  final OnMutationCompleted$Mutation$UpdateRoomStatus? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$UpdateRoomStatus
+    extends graphql.WatchQueryOptions<Mutation$UpdateRoomStatus> {
+  WatchOptions$Mutation$UpdateRoomStatus({
+    String? operationName,
+    required Variables$Mutation$UpdateRoomStatus variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateRoomStatus? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationUpdateRoomStatus,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$UpdateRoomStatus,
+        );
+}
+
+extension ClientExtension$Mutation$UpdateRoomStatus on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$UpdateRoomStatus>>
+      mutate$UpdateRoomStatus(
+              Options$Mutation$UpdateRoomStatus options) async =>
+          await this.mutate(options);
+
+  graphql.ObservableQuery<Mutation$UpdateRoomStatus>
+      watchMutation$UpdateRoomStatus(
+              WatchOptions$Mutation$UpdateRoomStatus options) =>
+          this.watchMutation(options);
+}
+
+class Mutation$UpdateRoomStatus$HookResult {
+  Mutation$UpdateRoomStatus$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$UpdateRoomStatus runMutation;
+
+  final graphql.QueryResult<Mutation$UpdateRoomStatus> result;
+}
+
+Mutation$UpdateRoomStatus$HookResult useMutation$UpdateRoomStatus(
+    [WidgetOptions$Mutation$UpdateRoomStatus? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$UpdateRoomStatus());
+  return Mutation$UpdateRoomStatus$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$UpdateRoomStatus>
+    useWatchMutation$UpdateRoomStatus(
+            WatchOptions$Mutation$UpdateRoomStatus options) =>
+        graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$UpdateRoomStatus
+    extends graphql.MutationOptions<Mutation$UpdateRoomStatus> {
+  WidgetOptions$Mutation$UpdateRoomStatus({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateRoomStatus? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UpdateRoomStatus? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UpdateRoomStatus>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$UpdateRoomStatus(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationUpdateRoomStatus,
+          parserFn: _parserFn$Mutation$UpdateRoomStatus,
+        );
+
+  final OnMutationCompleted$Mutation$UpdateRoomStatus? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$UpdateRoomStatus
+    = graphql.MultiSourceResult<Mutation$UpdateRoomStatus> Function(
+  Variables$Mutation$UpdateRoomStatus, {
+  Object? optimisticResult,
+  Mutation$UpdateRoomStatus? typedOptimisticResult,
+});
+typedef Builder$Mutation$UpdateRoomStatus = widgets.Widget Function(
+  RunMutation$Mutation$UpdateRoomStatus,
+  graphql.QueryResult<Mutation$UpdateRoomStatus>?,
+);
+
+class Mutation$UpdateRoomStatus$Widget
+    extends graphql_flutter.Mutation<Mutation$UpdateRoomStatus> {
+  Mutation$UpdateRoomStatus$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$UpdateRoomStatus? options,
+    required Builder$Mutation$UpdateRoomStatus builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$UpdateRoomStatus(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$UpdateRoomStatus$updateRoomStatus {
+  Mutation$UpdateRoomStatus$updateRoomStatus({
+    required this.id,
+    required this.roomNumber,
+    required this.housekeepingStatus,
+    required this.status,
+    this.$__typename = 'Room',
+  });
+
+  factory Mutation$UpdateRoomStatus$updateRoomStatus.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$roomNumber = json['roomNumber'];
+    final l$housekeepingStatus = json['housekeepingStatus'];
+    final l$status = json['status'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateRoomStatus$updateRoomStatus(
+      id: (l$id as String),
+      roomNumber: (l$roomNumber as String),
+      housekeepingStatus:
+          fromJson$Enum$HousekeepingStatus((l$housekeepingStatus as String)),
+      status: fromJson$Enum$RoomStatus((l$status as String)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String roomNumber;
+
+  final Enum$HousekeepingStatus housekeepingStatus;
+
+  final Enum$RoomStatus status;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$roomNumber = roomNumber;
+    _resultData['roomNumber'] = l$roomNumber;
+    final l$housekeepingStatus = housekeepingStatus;
+    _resultData['housekeepingStatus'] =
+        toJson$Enum$HousekeepingStatus(l$housekeepingStatus);
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$RoomStatus(l$status);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$roomNumber = roomNumber;
+    final l$housekeepingStatus = housekeepingStatus;
+    final l$status = status;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$roomNumber,
+      l$housekeepingStatus,
+      l$status,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateRoomStatus$updateRoomStatus) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$roomNumber = roomNumber;
+    final lOther$roomNumber = other.roomNumber;
+    if (l$roomNumber != lOther$roomNumber) {
+      return false;
+    }
+    final l$housekeepingStatus = housekeepingStatus;
+    final lOther$housekeepingStatus = other.housekeepingStatus;
+    if (l$housekeepingStatus != lOther$housekeepingStatus) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateRoomStatus$updateRoomStatus
+    on Mutation$UpdateRoomStatus$updateRoomStatus {
+  CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<
+          Mutation$UpdateRoomStatus$updateRoomStatus>
+      get copyWith => CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<TRes> {
+  factory CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus(
+    Mutation$UpdateRoomStatus$updateRoomStatus instance,
+    TRes Function(Mutation$UpdateRoomStatus$updateRoomStatus) then,
+  ) = _CopyWithImpl$Mutation$UpdateRoomStatus$updateRoomStatus;
+
+  factory CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateRoomStatus$updateRoomStatus;
+
+  TRes call({
+    String? id,
+    String? roomNumber,
+    Enum$HousekeepingStatus? housekeepingStatus,
+    Enum$RoomStatus? status,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UpdateRoomStatus$updateRoomStatus<TRes>
+    implements CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<TRes> {
+  _CopyWithImpl$Mutation$UpdateRoomStatus$updateRoomStatus(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateRoomStatus$updateRoomStatus _instance;
+
+  final TRes Function(Mutation$UpdateRoomStatus$updateRoomStatus) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? roomNumber = _undefined,
+    Object? housekeepingStatus = _undefined,
+    Object? status = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateRoomStatus$updateRoomStatus(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        roomNumber: roomNumber == _undefined || roomNumber == null
+            ? _instance.roomNumber
+            : (roomNumber as String),
+        housekeepingStatus:
+            housekeepingStatus == _undefined || housekeepingStatus == null
+                ? _instance.housekeepingStatus
+                : (housekeepingStatus as Enum$HousekeepingStatus),
+        status: status == _undefined || status == null
+            ? _instance.status
+            : (status as Enum$RoomStatus),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UpdateRoomStatus$updateRoomStatus<TRes>
+    implements CopyWith$Mutation$UpdateRoomStatus$updateRoomStatus<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateRoomStatus$updateRoomStatus(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? roomNumber,
+    Enum$HousekeepingStatus? housekeepingStatus,
+    Enum$RoomStatus? status,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$UpdateRoom {
+  factory Variables$Mutation$UpdateRoom({
+    required String id,
+    required Input$UpdateRoomInput input,
+  }) =>
+      Variables$Mutation$UpdateRoom._({
+        r'id': id,
+        r'input': input,
+      });
+
+  Variables$Mutation$UpdateRoom._(this._$data);
+
+  factory Variables$Mutation$UpdateRoom.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = (l$id as String);
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$UpdateRoomInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$UpdateRoom._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get id => (_$data['id'] as String);
+
+  Input$UpdateRoomInput get input => (_$data['input'] as Input$UpdateRoomInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = l$id;
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UpdateRoom<Variables$Mutation$UpdateRoom>
+      get copyWith => CopyWith$Variables$Mutation$UpdateRoom(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UpdateRoom) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$input = input;
+    return Object.hashAll([
+      l$id,
+      l$input,
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UpdateRoom<TRes> {
+  factory CopyWith$Variables$Mutation$UpdateRoom(
+    Variables$Mutation$UpdateRoom instance,
+    TRes Function(Variables$Mutation$UpdateRoom) then,
+  ) = _CopyWithImpl$Variables$Mutation$UpdateRoom;
+
+  factory CopyWith$Variables$Mutation$UpdateRoom.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UpdateRoom;
+
+  TRes call({
+    String? id,
+    Input$UpdateRoomInput? input,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$UpdateRoom<TRes>
+    implements CopyWith$Variables$Mutation$UpdateRoom<TRes> {
+  _CopyWithImpl$Variables$Mutation$UpdateRoom(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UpdateRoom _instance;
+
+  final TRes Function(Variables$Mutation$UpdateRoom) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? input = _undefined,
+  }) =>
+      _then(Variables$Mutation$UpdateRoom._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as String),
+        if (input != _undefined && input != null)
+          'input': (input as Input$UpdateRoomInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UpdateRoom<TRes>
+    implements CopyWith$Variables$Mutation$UpdateRoom<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UpdateRoom(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    Input$UpdateRoomInput? input,
+  }) =>
+      _res;
+}
+
+class Mutation$UpdateRoom {
+  Mutation$UpdateRoom({
+    required this.updateRoom,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UpdateRoom.fromJson(Map<String, dynamic> json) {
+    final l$updateRoom = json['updateRoom'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateRoom(
+      updateRoom: Mutation$UpdateRoom$updateRoom.fromJson(
+          (l$updateRoom as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$UpdateRoom$updateRoom updateRoom;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateRoom = updateRoom;
+    _resultData['updateRoom'] = l$updateRoom.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateRoom = updateRoom;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateRoom,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateRoom) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateRoom = updateRoom;
+    final lOther$updateRoom = other.updateRoom;
+    if (l$updateRoom != lOther$updateRoom) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateRoom on Mutation$UpdateRoom {
+  CopyWith$Mutation$UpdateRoom<Mutation$UpdateRoom> get copyWith =>
+      CopyWith$Mutation$UpdateRoom(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$UpdateRoom<TRes> {
+  factory CopyWith$Mutation$UpdateRoom(
+    Mutation$UpdateRoom instance,
+    TRes Function(Mutation$UpdateRoom) then,
+  ) = _CopyWithImpl$Mutation$UpdateRoom;
+
+  factory CopyWith$Mutation$UpdateRoom.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateRoom;
+
+  TRes call({
+    Mutation$UpdateRoom$updateRoom? updateRoom,
+    String? $__typename,
+  });
+  CopyWith$Mutation$UpdateRoom$updateRoom<TRes> get updateRoom;
+}
+
+class _CopyWithImpl$Mutation$UpdateRoom<TRes>
+    implements CopyWith$Mutation$UpdateRoom<TRes> {
+  _CopyWithImpl$Mutation$UpdateRoom(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateRoom _instance;
+
+  final TRes Function(Mutation$UpdateRoom) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateRoom = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateRoom(
+        updateRoom: updateRoom == _undefined || updateRoom == null
+            ? _instance.updateRoom
+            : (updateRoom as Mutation$UpdateRoom$updateRoom),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$UpdateRoom$updateRoom<TRes> get updateRoom {
+    final local$updateRoom = _instance.updateRoom;
+    return CopyWith$Mutation$UpdateRoom$updateRoom(
+        local$updateRoom, (e) => call(updateRoom: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$UpdateRoom<TRes>
+    implements CopyWith$Mutation$UpdateRoom<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateRoom(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$UpdateRoom$updateRoom? updateRoom,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$UpdateRoom$updateRoom<TRes> get updateRoom =>
+      CopyWith$Mutation$UpdateRoom$updateRoom.stub(_res);
+}
+
+const documentNodeMutationUpdateRoom = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UpdateRoom'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'UpdateRoomInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateRoom'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'roomNumber'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'housekeepingStatus'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'priorityCleaning'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Mutation$UpdateRoom _parserFn$Mutation$UpdateRoom(Map<String, dynamic> data) =>
+    Mutation$UpdateRoom.fromJson(data);
+typedef OnMutationCompleted$Mutation$UpdateRoom = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$UpdateRoom?,
+);
+
+class Options$Mutation$UpdateRoom
+    extends graphql.MutationOptions<Mutation$UpdateRoom> {
+  Options$Mutation$UpdateRoom({
+    String? operationName,
+    required Variables$Mutation$UpdateRoom variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateRoom? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UpdateRoom? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UpdateRoom>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null ? null : _parserFn$Mutation$UpdateRoom(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationUpdateRoom,
+          parserFn: _parserFn$Mutation$UpdateRoom,
+        );
+
+  final OnMutationCompleted$Mutation$UpdateRoom? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$UpdateRoom
+    extends graphql.WatchQueryOptions<Mutation$UpdateRoom> {
+  WatchOptions$Mutation$UpdateRoom({
+    String? operationName,
+    required Variables$Mutation$UpdateRoom variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateRoom? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationUpdateRoom,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$UpdateRoom,
+        );
+}
+
+extension ClientExtension$Mutation$UpdateRoom on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$UpdateRoom>> mutate$UpdateRoom(
+          Options$Mutation$UpdateRoom options) async =>
+      await this.mutate(options);
+
+  graphql.ObservableQuery<Mutation$UpdateRoom> watchMutation$UpdateRoom(
+          WatchOptions$Mutation$UpdateRoom options) =>
+      this.watchMutation(options);
+}
+
+class Mutation$UpdateRoom$HookResult {
+  Mutation$UpdateRoom$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$UpdateRoom runMutation;
+
+  final graphql.QueryResult<Mutation$UpdateRoom> result;
+}
+
+Mutation$UpdateRoom$HookResult useMutation$UpdateRoom(
+    [WidgetOptions$Mutation$UpdateRoom? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$UpdateRoom());
+  return Mutation$UpdateRoom$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$UpdateRoom> useWatchMutation$UpdateRoom(
+        WatchOptions$Mutation$UpdateRoom options) =>
+    graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$UpdateRoom
+    extends graphql.MutationOptions<Mutation$UpdateRoom> {
+  WidgetOptions$Mutation$UpdateRoom({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateRoom? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UpdateRoom? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UpdateRoom>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null ? null : _parserFn$Mutation$UpdateRoom(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationUpdateRoom,
+          parserFn: _parserFn$Mutation$UpdateRoom,
+        );
+
+  final OnMutationCompleted$Mutation$UpdateRoom? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$UpdateRoom
+    = graphql.MultiSourceResult<Mutation$UpdateRoom> Function(
+  Variables$Mutation$UpdateRoom, {
+  Object? optimisticResult,
+  Mutation$UpdateRoom? typedOptimisticResult,
+});
+typedef Builder$Mutation$UpdateRoom = widgets.Widget Function(
+  RunMutation$Mutation$UpdateRoom,
+  graphql.QueryResult<Mutation$UpdateRoom>?,
+);
+
+class Mutation$UpdateRoom$Widget
+    extends graphql_flutter.Mutation<Mutation$UpdateRoom> {
+  Mutation$UpdateRoom$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$UpdateRoom? options,
+    required Builder$Mutation$UpdateRoom builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$UpdateRoom(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$UpdateRoom$updateRoom {
+  Mutation$UpdateRoom$updateRoom({
+    required this.id,
+    required this.roomNumber,
+    required this.status,
+    required this.housekeepingStatus,
+    required this.priorityCleaning,
+    this.$__typename = 'Room',
+  });
+
+  factory Mutation$UpdateRoom$updateRoom.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$roomNumber = json['roomNumber'];
+    final l$status = json['status'];
+    final l$housekeepingStatus = json['housekeepingStatus'];
+    final l$priorityCleaning = json['priorityCleaning'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateRoom$updateRoom(
+      id: (l$id as String),
+      roomNumber: (l$roomNumber as String),
+      status: fromJson$Enum$RoomStatus((l$status as String)),
+      housekeepingStatus:
+          fromJson$Enum$HousekeepingStatus((l$housekeepingStatus as String)),
+      priorityCleaning: (l$priorityCleaning as bool),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String roomNumber;
+
+  final Enum$RoomStatus status;
+
+  final Enum$HousekeepingStatus housekeepingStatus;
+
+  final bool priorityCleaning;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$roomNumber = roomNumber;
+    _resultData['roomNumber'] = l$roomNumber;
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$RoomStatus(l$status);
+    final l$housekeepingStatus = housekeepingStatus;
+    _resultData['housekeepingStatus'] =
+        toJson$Enum$HousekeepingStatus(l$housekeepingStatus);
+    final l$priorityCleaning = priorityCleaning;
+    _resultData['priorityCleaning'] = l$priorityCleaning;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$roomNumber = roomNumber;
+    final l$status = status;
+    final l$housekeepingStatus = housekeepingStatus;
+    final l$priorityCleaning = priorityCleaning;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$roomNumber,
+      l$status,
+      l$housekeepingStatus,
+      l$priorityCleaning,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateRoom$updateRoom) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$roomNumber = roomNumber;
+    final lOther$roomNumber = other.roomNumber;
+    if (l$roomNumber != lOther$roomNumber) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$housekeepingStatus = housekeepingStatus;
+    final lOther$housekeepingStatus = other.housekeepingStatus;
+    if (l$housekeepingStatus != lOther$housekeepingStatus) {
+      return false;
+    }
+    final l$priorityCleaning = priorityCleaning;
+    final lOther$priorityCleaning = other.priorityCleaning;
+    if (l$priorityCleaning != lOther$priorityCleaning) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateRoom$updateRoom
+    on Mutation$UpdateRoom$updateRoom {
+  CopyWith$Mutation$UpdateRoom$updateRoom<Mutation$UpdateRoom$updateRoom>
+      get copyWith => CopyWith$Mutation$UpdateRoom$updateRoom(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateRoom$updateRoom<TRes> {
+  factory CopyWith$Mutation$UpdateRoom$updateRoom(
+    Mutation$UpdateRoom$updateRoom instance,
+    TRes Function(Mutation$UpdateRoom$updateRoom) then,
+  ) = _CopyWithImpl$Mutation$UpdateRoom$updateRoom;
+
+  factory CopyWith$Mutation$UpdateRoom$updateRoom.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateRoom$updateRoom;
+
+  TRes call({
+    String? id,
+    String? roomNumber,
+    Enum$RoomStatus? status,
+    Enum$HousekeepingStatus? housekeepingStatus,
+    bool? priorityCleaning,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UpdateRoom$updateRoom<TRes>
+    implements CopyWith$Mutation$UpdateRoom$updateRoom<TRes> {
+  _CopyWithImpl$Mutation$UpdateRoom$updateRoom(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateRoom$updateRoom _instance;
+
+  final TRes Function(Mutation$UpdateRoom$updateRoom) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? roomNumber = _undefined,
+    Object? status = _undefined,
+    Object? housekeepingStatus = _undefined,
+    Object? priorityCleaning = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateRoom$updateRoom(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        roomNumber: roomNumber == _undefined || roomNumber == null
+            ? _instance.roomNumber
+            : (roomNumber as String),
+        status: status == _undefined || status == null
+            ? _instance.status
+            : (status as Enum$RoomStatus),
+        housekeepingStatus:
+            housekeepingStatus == _undefined || housekeepingStatus == null
+                ? _instance.housekeepingStatus
+                : (housekeepingStatus as Enum$HousekeepingStatus),
+        priorityCleaning:
+            priorityCleaning == _undefined || priorityCleaning == null
+                ? _instance.priorityCleaning
+                : (priorityCleaning as bool),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UpdateRoom$updateRoom<TRes>
+    implements CopyWith$Mutation$UpdateRoom$updateRoom<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateRoom$updateRoom(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? roomNumber,
+    Enum$RoomStatus? status,
+    Enum$HousekeepingStatus? housekeepingStatus,
+    bool? priorityCleaning,
+    String? $__typename,
+  }) =>
+      _res;
+}

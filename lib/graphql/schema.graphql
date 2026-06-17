@@ -1,0 +1,622 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Guest {
+  id: ID!
+  name: String!
+  phone: String
+  email: String
+  idProofType: String
+  idProofNumber: String
+  tenantId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  address: String
+  idProofUrl: String
+  gstin: String
+  grNumber: String
+  preferences: String
+  notes: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type SyncGuestsResponse {
+  data: [Guest!]!
+  timestamp: Float!
+}
+
+type RoomType {
+  id: ID!
+  name: String!
+  capacity: Int!
+  defaultPrice: Float
+  propertyId: String!
+  photos: [String!]!
+  Room: [Room]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Room {
+  id: ID!
+  roomNumber: String!
+  status: RoomStatus!
+  roomTypeId: String!
+  housekeepingStatus: HousekeepingStatus!
+  priorityCleaning: Boolean!
+  RoomType: RoomType
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+enum RoomStatus {
+  AVAILABLE
+  MAINTENANCE
+  OCCUPIED
+  DIRTY
+}
+
+enum HousekeepingStatus {
+  READY
+  DIRTY
+  CLEANING
+  INSPECTING
+}
+
+type SyncRoomsResponse {
+  data: [Room!]!
+  timestamp: Float!
+}
+
+type SyncRoomTypesResponse {
+  data: [RoomType!]!
+  timestamp: Float!
+}
+
+type Property {
+  id: ID!
+  name: String!
+  address: String!
+  timezone: String!
+  tenantId: String!
+  taxPercentage: Float
+  logoUrl: String
+  phone: String
+  email: String
+  checkInTime: DateTime
+  checkOutTime: DateTime
+  settings: String
+  photos: [String!]!
+  RoomType: [RoomType]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Service {
+  id: ID!
+  name: String!
+  price: Float!
+  propertyId: String!
+  category: String
+  tenantId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type BookingService {
+  id: ID!
+  bookingId: String!
+  serviceId: String!
+  quantity: Int
+  totalPrice: Float!
+  Service: Service
+}
+
+type BookingRoom {
+  id: ID!
+  bookingId: String!
+  roomTypeId: String!
+  quantity: Int!
+  roomId: String
+  priceOverride: Float
+  status: BookingStatus!
+  checkInDate: DateTime
+  checkOutDate: DateTime
+  Room: Room
+  RoomType: RoomType
+  Booking: Booking
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CHECKED_IN
+  CHECKED_OUT
+  CANCELLED
+  NO_SHOW
+}
+
+type Booking {
+  id: ID!
+  guestId: String!
+  propertyId: String!
+  tenantId: String!
+  source: BookingSource
+  status: BookingStatus
+  checkInDate: DateTime!
+  checkOutDate: DateTime!
+  createdAt: DateTime
+  updatedAt: DateTime
+  adults: Int
+  children: Int
+  discountAmount: Float
+  discountType: String
+  totalAmount: Float
+  notes: String
+  waiveLastDayCharge: Boolean
+  actualCheckOut: DateTime
+  BookingRoom: [BookingRoom]
+  BookingService: [BookingService]
+  Guest: Guest
+  Property: Property
+  Payment: [Payment]
+  Billing: Billing
+}
+
+enum BookingSource {
+  DIRECT
+  OTA
+  BOOKING_ENGINE
+}
+
+type SyncBookingsResponse {
+  data: [Booking!]!
+  timestamp: Float!
+}
+
+type Billing {
+  id: ID!
+  bookingId: String!
+  tenantId: String!
+  totalAmount: Float!
+  taxAmount: Float!
+  paymentStatus: PaymentStatus
+  currency: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  PARTIAL
+  REFUNDED
+}
+
+type Payment {
+  id: ID!
+  bookingId: String!
+  tenantId: String!
+  amount: Float!
+  method: String!
+  status: PaymentStatus
+  createdAt: DateTime
+  updatedAt: DateTime
+  notes: String
+  Booking: Booking
+}
+
+type SyncPaymentsResponse {
+  data: [Payment!]!
+  timestamp: Float!
+}
+
+type RateOverride {
+  id: ID!
+  roomTypeId: String!
+  tenantId: String!
+  startDate: DateTime!
+  endDate: DateTime!
+  rate: Float!
+  RoomType: RoomType
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Tenant {
+  id: ID!
+  name: String!
+  email: String
+  featureFlags: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type TenantAdminUser {
+  email: String!
+  name: String
+}
+
+type CreateTenantResponse {
+  tenant: Tenant!
+  adminUser: TenantAdminUser!
+}
+
+type NightAuditResponse {
+  success: Boolean!
+  timestamp: DateTime!
+}
+
+type PublicHotel {
+  id: ID!
+  name: String!
+  slug: String!
+  location: String!
+  area: String!
+  lat: Float!
+  lng: Float!
+  rating: Float!
+  rating_count: Int!
+  starting_price: Float!
+  amenities: String!
+  amenities_search: String!
+  cover_image: String!
+  image_urls: [String!]!
+  is_sponsored: Boolean!
+  is_active: Boolean!
+  created_at: String!
+}
+
+type PublicRoom {
+  id: ID!
+  hotel_id: String!
+  name: String!
+  description: String!
+  price: Float!
+  capacity: Int!
+  amenities: String!
+  amenities_search: String!
+  image_urls: [String!]!
+  check_in: String!
+  check_out: String!
+  rules: String!
+  cancellation_policy: String!
+  is_active: Boolean!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String
+  role: UserRole!
+  tenantId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  TENANT_ADMIN
+  PROPERTY_MANAGER
+  STAFF
+}
+
+type Expense {
+  id: ID!
+  propertyId: String!
+  tenantId: String!
+  amount: Float!
+  category: String!
+  description: String
+  date: DateTime
+  createdAt: DateTime
+}
+
+type Message {
+  id: ID!
+  bookingId: String
+  guestId: String!
+  tenantId: String!
+  content: String!
+  direction: String!
+  status: String
+  channel: String
+  createdAt: DateTime
+}
+
+type DevEntitiesResponse {
+  dataJson: String!
+  count: Int!
+}
+
+type DevDropdownsResponse {
+  properties: String!
+  roomTypes: String!
+  guests: String!
+  products: String!
+  rooms: String!
+  bookings: String!
+}
+
+type RecentActivity {
+  id: ID!
+  propertyId: String!
+  tenantId: String!
+  title: String!
+  type: String!
+  staffName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  getPublicHotels: [PublicHotel!]!
+  getPublicHotelBySlug(slug: String!): PublicHotel
+  getPublicRooms(hotelId: String!): [PublicRoom!]!
+  properties: [Property!]!
+  property(id: String!): Property
+  roomTypes(propertyId: String!): [RoomType!]!
+  syncRooms(propertyId: String!, since: String): SyncRoomsResponse!
+  syncRoomTypes(propertyId: String!, since: String): SyncRoomTypesResponse!
+  rooms(propertyId: String!): [Room!]!
+  syncBookings(propertyId: String!, since: String): SyncBookingsResponse!
+  booking(id: ID!): Booking
+  services(propertyId: String!): [Service!]!
+  activeBookingRooms(propertyId: String!): [BookingRoom!]!
+  bookings(propertyId: String, guestId: String): [Booking!]!
+  bookingRooms(propertyId: String!): [BookingRoom!]!
+  rateOverrides: [RateOverride!]!
+  guests: [Guest!]!
+  guest(id: ID!): Guest
+  syncGuests(since: String): SyncGuestsResponse!
+  billingInfo(bookingId: ID!): Billing
+  syncBillings(propertyId: String!, since: String): SyncPaymentsResponse!
+  payments: [Payment!]!
+  tenants: [Tenant!]!
+  tenant(id: ID!): Tenant
+  users: [User!]!
+  user(id: ID!): User!
+  expenses(propertyId: String!): [Expense!]!
+  messages(guestId: String!): [Message!]!
+  devEntities(entity: String!, page: Int!, limit: Int!, search: String): DevEntitiesResponse!
+  devDropdowns: DevDropdownsResponse!
+  recentActivities(propertyId: String!): [RecentActivity!]!
+}
+
+type Mutation {
+  createProperty(input: CreatePropertyInput!): Property!
+  updateProperty(id: ID!, input: UpdatePropertyInput!): Property!
+  createRoomType(input: CreateRoomTypeInput!): RoomType!
+  createRoom(input: CreateRoomInput!): Room!
+  updateRoomType(id: ID!, input: UpdateRoomTypeInput!): RoomType!
+  updateRoom(id: ID!, input: UpdateRoomInput!): Room!
+  updateRoomStatus(id: ID!, status: HousekeepingStatus!): Room!
+  createBooking(input: CreateBookingInput!): Booking!
+  cancelBooking(id: ID!): Booking!
+  updateBooking(id: ID!, input: UpdateBookingInput!): Booking!
+  addBookingRoom(bookingId: ID!, roomId: ID, roomTypeId: ID!, checkInDate: String, checkOutDate: String): BookingRoom!
+  updateBookingRoom(id: ID!, input: UpdateBookingRoomInput!): BookingRoom!
+  deleteBookingRoom(id: ID!): Boolean!
+  addBookingService(bookingId: ID!, serviceId: ID!, quantity: Int!, totalPrice: Float!): BookingService!
+  updateBookingService(id: ID!, input: UpdateBookingServiceInput!): BookingService!
+  deleteBookingService(id: ID!): Boolean!
+  createRateOverride(input: CreateRateOverrideInput!): RateOverride!
+  deleteRateOverride(id: ID!): RateOverride!
+  createGuest(input: CreateGuestInput!): Guest!
+  updateGuest(id: ID!, input: UpdateGuestInput!): Guest!
+  updateBillingStatus(bookingId: ID!, status: PaymentStatus!): Billing!
+  createPayment(input: CreatePaymentInput!): Payment!
+  updatePayment(id: ID!, input: UpdatePaymentInput!): Payment!
+  createTenant(input: CreateTenantInput!): CreateTenantResponse!
+  runNightAudit(propertyId: String!): NightAuditResponse!
+  createUser(input: CreateUserInput!): User!
+  removeUser(id: ID!): User!
+  createExpense(input: CreateExpenseInput!): Expense!
+  updateExpense(id: ID!, input: UpdateExpenseInput!): Expense!
+  deleteExpense(id: ID!): Expense!
+  createMessage(input: CreateMessageInput!): Message!
+  devInsert(entity: String!, dataJson: String!): String!
+  devUpdate(entity: String!, id: String!, dataJson: String!): String!
+  devDelete(entity: String!, id: String!): String!
+}
+
+input CreatePropertyInput {
+  name: String!
+  address: String!
+  timezone: String!
+  taxPercentage: Float = 0
+  tenantId: String!
+  logoUrl: String
+  phone: String
+  email: String
+  checkInTime: String
+  checkOutTime: String
+  settings: String
+  photos: [String] = []
+}
+
+input UpdatePropertyInput {
+  name: String
+  address: String
+  timezone: String
+  taxPercentage: Float
+  logoUrl: String
+  phone: String
+  email: String
+  checkInTime: String
+  checkOutTime: String
+  settings: String
+  photos: [String]
+}
+
+input CreateRoomTypeInput {
+  name: String!
+  capacity: Int!
+  defaultPrice: Float!
+  propertyId: String!
+}
+
+input CreateRoomInput {
+  roomNumber: String!
+  roomTypeId: String!
+}
+
+input UpdateRoomTypeInput {
+  name: String
+  capacity: Int
+  defaultPrice: Float
+}
+
+input UpdateRoomInput {
+  roomNumber: String
+  roomTypeId: String
+  status: RoomStatus
+  housekeepingStatus: HousekeepingStatus
+  priorityCleaning: Boolean
+}
+
+input CreateBookingInput {
+  guestId: String!
+  propertyId: String!
+  source: BookingSource! = DIRECT
+  checkInDate: String!
+  checkOutDate: String!
+  rooms: [BookingRoomInput!]!
+  adults: Int
+  children: Int
+  notes: String
+  waiveLastDayCharge: Boolean
+  advanceAmount: Float
+  advanceMethod: String
+}
+
+input BookingRoomInput {
+  roomTypeId: String!
+  quantity: Int!
+  roomId: String
+  priceOverride: Float
+}
+
+input UpdateBookingInput {
+  status: BookingStatus
+  checkInDate: String
+  checkOutDate: String
+  adults: Int
+  children: Int
+  discountAmount: Float
+  discountType: String
+  notes: String
+  waiveLastDayCharge: Boolean
+  actualCheckOut: String
+  totalAmount: Float
+}
+
+input UpdateBookingRoomInput {
+  roomId: String
+  roomTypeId: String
+  priceOverride: Float
+  checkInDate: String
+  checkOutDate: String
+}
+
+input UpdateBookingServiceInput {
+  quantity: Int
+  totalPrice: Float
+}
+
+input CreateRateOverrideInput {
+  roomTypeId: String!
+  startDate: String!
+  endDate: String!
+  rate: Float!
+}
+
+input CreateGuestInput {
+  name: String!
+  phone: String!
+  email: String
+  idProofType: String
+  idProofNumber: String
+  tenantId: String!
+  address: String
+  idProofUrl: String
+  gstin: String
+  grNumber: String
+  preferences: String
+  notes: String
+}
+
+input UpdateGuestInput {
+  name: String
+  phone: String
+  email: String
+  idProofType: String
+  idProofNumber: String
+  address: String
+  idProofUrl: String
+  gstin: String
+  grNumber: String
+  preferences: String
+  notes: String
+}
+
+input CreatePaymentInput {
+  bookingId: String!
+  tenantId: String!
+  amount: Float!
+  method: String!
+  status: PaymentStatus
+  notes: String
+}
+
+input UpdatePaymentInput {
+  amount: Float
+  method: String
+  status: PaymentStatus
+  notes: String
+}
+
+input CreateTenantInput {
+  name: String!
+  email: String
+  featureFlags: String
+  adminEmail: String!
+  adminPassword: String!
+  adminName: String
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  name: String!
+  role: UserRole! = STAFF
+  tenantId: String
+}
+
+input CreateExpenseInput {
+  amount: Float!
+  category: String!
+  description: String
+  date: String
+  propertyId: String!
+}
+
+input UpdateExpenseInput {
+  amount: Float
+  category: String
+  description: String
+  date: String
+}
+
+input CreateMessageInput {
+  bookingId: String
+  guestId: String!
+  content: String!
+  direction: String! = "OUTBOUND"
+  status: String! = "SENT"
+  channel: String! = "WHATSAPP"
+}
