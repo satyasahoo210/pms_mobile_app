@@ -23,8 +23,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void initState() {
     super.initState();
     _checkBiometrics();
-    _emailController.text = 'baibhablodge1@gmail.com';
-    _passwordController.text = 'Satya@123';
   }
 
   Future<void> _checkBiometrics() async {
@@ -292,7 +290,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   // Footer info
                   Center(
                     child: Text(
-                      'Travelspuri Property Management Systems v1.0',
+                      'Travels Puri Property Management Systems v1.0',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: ext.textMuted,
                         fontSize: 10,

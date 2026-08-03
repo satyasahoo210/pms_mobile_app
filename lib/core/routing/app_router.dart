@@ -32,16 +32,17 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authControllerProvider);
 
   return GoRouter(
-    initialLocation: '/dashboard',
+    initialLocation: '/',
     refreshListenable: GoRouterRefreshStream(
       ref.watch(authControllerProvider.notifier).stream,
     ),
     redirect: (context, state) {
       final status = authState.status;
       final loggingIn = state.matchedLocation == '/login';
+      final isSplashing = state.matchedLocation == '/';
 
       if (status == AuthStatus.initial || status == AuthStatus.authenticating) {
-        return null; // Don't redirect while checking auth
+        return isSplashing ? null : '/'; // Force staying on splash screen while checking auth
       }
 
       final isLoggedIn = status == AuthStatus.authenticated;
@@ -50,13 +51,14 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
         return loggingIn ? null : '/login';
       }
 
-      if (loggingIn) {
+      if (loggingIn || isSplashing) {
         return '/dashboard';
       }
 
       return null;
     },
     routes: [
+      GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       ShellRoute(
         builder: (context, state, child) {
@@ -183,6 +185,50 @@ class PlaceholderScreen extends StatelessWidget {
           style: theme.textTheme.bodyLarge?.copyWith(
             color: theme.extension<AppColorsExtension>()?.textMuted,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final ext = theme.extension<AppColorsExtension>()!;
+    
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary,
+                borderRadius: BorderRadius.circular(AppTheme.radiusLg),
+              ),
+              child: const Icon(
+                Icons.hotel,
+                size: 44,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Travels Puri PMS',
+              style: theme.textTheme.headlineMedium?.copyWith(
+                color: ext.textPrimary,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const CircularProgressIndicator(),
+          ],
         ),
       ),
     );

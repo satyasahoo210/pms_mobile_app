@@ -25,6 +25,13 @@ class DashboardScreen extends ConsumerWidget {
       }
     });
 
+    // Return to login screen when exception received
+    ref.listen<AsyncValue>(propertiesProvider, (previous, next) {
+      if (next.hasError) {
+        ref.read(authControllerProvider.notifier).logout();
+      }
+    });
+
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
