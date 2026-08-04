@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_controller.dart';
 import 'package:pms_admin/features/calendar/presentation/calendar_controller.dart';
@@ -839,22 +840,46 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          booking.Guest?.name ?? 'Guest',
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        if (booking.Guest?.phone != null)
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Text(
-                            booking.Guest!.phone!,
-                            style: theme.textTheme.bodySmall,
+                            booking.Guest?.name ?? 'Guest',
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                      ],
+                          if (booking.Guest?.phone != null)
+                            Text(
+                              booking.Guest!.phone!,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                        ],
+                      ),
                     ),
+                    if (booking.Guest?.phone != null &&
+                        booking.Guest!.phone!.isNotEmpty)
+                      IconButton(
+                        icon: const Icon(Icons.phone, color: Colors.green),
+                        onPressed: () async {
+                          final phone = booking.Guest!.phone!;
+                          final url = Uri.parse('tel:$phone');
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          } else {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Could not launch call to $phone',
+                                  ),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                      ),
                   ],
                 ),
                 const Divider(height: 24),
@@ -941,6 +966,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                 // Billing
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1096,6 +1122,19 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                       }
                     });
               },
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).colorScheme.primary,
+                ),
+                foregroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).colorScheme.onPrimary,
+                ),
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
               child: const Text('Record'),
             ),
           ],

@@ -187,6 +187,13 @@ const documentNodeQueryGetProperties = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'address'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'timezone'),
             alias: null,
             arguments: [],
@@ -202,6 +209,41 @@ const documentNodeQueryGetProperties = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'taxPercentage'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'logoUrl'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'phone'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkOutTime'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'settings'),
             alias: null,
             arguments: [],
             directives: [],
@@ -373,25 +415,43 @@ class Query$GetProperties$properties {
   Query$GetProperties$properties({
     required this.id,
     required this.name,
+    required this.address,
     required this.timezone,
     required this.tenantId,
     this.taxPercentage,
+    this.logoUrl,
+    this.phone,
+    this.email,
+    this.checkOutTime,
+    this.settings,
     this.$__typename = 'Property',
   });
 
   factory Query$GetProperties$properties.fromJson(Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$address = json['address'];
     final l$timezone = json['timezone'];
     final l$tenantId = json['tenantId'];
     final l$taxPercentage = json['taxPercentage'];
+    final l$logoUrl = json['logoUrl'];
+    final l$phone = json['phone'];
+    final l$email = json['email'];
+    final l$checkOutTime = json['checkOutTime'];
+    final l$settings = json['settings'];
     final l$$__typename = json['__typename'];
     return Query$GetProperties$properties(
       id: (l$id as String),
       name: (l$name as String),
+      address: (l$address as String),
       timezone: (l$timezone as String),
       tenantId: (l$tenantId as String),
       taxPercentage: (l$taxPercentage as num?)?.toDouble(),
+      logoUrl: (l$logoUrl as String?),
+      phone: (l$phone as String?),
+      email: (l$email as String?),
+      checkOutTime: (l$checkOutTime as String?),
+      settings: (l$settings as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -400,11 +460,23 @@ class Query$GetProperties$properties {
 
   final String name;
 
+  final String address;
+
   final String timezone;
 
   final String tenantId;
 
   final double? taxPercentage;
+
+  final String? logoUrl;
+
+  final String? phone;
+
+  final String? email;
+
+  final String? checkOutTime;
+
+  final String? settings;
 
   final String $__typename;
 
@@ -414,12 +486,24 @@ class Query$GetProperties$properties {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$address = address;
+    _resultData['address'] = l$address;
     final l$timezone = timezone;
     _resultData['timezone'] = l$timezone;
     final l$tenantId = tenantId;
     _resultData['tenantId'] = l$tenantId;
     final l$taxPercentage = taxPercentage;
     _resultData['taxPercentage'] = l$taxPercentage;
+    final l$logoUrl = logoUrl;
+    _resultData['logoUrl'] = l$logoUrl;
+    final l$phone = phone;
+    _resultData['phone'] = l$phone;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$checkOutTime = checkOutTime;
+    _resultData['checkOutTime'] = l$checkOutTime;
+    final l$settings = settings;
+    _resultData['settings'] = l$settings;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -429,16 +513,28 @@ class Query$GetProperties$properties {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$address = address;
     final l$timezone = timezone;
     final l$tenantId = tenantId;
     final l$taxPercentage = taxPercentage;
+    final l$logoUrl = logoUrl;
+    final l$phone = phone;
+    final l$email = email;
+    final l$checkOutTime = checkOutTime;
+    final l$settings = settings;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$address,
       l$timezone,
       l$tenantId,
       l$taxPercentage,
+      l$logoUrl,
+      l$phone,
+      l$email,
+      l$checkOutTime,
+      l$settings,
       l$$__typename,
     ]);
   }
@@ -462,6 +558,11 @@ class Query$GetProperties$properties {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
+      return false;
+    }
     final l$timezone = timezone;
     final lOther$timezone = other.timezone;
     if (l$timezone != lOther$timezone) {
@@ -475,6 +576,31 @@ class Query$GetProperties$properties {
     final l$taxPercentage = taxPercentage;
     final lOther$taxPercentage = other.taxPercentage;
     if (l$taxPercentage != lOther$taxPercentage) {
+      return false;
+    }
+    final l$logoUrl = logoUrl;
+    final lOther$logoUrl = other.logoUrl;
+    if (l$logoUrl != lOther$logoUrl) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$checkOutTime = checkOutTime;
+    final lOther$checkOutTime = other.checkOutTime;
+    if (l$checkOutTime != lOther$checkOutTime) {
+      return false;
+    }
+    final l$settings = settings;
+    final lOther$settings = other.settings;
+    if (l$settings != lOther$settings) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -507,9 +633,15 @@ abstract class CopyWith$Query$GetProperties$properties<TRes> {
   TRes call({
     String? id,
     String? name,
+    String? address,
     String? timezone,
     String? tenantId,
     double? taxPercentage,
+    String? logoUrl,
+    String? phone,
+    String? email,
+    String? checkOutTime,
+    String? settings,
     String? $__typename,
   });
 }
@@ -530,9 +662,15 @@ class _CopyWithImpl$Query$GetProperties$properties<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? address = _undefined,
     Object? timezone = _undefined,
     Object? tenantId = _undefined,
     Object? taxPercentage = _undefined,
+    Object? logoUrl = _undefined,
+    Object? phone = _undefined,
+    Object? email = _undefined,
+    Object? checkOutTime = _undefined,
+    Object? settings = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetProperties$properties(
@@ -540,6 +678,9 @@ class _CopyWithImpl$Query$GetProperties$properties<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        address: address == _undefined || address == null
+            ? _instance.address
+            : (address as String),
         timezone: timezone == _undefined || timezone == null
             ? _instance.timezone
             : (timezone as String),
@@ -549,6 +690,15 @@ class _CopyWithImpl$Query$GetProperties$properties<TRes>
         taxPercentage: taxPercentage == _undefined
             ? _instance.taxPercentage
             : (taxPercentage as double?),
+        logoUrl:
+            logoUrl == _undefined ? _instance.logoUrl : (logoUrl as String?),
+        phone: phone == _undefined ? _instance.phone : (phone as String?),
+        email: email == _undefined ? _instance.email : (email as String?),
+        checkOutTime: checkOutTime == _undefined
+            ? _instance.checkOutTime
+            : (checkOutTime as String?),
+        settings:
+            settings == _undefined ? _instance.settings : (settings as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -564,9 +714,15 @@ class _CopyWithStubImpl$Query$GetProperties$properties<TRes>
   call({
     String? id,
     String? name,
+    String? address,
     String? timezone,
     String? tenantId,
     double? taxPercentage,
+    String? logoUrl,
+    String? phone,
+    String? email,
+    String? checkOutTime,
+    String? settings,
     String? $__typename,
   }) =>
       _res;
@@ -1961,6 +2117,20 @@ const documentNodeQueryGetBookings = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'address'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'gstin'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: '__typename'),
                 alias: null,
                 arguments: [],
@@ -2775,6 +2945,8 @@ class Query$GetBookings$bookings$Guest {
     required this.name,
     this.phone,
     this.email,
+    this.address,
+    this.gstin,
     this.$__typename = 'Guest',
   });
 
@@ -2783,12 +2955,16 @@ class Query$GetBookings$bookings$Guest {
     final l$name = json['name'];
     final l$phone = json['phone'];
     final l$email = json['email'];
+    final l$address = json['address'];
+    final l$gstin = json['gstin'];
     final l$$__typename = json['__typename'];
     return Query$GetBookings$bookings$Guest(
       id: (l$id as String),
       name: (l$name as String),
       phone: (l$phone as String?),
       email: (l$email as String?),
+      address: (l$address as String?),
+      gstin: (l$gstin as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -2800,6 +2976,10 @@ class Query$GetBookings$bookings$Guest {
   final String? phone;
 
   final String? email;
+
+  final String? address;
+
+  final String? gstin;
 
   final String $__typename;
 
@@ -2813,6 +2993,10 @@ class Query$GetBookings$bookings$Guest {
     _resultData['phone'] = l$phone;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$address = address;
+    _resultData['address'] = l$address;
+    final l$gstin = gstin;
+    _resultData['gstin'] = l$gstin;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2824,12 +3008,16 @@ class Query$GetBookings$bookings$Guest {
     final l$name = name;
     final l$phone = phone;
     final l$email = email;
+    final l$address = address;
+    final l$gstin = gstin;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
       l$phone,
       l$email,
+      l$address,
+      l$gstin,
       l$$__typename,
     ]);
   }
@@ -2861,6 +3049,16 @@ class Query$GetBookings$bookings$Guest {
     final l$email = email;
     final lOther$email = other.email;
     if (l$email != lOther$email) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
+      return false;
+    }
+    final l$gstin = gstin;
+    final lOther$gstin = other.gstin;
+    if (l$gstin != lOther$gstin) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2895,6 +3093,8 @@ abstract class CopyWith$Query$GetBookings$bookings$Guest<TRes> {
     String? name,
     String? phone,
     String? email,
+    String? address,
+    String? gstin,
     String? $__typename,
   });
 }
@@ -2917,6 +3117,8 @@ class _CopyWithImpl$Query$GetBookings$bookings$Guest<TRes>
     Object? name = _undefined,
     Object? phone = _undefined,
     Object? email = _undefined,
+    Object? address = _undefined,
+    Object? gstin = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetBookings$bookings$Guest(
@@ -2926,6 +3128,9 @@ class _CopyWithImpl$Query$GetBookings$bookings$Guest<TRes>
             : (name as String),
         phone: phone == _undefined ? _instance.phone : (phone as String?),
         email: email == _undefined ? _instance.email : (email as String?),
+        address:
+            address == _undefined ? _instance.address : (address as String?),
+        gstin: gstin == _undefined ? _instance.gstin : (gstin as String?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -2943,6 +3148,8 @@ class _CopyWithStubImpl$Query$GetBookings$bookings$Guest<TRes>
     String? name,
     String? phone,
     String? email,
+    String? address,
+    String? gstin,
     String? $__typename,
   }) =>
       _res;

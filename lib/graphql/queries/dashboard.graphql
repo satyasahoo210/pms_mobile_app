@@ -2,9 +2,15 @@ query GetProperties {
   properties {
     id
     name
+    address
     timezone
     tenantId
     taxPercentage
+    logoUrl
+    phone
+    email
+    checkOutTime
+    settings
   }
 }
 
@@ -41,6 +47,8 @@ query GetBookings($propertyId: String, $guestId: String) {
       name
       phone
       email
+      address
+      gstin
     }
     Payment {
       id
