@@ -157,3 +157,19 @@ mutation UpdateBooking($id: ID!, $input: UpdateBookingInput!) {
     notes
   }
 }
+
+mutation CancelBooking($id: ID!) {
+  cancelBooking(id: $id) {
+    id
+    status
+  }
+}
+
+mutation CreatePayment($input: CreatePaymentInput!) {
+  createPayment(input: $input) {
+    id
+    amount
+    method
+    status
+  }
+}

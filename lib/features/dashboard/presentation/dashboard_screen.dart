@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
+import 'package:pms_admin/core/utils/logger.dart';
 import 'package:pms_admin/core/widgets/empty_state_widget.dart';
 import 'package:pms_admin/features/auth/presentation/auth_controller.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_controller.dart';
@@ -29,6 +30,9 @@ class DashboardScreen extends ConsumerWidget {
     // Return to login screen when exception received
     ref.listen<AsyncValue>(propertiesProvider, (previous, next) {
       if (next.hasError) {
+        appLog(
+          '[DashboardScreen] Exception received while loading properties ${next.error}',
+        );
         ref.read(authControllerProvider.notifier).logout();
       }
     });
@@ -396,7 +400,7 @@ class DashboardScreen extends ConsumerWidget {
                   context,
                   Icons.how_to_reg_outlined,
                   'Check-In',
-                  onTap: () => context.go('/calendar'),
+                  onTap: () => context.go('/calendar?scrollToToday=true'),
                 ),
                 _buildActionTile(
                   context,
@@ -411,7 +415,9 @@ class DashboardScreen extends ConsumerWidget {
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: const Text('Billing module coming soon in Phase 2'),
+                        content: const Text(
+                          'Billing module coming soon in Phase 2',
+                        ),
                         backgroundColor: theme.colorScheme.secondary,
                         behavior: SnackBarBehavior.floating,
                       ),

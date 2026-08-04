@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_controller.dart';
 import 'package:pms_admin/features/calendar/presentation/calendar_controller.dart';
+import 'package:pms_admin/features/bookings/presentation/bookings_controller.dart';
 import 'package:pms_admin/graphql/queries/dashboard.graphql.dart';
 import 'package:pms_admin/graphql/schema.graphql.dart';
 
 class CalendarScreen extends ConsumerStatefulWidget {
-  const CalendarScreen({super.key});
+  final bool scrollToToday;
+
+  const CalendarScreen({super.key, this.scrollToToday = false});
 
   @override
   ConsumerState<CalendarScreen> createState() => _CalendarScreenState();
@@ -66,6 +68,28 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
         _datesScrollController.jumpTo(_gridHorizontalScrollController.offset);
       }
     });
+    if (widget.scrollToToday) {
+      final now = DateTime.now();
+      final todayDate = DateTime(now.year, now.month, now.day);
+
+      Future.microtask(() {
+        ref.read(calendarStartDateProvider.notifier).state = todayDate.subtract(
+          const Duration(days: 7),
+        );
+      });
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (_gridHorizontalScrollController.hasClients) {
+            _gridHorizontalScrollController.animateTo(
+              _dateColumnWidth * 6,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
+          }
+        });
+      });
+    }
   }
 
   @override
@@ -90,6 +114,19 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
     final propertiesAsync = ref.watch(propertiesProvider);
     final calendarDataAsync = ref.watch(calendarDataProvider);
     final startDate = ref.watch(calendarStartDateProvider);
+
+    void foucusOnDate(DateTime date) {
+      ref.read(calendarStartDateProvider.notifier).state = DateTime(
+        date.year,
+        date.month,
+        date.day,
+      ).subtract(const Duration(days: 7));
+      _gridHorizontalScrollController.animateTo(
+        _dateColumnWidth * 6,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -153,14 +190,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
           TextButton.icon(
             icon: const Icon(Icons.today, size: 18),
             label: const Text('Today'),
-            onPressed: () {
-              final now = DateTime.now();
-              ref.read(calendarStartDateProvider.notifier).state = DateTime(
-                now.year,
-                now.month,
-                now.day,
-              ).subtract(const Duration(days: 7));
-            },
+            onPressed: () => foucusOnDate(DateTime.now()),
           ),
           // Date Picker
           IconButton(
@@ -623,6 +653,145 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
 
     final isPaid = totalPaid >= totalAmount;
 
+    final today = DateTime.now();
+    final todayDateOnly = DateTime(today.year, today.month, today.day);
+    final checkInDateOnly = DateTime(checkIn.year, checkIn.month, checkIn.day);
+    final limitDate = todayDateOnly.add(const Duration(days: 1));
+    final isFutureBooking = checkInDateOnly.isAfter(limitDate);
+
+    final List<Widget> actionButtons = [];
+
+    if (booking.status != Enum$BookingStatus.CANCELLED &&
+        booking.status != Enum$BookingStatus.CHECKED_OUT) {
+      if (isFutureBooking && booking.status == Enum$BookingStatus.CONFIRMED) {
+        actionButtons.add(
+          TextButton.icon(
+            icon: const Icon(
+              Icons.cancel_outlined,
+              color: Colors.red,
+              size: 16,
+            ),
+            label: const Text(
+              'Cancel Booking',
+              style: TextStyle(color: Colors.red),
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (confirmContext) {
+                  return AlertDialog(
+                    title: const Text('Cancel Booking'),
+                    content: const Text(
+                      'Are you sure you want to cancel this booking?',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(confirmContext).pop(),
+                        child: const Text('No'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(confirmContext).pop();
+                          ref
+                              .read(bookingsControllerProvider.notifier)
+                              .cancelBooking(booking.id)
+                              .then((success) {
+                                if (success && context.mounted) {
+                                  Navigator.of(context).pop();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Booking cancelled successfully',
+                                      ),
+                                    ),
+                                  );
+                                }
+                              });
+                        },
+                        child: const Text(
+                          'Yes, Cancel',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        );
+      } else if (booking.status == Enum$BookingStatus.CONFIRMED) {
+        actionButtons.add(
+          TextButton.icon(
+            icon: const Icon(Icons.login, size: 16),
+            label: const Text('Check In'),
+            onPressed: () {
+              ref
+                  .read(bookingsControllerProvider.notifier)
+                  .updateBooking(
+                    booking.id,
+                    Input$UpdateBookingInput(
+                      status: Enum$BookingStatus.CHECKED_IN,
+                    ),
+                  )
+                  .then((success) {
+                    if (success && context.mounted) {
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Booking checked in successfully'),
+                        ),
+                      );
+                    }
+                  });
+            },
+          ),
+        );
+      } else if (booking.status == Enum$BookingStatus.CHECKED_IN) {
+        if (!isPaid) {
+          actionButtons.add(
+            TextButton.icon(
+              icon: const Icon(Icons.payment, size: 16),
+              label: const Text('Record Payment'),
+              onPressed: () => _showRecordPaymentDialog(
+                context,
+                booking,
+                totalAmount,
+                totalPaid,
+              ),
+            ),
+          );
+        } else {
+          actionButtons.add(
+            TextButton.icon(
+              icon: const Icon(Icons.logout, size: 16),
+              label: const Text('Check Out'),
+              onPressed: () {
+                ref
+                    .read(bookingsControllerProvider.notifier)
+                    .updateBooking(
+                      booking.id,
+                      Input$UpdateBookingInput(
+                        status: Enum$BookingStatus.CHECKED_OUT,
+                      ),
+                    )
+                    .then((success) {
+                      if (success && context.mounted) {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Booking checked out successfully'),
+                          ),
+                        );
+                      }
+                    });
+              },
+            ),
+          );
+        }
+      }
+    }
+
     showDialog(
       context: context,
       builder: (context) {
@@ -760,7 +929,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                         border: Border.all(color: ext.borderLight),
                       ),
                       child: Text(
-                        'Room ${br.Room?.roomNumber ?? 'TBD'} (${br.RoomType?.name ?? 'Standard'})',
+                        'Room ${br.Room?.roomNumber ?? 'TBD'} ${br.RoomType?.name != null ? '(${br.RoomType!.name})' : ''}',
                         style: theme.textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -832,17 +1001,102 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
             ),
           ),
           actions: [
-            TextButton.icon(
-              icon: const Icon(Icons.edit, size: 16),
-              label: const Text('Edit'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                context.push('/bookings', extra: booking);
-              },
-            ),
+            ...actionButtons,
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showRecordPaymentDialog(
+    BuildContext context,
+    Query$GetBookings$bookings booking,
+    double totalAmount,
+    double totalPaid,
+  ) {
+    final amountController = TextEditingController(
+      text: (totalAmount - totalPaid).toStringAsFixed(0),
+    );
+    String paymentMethod = 'CASH';
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Record Payment'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: amountController,
+                decoration: const InputDecoration(
+                  labelText: 'Amount (₹)',
+                  prefixIcon: Icon(Icons.currency_rupee),
+                ),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                initialValue: paymentMethod,
+                decoration: const InputDecoration(labelText: 'Payment Method'),
+                items: const [
+                  DropdownMenuItem(value: 'CASH', child: Text('Cash')),
+                  DropdownMenuItem(value: 'CARD', child: Text('Card')),
+                  DropdownMenuItem(value: 'UPI', child: Text('UPI / QR')),
+                  DropdownMenuItem(
+                    value: 'BANK_TRANSFER',
+                    child: Text('Bank Transfer'),
+                  ),
+                ],
+                onChanged: (val) {
+                  if (val != null) {
+                    paymentMethod = val;
+                  }
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final amt = double.tryParse(amountController.text) ?? 0.0;
+                if (amt <= 0) return;
+
+                Navigator.of(context).pop();
+
+                ref
+                    .read(bookingsControllerProvider.notifier)
+                    .createPayment(
+                      Input$CreatePaymentInput(
+                        bookingId: booking.id,
+                        tenantId: booking.propertyId,
+                        amount: amt,
+                        method: paymentMethod,
+                        status: Enum$PaymentStatus.PAID,
+                      ),
+                    )
+                    .then((success) {
+                      if (success && context.mounted) {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Payment recorded successfully'),
+                          ),
+                        );
+                      }
+                    });
+              },
+              child: const Text('Record'),
             ),
           ],
         );

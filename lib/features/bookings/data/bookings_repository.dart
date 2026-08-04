@@ -76,6 +76,42 @@ class BookingsRepository {
     }
     return data;
   }
+
+  Future<Mutation$CancelBooking$cancelBooking> cancelBooking(String id) async {
+    final result = await _client.mutate$CancelBooking(
+      Options$Mutation$CancelBooking(
+        variables: Variables$Mutation$CancelBooking(id: id),
+      ),
+    );
+
+    if (result.hasException) {
+      throw Exception(result.exception.toString());
+    }
+
+    final data = result.parsedData?.cancelBooking;
+    if (data == null) {
+      throw Exception('Failed to cancel booking');
+    }
+    return data;
+  }
+
+  Future<Mutation$CreatePayment$createPayment> createPayment(Input$CreatePaymentInput input) async {
+    final result = await _client.mutate$CreatePayment(
+      Options$Mutation$CreatePayment(
+        variables: Variables$Mutation$CreatePayment(input: input),
+      ),
+    );
+
+    if (result.hasException) {
+      throw Exception(result.exception.toString());
+    }
+
+    final data = result.parsedData?.createPayment;
+    if (data == null) {
+      throw Exception('Failed to create payment');
+    }
+    return data;
+  }
 }
 
 final bookingsRepositoryProvider = Provider<BookingsRepository>((ref) {

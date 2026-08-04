@@ -44,7 +44,9 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
       final isSplashing = state.matchedLocation == '/';
 
       if (status == AuthStatus.initial || status == AuthStatus.authenticating) {
-        return isSplashing ? null : '/'; // Force staying on splash screen while checking auth
+        return isSplashing
+            ? null
+            : '/'; // Force staying on splash screen while checking auth
       }
 
       final isLoggedIn = status == AuthStatus.authenticated;
@@ -53,7 +55,7 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
         return loggingIn ? null : '/login';
       }
 
-      if (loggingIn || isSplashing) {
+      if (isLoggedIn && (loggingIn || isSplashing)) {
         return '/dashboard';
       }
 
@@ -73,7 +75,11 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/calendar',
-            builder: (context, state) => const CalendarScreen(),
+            builder: (context, state) {
+              final scrollToToday =
+                  state.uri.queryParameters['scrollToToday'] == 'true';
+              return CalendarScreen(scrollToToday: scrollToToday);
+            },
           ),
           GoRoute(
             path: '/housekeeping',
@@ -207,7 +213,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final ext = theme.extension<AppColorsExtension>()!;
-    
+
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: Center(
@@ -221,11 +227,7 @@ class SplashScreen extends StatelessWidget {
                 color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(AppTheme.radiusLg),
               ),
-              child: const Icon(
-                Icons.hotel,
-                size: 44,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.hotel, size: 44, color: Colors.white),
             ),
             const SizedBox(height: 24),
             Text(

@@ -83,6 +83,46 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
       return false;
     }
   }
+
+  Future<bool> cancelBooking(String id) async {
+    appLog('[BookingsController] cancelBooking started. ID: $id');
+    state = const AsyncValue.loading();
+    try {
+      await _repository.cancelBooking(id);
+      appLog('[BookingsController] cancelBooking succeeded.');
+      state = const AsyncValue.data(null);
+      _ref.invalidate(dashboardStatsProvider);
+      _ref.invalidate(upcomingArrivalsProvider);
+      _ref.invalidate(recentActivityProvider);
+      _ref.invalidate(calendarDataProvider);
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] cancelBooking failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> createPayment(Input$CreatePaymentInput input) async {
+    appLog(
+      '[BookingsController] createPayment started. Booking: ${input.bookingId}, Amount: ${input.amount}',
+    );
+    state = const AsyncValue.loading();
+    try {
+      await _repository.createPayment(input);
+      appLog('[BookingsController] createPayment succeeded.');
+      state = const AsyncValue.data(null);
+      _ref.invalidate(dashboardStatsProvider);
+      _ref.invalidate(upcomingArrivalsProvider);
+      _ref.invalidate(recentActivityProvider);
+      _ref.invalidate(calendarDataProvider);
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] createPayment failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
 }
 
 final bookingsControllerProvider =

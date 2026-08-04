@@ -390,6 +390,8 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: theme.colorScheme.primary,
+                    foregroundColor: theme.colorScheme.onPrimary,
                   ),
                   onPressed: _submit,
                   child: Text(
@@ -696,7 +698,7 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
                                                       ? theme
                                                             .colorScheme
                                                             .primaryContainer
-                                                            .withOpacity(0.15)
+                                                            .withValues(alpha: 0.15)
                                                       : theme
                                                             .colorScheme
                                                             .surface,
@@ -1016,11 +1018,26 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
                                   prefixIcon: Icon(Icons.badge_outlined),
                                 ),
                                 items: const [
-                                  DropdownMenuItem(value: 'AADHAAR', child: Text('Aadhaar Card')),
-                                  DropdownMenuItem(value: 'PAN', child: Text('PAN Card')),
-                                  DropdownMenuItem(value: 'PASSPORT', child: Text('Passport')),
-                                  DropdownMenuItem(value: 'DRIVING_LICENSE', child: Text('Driving License')),
-                                  DropdownMenuItem(value: 'VOTER_ID', child: Text('Voter ID')),
+                                  DropdownMenuItem(
+                                    value: 'AADHAAR',
+                                    child: Text('Aadhaar Card'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'PAN',
+                                    child: Text('PAN Card'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'PASSPORT',
+                                    child: Text('Passport'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'DRIVING_LICENSE',
+                                    child: Text('Driving License'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'VOTER_ID',
+                                    child: Text('Voter ID'),
+                                  ),
                                 ],
                                 onChanged: (val) {
                                   setState(() {
