@@ -7,6 +7,7 @@ import 'package:pms_admin/features/auth/domain/auth_models.dart';
 import 'package:pms_admin/features/auth/presentation/auth_controller.dart';
 import 'package:pms_admin/features/auth/presentation/login_screen.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:pms_admin/features/dashboard/presentation/inventory_screen.dart';
 import 'package:pms_admin/features/housekeeping/presentation/housekeeping_screen.dart';
 import 'package:pms_admin/features/calendar/presentation/calendar_screen.dart';
 import 'package:pms_admin/features/bookings/presentation/booking_screen.dart';
@@ -84,6 +85,10 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/housekeeping',
             builder: (context, state) => const HousekeepingScreen(),
+          ),
+          GoRoute(
+            path: '/inventory',
+            builder: (context, state) => const InventoryScreen(),
           ),
           GoRoute(
             path: '/more',

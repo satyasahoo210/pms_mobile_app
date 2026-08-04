@@ -9,6 +9,7 @@ query GetProperties {
     logoUrl
     phone
     email
+    checkInTime
     checkOutTime
     settings
   }

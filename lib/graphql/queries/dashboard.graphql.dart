@@ -236,6 +236,13 @@ const documentNodeQueryGetProperties = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'checkInTime'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'checkOutTime'),
             alias: null,
             arguments: [],
@@ -422,6 +429,7 @@ class Query$GetProperties$properties {
     this.logoUrl,
     this.phone,
     this.email,
+    this.checkInTime,
     this.checkOutTime,
     this.settings,
     this.$__typename = 'Property',
@@ -437,6 +445,7 @@ class Query$GetProperties$properties {
     final l$logoUrl = json['logoUrl'];
     final l$phone = json['phone'];
     final l$email = json['email'];
+    final l$checkInTime = json['checkInTime'];
     final l$checkOutTime = json['checkOutTime'];
     final l$settings = json['settings'];
     final l$$__typename = json['__typename'];
@@ -450,6 +459,7 @@ class Query$GetProperties$properties {
       logoUrl: (l$logoUrl as String?),
       phone: (l$phone as String?),
       email: (l$email as String?),
+      checkInTime: (l$checkInTime as String?),
       checkOutTime: (l$checkOutTime as String?),
       settings: (l$settings as String?),
       $__typename: (l$$__typename as String),
@@ -473,6 +483,8 @@ class Query$GetProperties$properties {
   final String? phone;
 
   final String? email;
+
+  final String? checkInTime;
 
   final String? checkOutTime;
 
@@ -500,6 +512,8 @@ class Query$GetProperties$properties {
     _resultData['phone'] = l$phone;
     final l$email = email;
     _resultData['email'] = l$email;
+    final l$checkInTime = checkInTime;
+    _resultData['checkInTime'] = l$checkInTime;
     final l$checkOutTime = checkOutTime;
     _resultData['checkOutTime'] = l$checkOutTime;
     final l$settings = settings;
@@ -520,6 +534,7 @@ class Query$GetProperties$properties {
     final l$logoUrl = logoUrl;
     final l$phone = phone;
     final l$email = email;
+    final l$checkInTime = checkInTime;
     final l$checkOutTime = checkOutTime;
     final l$settings = settings;
     final l$$__typename = $__typename;
@@ -533,6 +548,7 @@ class Query$GetProperties$properties {
       l$logoUrl,
       l$phone,
       l$email,
+      l$checkInTime,
       l$checkOutTime,
       l$settings,
       l$$__typename,
@@ -593,6 +609,11 @@ class Query$GetProperties$properties {
     if (l$email != lOther$email) {
       return false;
     }
+    final l$checkInTime = checkInTime;
+    final lOther$checkInTime = other.checkInTime;
+    if (l$checkInTime != lOther$checkInTime) {
+      return false;
+    }
     final l$checkOutTime = checkOutTime;
     final lOther$checkOutTime = other.checkOutTime;
     if (l$checkOutTime != lOther$checkOutTime) {
@@ -640,6 +661,7 @@ abstract class CopyWith$Query$GetProperties$properties<TRes> {
     String? logoUrl,
     String? phone,
     String? email,
+    String? checkInTime,
     String? checkOutTime,
     String? settings,
     String? $__typename,
@@ -669,6 +691,7 @@ class _CopyWithImpl$Query$GetProperties$properties<TRes>
     Object? logoUrl = _undefined,
     Object? phone = _undefined,
     Object? email = _undefined,
+    Object? checkInTime = _undefined,
     Object? checkOutTime = _undefined,
     Object? settings = _undefined,
     Object? $__typename = _undefined,
@@ -694,6 +717,9 @@ class _CopyWithImpl$Query$GetProperties$properties<TRes>
             logoUrl == _undefined ? _instance.logoUrl : (logoUrl as String?),
         phone: phone == _undefined ? _instance.phone : (phone as String?),
         email: email == _undefined ? _instance.email : (email as String?),
+        checkInTime: checkInTime == _undefined
+            ? _instance.checkInTime
+            : (checkInTime as String?),
         checkOutTime: checkOutTime == _undefined
             ? _instance.checkOutTime
             : (checkOutTime as String?),
@@ -721,6 +747,7 @@ class _CopyWithStubImpl$Query$GetProperties$properties<TRes>
     String? logoUrl,
     String? phone,
     String? email,
+    String? checkInTime,
     String? checkOutTime,
     String? settings,
     String? $__typename,
