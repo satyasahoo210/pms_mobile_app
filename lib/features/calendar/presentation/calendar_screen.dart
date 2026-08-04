@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:pms_admin/core/utils/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pms_admin/core/utils/invoice_generator.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
@@ -31,6 +32,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   static const double _rowHeight = 65.0;
   static const double _headerHeight = 55.0;
   static const int _daysToShow = 30;
+  bool _hasScrolledToToday = false;
 
   @override
   void initState() {
@@ -71,28 +73,6 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
         _datesScrollController.jumpTo(_gridHorizontalScrollController.offset);
       }
     });
-    if (widget.scrollToToday) {
-      final now = DateTime.now();
-      final todayDate = DateTime(now.year, now.month, now.day);
-
-      Future.microtask(() {
-        ref.read(calendarStartDateProvider.notifier).state = todayDate.subtract(
-          const Duration(days: 7),
-        );
-      });
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Future.delayed(const Duration(milliseconds: 300), () {
-          if (_gridHorizontalScrollController.hasClients) {
-            _gridHorizontalScrollController.animateTo(
-              _dateColumnWidth * 6,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-            );
-          }
-        });
-      });
-    }
   }
 
   @override
@@ -219,6 +199,29 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Center(child: Text('Error: $err')),
               data: (data) {
+                if (widget.scrollToToday && !_hasScrolledToToday) {
+                  _hasScrolledToToday = true;
+                  final now = DateTime.now();
+                  final todayDate = DateTime(now.year, now.month, now.day);
+
+                  Future.microtask(() {
+                    ref.read(calendarStartDateProvider.notifier).state =
+                        todayDate.subtract(const Duration(days: 7));
+                  });
+
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Future.delayed(const Duration(milliseconds: 300), () {
+                      if (_gridHorizontalScrollController.hasClients) {
+                        _gridHorizontalScrollController.animateTo(
+                          _dateColumnWidth * 6,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    });
+                  });
+                }
+
                 if (data.rooms.isEmpty) {
                   return const Center(
                     child: Text(
@@ -829,15 +832,6 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
         ),
       );
     }
-    actionButtons.add(
-      TextButton.icon(
-        icon: const Icon(Icons.info_outline, size: 16),
-        label: const Text('View Details'),
-        onPressed: () {
-          context.push('/bookings/details', extra: booking);
-        },
-      ),
-    );
 
     showDialog(
       context: context,
@@ -1074,6 +1068,14 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
           ),
           actions: [
             ...actionButtons,
+            TextButton.icon(
+              icon: const Icon(Icons.info_outline, size: 16),
+              label: const Text('View Details'),
+              onPressed: () {
+                Navigator.of(context).maybePop();
+                context.push('/bookings/details', extra: booking);
+              },
+            ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: const Text('Close'),

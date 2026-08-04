@@ -9,7 +9,8 @@ import 'package:pms_admin/graphql/queries/dashboard.graphql.dart';
 import 'package:pms_admin/graphql/schema.graphql.dart';
 
 class BookingsListScreen extends ConsumerStatefulWidget {
-  const BookingsListScreen({super.key});
+  final String? tab;
+  const BookingsListScreen({super.key, this.tab = 'ALL'});
 
   @override
   ConsumerState<BookingsListScreen> createState() => _BookingsListScreenState();
@@ -19,6 +20,20 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   String _selectedStatus = 'ALL';
+
+  @override
+  void initState() {
+    super.initState();
+    if ([
+      'ALL',
+      'CONFIRMED',
+      'CHECKED_IN',
+      'CHECKED_OUT',
+      'CANCELLED',
+    ].contains(widget.tab)) {
+      _selectedStatus = widget.tab ?? 'ALL';
+    }
+  }
 
   @override
   void dispose() {
@@ -44,7 +59,8 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
         final bookingId = b.id.toLowerCase();
         final shortId = b.id.toLowerCase().substring(0, 8);
 
-        final matchesGuest = guestName.contains(query) || guestPhone.contains(query);
+        final matchesGuest =
+            guestName.contains(query) || guestPhone.contains(query);
         final matchesId = bookingId.contains(query) || shortId.contains(query);
 
         // Check if matches any assigned room number
@@ -135,16 +151,15 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
                   decoration: InputDecoration(
                     hintText: 'Search by Guest Name, Phone, Room or ID...',
                     prefixIcon: const Icon(Icons.search),
-                    suffixIcon:
-                        _searchQuery.isNotEmpty
-                            ? IconButton(
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                _searchController.clear();
-                                setState(() => _searchQuery = '');
-                              },
-                            )
-                            : null,
+                    suffixIcon: _searchQuery.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() => _searchQuery = '');
+                            },
+                          )
+                        : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMd),
                     ),
@@ -180,7 +195,8 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
               onRefresh: () => ref.refresh(bookingsListProvider.future),
               child: bookingsAsync.when(
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, stack) => Center(child: Text('Error loading bookings: $err')),
+                error: (err, stack) =>
+                    Center(child: Text('Error loading bookings: $err')),
                 data: (bookings) {
                   final filteredBookings = _filterBookings(bookings);
 
@@ -188,12 +204,18 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
                     return ListView(
                       physics: const AlwaysScrollableScrollPhysics(),
                       children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.2,
+                        ),
                         Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.book_outlined, size: 64, color: ext.textMuted),
+                              Icon(
+                                Icons.book_outlined,
+                                size: 64,
+                                color: ext.textMuted,
+                              ),
                               const SizedBox(height: AppTheme.spacingMd),
                               Text(
                                 'No bookings found',
@@ -217,7 +239,9 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
                   }
 
                   return ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: AppTheme.spacingMd),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacingMd,
+                    ),
                     itemCount: filteredBookings.length,
                     itemBuilder: (context, index) {
                       final b = filteredBookings[index];
@@ -251,10 +275,14 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
       },
       labelStyle: theme.textTheme.bodySmall?.copyWith(
         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-        color: isSelected ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant,
+        color: isSelected
+            ? theme.colorScheme.onPrimary
+            : theme.colorScheme.onSurfaceVariant,
       ),
       selectedColor: theme.colorScheme.primary,
-      backgroundColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+      backgroundColor: theme.colorScheme.surfaceContainerHighest.withValues(
+        alpha: 0.3,
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppTheme.radiusMd),
       ),
@@ -275,35 +303,33 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
     final checkOut = DateTime.parse(b.checkOutDate).toLocal();
     final nights = checkOut.difference(checkIn).inDays;
 
-    final roomInfo =
-        b.BookingRoom != null && b.BookingRoom!.isNotEmpty
-            ? b.BookingRoom!.map((br) {
-              final roomNum = br?.Room?.roomNumber ?? 'TBD';
-              final roomType = br?.RoomType?.name ?? 'Standard';
-              return 'Room $roomNum ($roomType)';
-            }).join(', ')
-            : 'Unassigned';
+    final roomInfo = b.BookingRoom != null && b.BookingRoom!.isNotEmpty
+        ? b.BookingRoom!
+              .map((br) {
+                final roomNum = br?.Room?.roomNumber ?? 'TBD';
+                final roomType = br?.RoomType?.name ?? 'Standard';
+                return 'Room $roomNum ($roomType)';
+              })
+              .join(', ')
+        : 'Unassigned';
 
     // Calculate payment status
     final totalAmount = b.totalAmount ?? 0.0;
-    final totalPaid =
-        (b.Payment ?? [])
-            .where((p) => p != null && p.status == Enum$PaymentStatus.PAID)
-            .fold<double>(0.0, (sum, p) => sum + (p?.amount ?? 0.0));
+    final totalPaid = (b.Payment ?? [])
+        .where((p) => p != null && p.status == Enum$PaymentStatus.PAID)
+        .fold<double>(0.0, (sum, p) => sum + (p?.amount ?? 0.0));
 
     final isPaid = totalPaid >= totalAmount;
-    final paymentStatusLabel =
-        isPaid
-            ? 'Paid'
-            : totalPaid > 0
-            ? 'Partial'
-            : 'Unpaid';
-    final paymentColor =
-        isPaid
-            ? Colors.green
-            : totalPaid > 0
-            ? Colors.orange
-            : Colors.red;
+    final paymentStatusLabel = isPaid
+        ? 'Paid'
+        : totalPaid > 0
+        ? 'Partial'
+        : 'Unpaid';
+    final paymentColor = isPaid
+        ? Colors.green
+        : totalPaid > 0
+        ? Colors.orange
+        : Colors.red;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -334,7 +360,10 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: statusColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(AppTheme.radiusSm),
@@ -367,9 +396,13 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1.5),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 1.5,
+                    ),
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                      color: theme.colorScheme.surfaceContainerHighest
+                          .withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -419,10 +452,15 @@ class _BookingsListScreenState extends ConsumerState<BookingsListScreen> {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: paymentColor.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                          borderRadius: BorderRadius.circular(
+                            AppTheme.radiusSm,
+                          ),
                         ),
                         child: Text(
                           paymentStatusLabel.toUpperCase(),

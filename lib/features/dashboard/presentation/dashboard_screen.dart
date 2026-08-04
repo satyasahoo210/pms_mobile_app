@@ -485,7 +485,7 @@ class DashboardScreen extends ConsumerWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => context.go('/bookings/list?tab=CONFIRMED'),
                   child: Text(
                     'VIEW ALL',
                     style: theme.textTheme.labelLarge?.copyWith(
@@ -540,7 +540,7 @@ class DashboardScreen extends ConsumerWidget {
                       ),
                     ),
                     subtitle: Text(
-                      'Room ${item.roomNumber} • ${item.roomType}',
+                      'Room ${item.roomNumber}',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: ext.textMuted,
                       ),

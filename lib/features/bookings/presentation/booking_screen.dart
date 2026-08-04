@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -66,6 +67,36 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
   // Status for edit mode
   Enum$BookingStatus _status = Enum$BookingStatus.CONFIRMED;
 
+  TimeOfDay _getPropertyCheckInTime() {
+    final property = ref.read(selectedPropertyProvider);
+    if (property?.settings != null) {
+      try {
+        final settings = jsonDecode(property!.settings!) as Map<String, dynamic>;
+        final checkInStr = settings['checkinTime'] as String?;
+        if (checkInStr != null && checkInStr.isNotEmpty) {
+          final parts = checkInStr.split(':');
+          return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+        }
+      } catch (_) {}
+    }
+    return const TimeOfDay(hour: 8, minute: 0); // Default check-in at 8:00 AM
+  }
+
+  TimeOfDay _getPropertyCheckOutTime() {
+    final property = ref.read(selectedPropertyProvider);
+    if (property?.settings != null) {
+      try {
+        final settings = jsonDecode(property!.settings!) as Map<String, dynamic>;
+        final checkOutStr = settings['checkoutTime'] as String?;
+        if (checkOutStr != null && checkOutStr.isNotEmpty) {
+          final parts = checkOutStr.split(':');
+          return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+        }
+      } catch (_) {}
+    }
+    return const TimeOfDay(hour: 7, minute: 0); // Default check-out at 07:00 AM
+  }
+
   @override
   void initState() {
     super.initState();
@@ -101,6 +132,26 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
       _selectedGuestId = booking.guestId;
     } else {
       _selectedRooms = [SelectedRoomState()];
+
+      final checkInTime = _getPropertyCheckInTime();
+      final checkOutTime = _getPropertyCheckOutTime();
+      final now = DateTime.now();
+
+      _checkInDate = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        checkInTime.hour,
+        checkInTime.minute,
+      );
+      final tomorrow = now.add(const Duration(days: 1));
+      _checkOutDate = DateTime(
+        tomorrow.year,
+        tomorrow.month,
+        tomorrow.day,
+        checkOutTime.hour,
+        checkOutTime.minute,
+      );
     }
   }
 
@@ -122,15 +173,32 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
   }
 
   Future<void> _selectCheckInDate() async {
-    final picked = await showDatePicker(
+    final pickedDate = await showDatePicker(
       context: context,
       initialDate: _checkInDate ?? DateTime.now(),
       firstDate: DateTime.now().subtract(const Duration(days: 30)),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
-    if (picked != null) {
+    if (pickedDate != null) {
+      if (!mounted) return;
+      final defaultTime = _getPropertyCheckInTime();
+      final pickedTime = await showTimePicker(
+        context: context,
+        initialTime: _checkInDate != null
+            ? TimeOfDay(hour: _checkInDate!.hour, minute: _checkInDate!.minute)
+            : defaultTime,
+        helpText: 'SELECT CHECK-IN TIME',
+      );
+
+      final finalTime = pickedTime ?? defaultTime;
       setState(() {
-        _checkInDate = picked;
+        _checkInDate = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          finalTime.hour,
+          finalTime.minute,
+        );
         // Reset check-out date if it is before check-in
         if (_checkOutDate != null && _checkOutDate!.isBefore(_checkInDate!)) {
           _checkOutDate = null;
@@ -140,7 +208,7 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
   }
 
   Future<void> _selectCheckOutDate() async {
-    final picked = await showDatePicker(
+    final pickedDate = await showDatePicker(
       context: context,
       initialDate:
           _checkOutDate ??
@@ -148,9 +216,26 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
       firstDate: _checkInDate ?? DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
-    if (picked != null) {
+    if (pickedDate != null) {
+      if (!mounted) return;
+      final defaultTime = _getPropertyCheckOutTime();
+      final pickedTime = await showTimePicker(
+        context: context,
+        initialTime: _checkOutDate != null
+            ? TimeOfDay(hour: _checkOutDate!.hour, minute: _checkOutDate!.minute)
+            : defaultTime,
+        helpText: 'SELECT CHECK-OUT TIME',
+      );
+
+      final finalTime = pickedTime ?? defaultTime;
       setState(() {
-        _checkOutDate = picked;
+        _checkOutDate = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          finalTime.hour,
+          finalTime.minute,
+        );
       });
     }
   }
@@ -221,8 +306,8 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
     }
 
     if (!mounted) return;
-    final checkInStr = DateFormat('yyyy-MM-dd').format(_checkInDate!);
-    final checkOutStr = DateFormat('yyyy-MM-dd').format(_checkOutDate!);
+    final checkInStr = _checkInDate!.toIso8601String();
+    final checkOutStr = _checkOutDate!.toIso8601String();
     final adultsVal = int.tryParse(_adultsController.text) ?? 1;
     final childrenVal = int.tryParse(_childrenController.text) ?? 0;
 
@@ -440,7 +525,7 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
                                         _checkInDate == null
                                             ? 'Select'
                                             : DateFormat(
-                                                'dd MMM yyyy',
+                                                'dd MMM yyyy, hh:mm a',
                                               ).format(_checkInDate!),
                                       ),
                                     ),
@@ -459,7 +544,7 @@ class _BookingScreenState extends ConsumerState<BookingScreen> {
                                         _checkOutDate == null
                                             ? 'Select'
                                             : DateFormat(
-                                                'dd MMM yyyy',
+                                                'dd MMM yyyy, hh:mm a',
                                               ).format(_checkOutDate!),
                                       ),
                                     ),

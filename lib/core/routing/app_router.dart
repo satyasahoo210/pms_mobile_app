@@ -99,7 +99,10 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/bookings/list',
-            builder: (context, state) => const BookingsListScreen(),
+            builder: (context, state) {
+              final tab = state.uri.queryParameters['tab'] ?? 'ALL';
+              return BookingsListScreen(tab: tab);
+            },
           ),
         ],
       ),
@@ -136,7 +139,10 @@ class MainNavigationShell extends ConsumerWidget {
       if (location.startsWith('/dashboard')) return 0;
       if (location.startsWith('/calendar')) return 1;
       if (location.startsWith('/housekeeping')) return 2;
-      if (location.startsWith('/more') || location.startsWith('/bookings/list')) return 3;
+      if (location.startsWith('/more') ||
+          location.startsWith('/bookings/list')) {
+        return 3;
+      }
       return 0;
     }
 
