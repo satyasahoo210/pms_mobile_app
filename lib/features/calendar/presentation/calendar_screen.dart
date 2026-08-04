@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pms_admin/core/utils/invoice_generator.dart';
@@ -828,6 +829,15 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
         ),
       );
     }
+    actionButtons.add(
+      TextButton.icon(
+        icon: const Icon(Icons.info_outline, size: 16),
+        label: const Text('View Details'),
+        onPressed: () {
+          context.push('/bookings/details', extra: booking);
+        },
+      ),
+    );
 
     showDialog(
       context: context,

@@ -13,6 +13,13 @@ final guestsProvider = FutureProvider.autoDispose<List<Query$GetGuests$guests>>(
   },
 );
 
+final bookingsListProvider = FutureProvider<List<Query$GetBookings$bookings>>((ref) async {
+  final selectedProperty = ref.watch(selectedPropertyProvider);
+  if (selectedProperty == null) return [];
+  final repo = ref.watch(dashboardRepositoryProvider);
+  return repo.getBookings(selectedProperty.id);
+});
+
 class BookingsController extends StateNotifier<AsyncValue<void>> {
   final BookingsRepository _repository;
   final Ref _ref;
@@ -55,6 +62,7 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
       _ref.invalidate(upcomingArrivalsProvider);
       _ref.invalidate(recentActivityProvider);
       _ref.invalidate(calendarDataProvider);
+      _ref.invalidate(bookingsListProvider);
       return true;
     } catch (e, stack) {
       appLog('[BookingsController] createBooking failed: $e');
@@ -76,6 +84,7 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
       _ref.invalidate(upcomingArrivalsProvider);
       _ref.invalidate(recentActivityProvider);
       _ref.invalidate(calendarDataProvider);
+      _ref.invalidate(bookingsListProvider);
       return true;
     } catch (e, stack) {
       appLog('[BookingsController] updateBooking failed: $e');
@@ -95,6 +104,7 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
       _ref.invalidate(upcomingArrivalsProvider);
       _ref.invalidate(recentActivityProvider);
       _ref.invalidate(calendarDataProvider);
+      _ref.invalidate(bookingsListProvider);
       return true;
     } catch (e, stack) {
       appLog('[BookingsController] cancelBooking failed: $e');
@@ -116,6 +126,7 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
       _ref.invalidate(upcomingArrivalsProvider);
       _ref.invalidate(recentActivityProvider);
       _ref.invalidate(calendarDataProvider);
+      _ref.invalidate(bookingsListProvider);
       return true;
     } catch (e, stack) {
       appLog('[BookingsController] createPayment failed: $e');

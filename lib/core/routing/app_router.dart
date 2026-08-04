@@ -8,9 +8,12 @@ import 'package:pms_admin/features/auth/presentation/auth_controller.dart';
 import 'package:pms_admin/features/auth/presentation/login_screen.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:pms_admin/features/dashboard/presentation/inventory_screen.dart';
+import 'package:pms_admin/features/dashboard/presentation/more_screen.dart';
 import 'package:pms_admin/features/housekeeping/presentation/housekeeping_screen.dart';
 import 'package:pms_admin/features/calendar/presentation/calendar_screen.dart';
 import 'package:pms_admin/features/bookings/presentation/booking_screen.dart';
+import 'package:pms_admin/features/bookings/presentation/bookings_list_screen.dart';
+import 'package:pms_admin/features/bookings/presentation/booking_details_screen.dart';
 import 'package:pms_admin/graphql/queries/dashboard.graphql.dart';
 
 // Helper class to convert a Riverpod stream/provider into a Listenable for GoRouter
@@ -92,8 +95,11 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/more',
-            builder: (context, state) =>
-                const PlaceholderScreen(title: 'More & Settings'),
+            builder: (context, state) => const MoreScreen(),
+          ),
+          GoRoute(
+            path: '/bookings/list',
+            builder: (context, state) => const BookingsListScreen(),
           ),
         ],
       ),
@@ -102,6 +108,13 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           final booking = state.extra as Query$GetBookings$bookings?;
           return BookingScreen(existingBooking: booking);
+        },
+      ),
+      GoRoute(
+        path: '/bookings/details',
+        builder: (context, state) {
+          final booking = state.extra as Query$GetBookings$bookings;
+          return BookingDetailsScreen(booking: booking);
         },
       ),
     ],
@@ -123,7 +136,7 @@ class MainNavigationShell extends ConsumerWidget {
       if (location.startsWith('/dashboard')) return 0;
       if (location.startsWith('/calendar')) return 1;
       if (location.startsWith('/housekeeping')) return 2;
-      if (location.startsWith('/more')) return 3;
+      if (location.startsWith('/more') || location.startsWith('/bookings/list')) return 3;
       return 0;
     }
 
