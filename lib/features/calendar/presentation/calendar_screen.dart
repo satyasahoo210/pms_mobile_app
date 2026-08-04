@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pms_admin/core/utils/invoice_generator.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_controller.dart';
 import 'package:pms_admin/features/calendar/presentation/calendar_controller.dart';
@@ -791,6 +792,41 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
           );
         }
       }
+    }
+
+    if (booking.status != Enum$BookingStatus.CANCELLED) {
+      actionButtons.add(
+        TextButton.icon(
+          icon: const Icon(Icons.share, color: Colors.green, size: 16),
+          label: const Text(
+            'Share Invoice',
+            style: TextStyle(color: Colors.green),
+          ),
+          onPressed: () async {
+            final property = ref.read(selectedPropertyProvider);
+            if (property == null) return;
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Generating and sharing invoice...'),
+              ),
+            );
+
+            try {
+              await shareInvoiceViaWhatsApp(
+                booking: booking,
+                property: property,
+              );
+            } catch (e) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Failed to share invoice: $e')),
+                );
+              }
+            }
+          },
+        ),
+      );
     }
 
     showDialog(

@@ -50,7 +50,16 @@ Link createGraphqlLink(SecureStorageService secureStorage) {
           appLog(
             '[GraphQLClient] Token refresh succeeded. Retrying original request.',
           );
-          yield* forward(request);
+          final newAccessToken = await secureStorage.read(StorageKeys.accessToken);
+          final retriedRequest = request.updateContextEntry<HttpLinkHeaders>(
+            (headers) => HttpLinkHeaders(
+              headers: {
+                ...?headers?.headers,
+                if (newAccessToken != null) 'Authorization': 'Bearer $newAccessToken',
+              },
+            ),
+          );
+          yield* forward(retriedRequest);
           return;
         }
         appLog(
@@ -72,7 +81,16 @@ Link createGraphqlLink(SecureStorageService secureStorage) {
           appLog(
             '[GraphQLClient] Token refresh succeeded. Retrying original request.',
           );
-          yield* forward(request);
+          final newAccessToken = await secureStorage.read(StorageKeys.accessToken);
+          final retriedRequest = request.updateContextEntry<HttpLinkHeaders>(
+            (headers) => HttpLinkHeaders(
+              headers: {
+                ...?headers?.headers,
+                if (newAccessToken != null) 'Authorization': 'Bearer $newAccessToken',
+              },
+            ),
+          );
+          yield* forward(retriedRequest);
           return;
         }
         appLog('[GraphQLClient] Token refresh failed.');

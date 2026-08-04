@@ -2294,6 +2294,13 @@ const documentNodeQueryGetBookings = DocumentNode(definitions: [
                     selectionSet: null,
                   ),
                   FieldNode(
+                    name: NameNode(value: 'defaultPrice'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
                     name: NameNode(value: '__typename'),
                     alias: null,
                     arguments: [],
@@ -3827,6 +3834,7 @@ class Query$GetBookings$bookings$BookingRoom$RoomType {
   Query$GetBookings$bookings$BookingRoom$RoomType({
     required this.id,
     required this.name,
+    this.defaultPrice,
     this.$__typename = 'RoomType',
   });
 
@@ -3834,10 +3842,12 @@ class Query$GetBookings$bookings$BookingRoom$RoomType {
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
+    final l$defaultPrice = json['defaultPrice'];
     final l$$__typename = json['__typename'];
     return Query$GetBookings$bookings$BookingRoom$RoomType(
       id: (l$id as String),
       name: (l$name as String),
+      defaultPrice: (l$defaultPrice as num?)?.toDouble(),
       $__typename: (l$$__typename as String),
     );
   }
@@ -3845,6 +3855,8 @@ class Query$GetBookings$bookings$BookingRoom$RoomType {
   final String id;
 
   final String name;
+
+  final double? defaultPrice;
 
   final String $__typename;
 
@@ -3854,6 +3866,8 @@ class Query$GetBookings$bookings$BookingRoom$RoomType {
     _resultData['id'] = l$id;
     final l$name = name;
     _resultData['name'] = l$name;
+    final l$defaultPrice = defaultPrice;
+    _resultData['defaultPrice'] = l$defaultPrice;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3863,10 +3877,12 @@ class Query$GetBookings$bookings$BookingRoom$RoomType {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$defaultPrice = defaultPrice;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
       l$name,
+      l$defaultPrice,
       l$$__typename,
     ]);
   }
@@ -3888,6 +3904,11 @@ class Query$GetBookings$bookings$BookingRoom$RoomType {
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$defaultPrice = defaultPrice;
+    final lOther$defaultPrice = other.defaultPrice;
+    if (l$defaultPrice != lOther$defaultPrice) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3922,6 +3943,7 @@ abstract class CopyWith$Query$GetBookings$bookings$BookingRoom$RoomType<TRes> {
   TRes call({
     String? id,
     String? name,
+    double? defaultPrice,
     String? $__typename,
   });
 }
@@ -3942,6 +3964,7 @@ class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$RoomType<TRes>
   TRes call({
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? defaultPrice = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Query$GetBookings$bookings$BookingRoom$RoomType(
@@ -3949,6 +3972,9 @@ class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom$RoomType<TRes>
         name: name == _undefined || name == null
             ? _instance.name
             : (name as String),
+        defaultPrice: defaultPrice == _undefined
+            ? _instance.defaultPrice
+            : (defaultPrice as double?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -3964,6 +3990,7 @@ class _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom$RoomType<TRes>
   call({
     String? id,
     String? name,
+    double? defaultPrice,
     String? $__typename,
   }) =>
       _res;
