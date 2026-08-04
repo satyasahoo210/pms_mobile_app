@@ -15,7 +15,8 @@ class BookingDetailsScreen extends ConsumerStatefulWidget {
   const BookingDetailsScreen({super.key, required this.booking});
 
   @override
-  ConsumerState<BookingDetailsScreen> createState() => _BookingDetailsScreenState();
+  ConsumerState<BookingDetailsScreen> createState() =>
+      _BookingDetailsScreenState();
 }
 
 class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
@@ -53,21 +54,25 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
 
   Future<void> _updateStatus(Enum$BookingStatus status) async {
     setState(() => _isLoading = true);
-    final success = await ref.read(bookingsControllerProvider.notifier).updateBooking(
-      widget.booking.id,
-      Input$UpdateBookingInput(
-        status: status,
-        checkInDate: widget.booking.checkInDate,
-        checkOutDate: widget.booking.checkOutDate,
-        adults: widget.booking.adults,
-        children: widget.booking.children,
-      ),
-    );
+    final success = await ref
+        .read(bookingsControllerProvider.notifier)
+        .updateBooking(
+          widget.booking.id,
+          Input$UpdateBookingInput(
+            status: status,
+            checkInDate: widget.booking.checkInDate,
+            checkOutDate: widget.booking.checkOutDate,
+            adults: widget.booking.adults,
+            children: widget.booking.children,
+          ),
+        );
     setState(() => _isLoading = false);
 
     if (success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Booking status updated to ${_getStatusLabel(status)}')),
+        SnackBar(
+          content: Text('Booking status updated to ${_getStatusLabel(status)}'),
+        ),
       );
     }
   }
@@ -77,7 +82,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Cancel Booking'),
-        content: const Text('Are you sure you want to cancel this booking? This action cannot be undone.'),
+        content: const Text(
+          'Are you sure you want to cancel this booking? This action cannot be undone.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -85,7 +92,10 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Cancel Booking', style: TextStyle(color: Colors.red)),
+            child: const Text(
+              'Cancel Booking',
+              style: TextStyle(color: Colors.red),
+            ),
           ),
         ],
       ),
@@ -93,7 +103,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
 
     if (confirm == true) {
       setState(() => _isLoading = true);
-      final success = await ref.read(bookingsControllerProvider.notifier).cancelBooking(widget.booking.id);
+      final success = await ref
+          .read(bookingsControllerProvider.notifier)
+          .cancelBooking(widget.booking.id);
       setState(() => _isLoading = false);
 
       if (success && mounted) {
@@ -128,7 +140,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                   labelText: 'Amount (₹)',
                   prefixIcon: Icon(Icons.currency_rupee),
                 ),
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
@@ -138,7 +152,10 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                   DropdownMenuItem(value: 'CASH', child: Text('Cash')),
                   DropdownMenuItem(value: 'CARD', child: Text('Card')),
                   DropdownMenuItem(value: 'UPI', child: Text('UPI / QR')),
-                  DropdownMenuItem(value: 'BANK_TRANSFER', child: Text('Bank Transfer')),
+                  DropdownMenuItem(
+                    value: 'BANK_TRANSFER',
+                    child: Text('Bank Transfer'),
+                  ),
                 ],
                 onChanged: (val) {
                   if (val != null) {
@@ -174,7 +191,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                     .then((success) {
                       if (success && context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Payment recorded successfully')),
+                          const SnackBar(
+                            content: Text('Payment recorded successfully'),
+                          ),
                         );
                       }
                     });
@@ -206,9 +225,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to share invoice: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Failed to share invoice: $e')));
       }
     }
   }
@@ -254,7 +273,8 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
           ),
         ),
         actions: [
-          if (booking.status != Enum$BookingStatus.CANCELLED && selectedProperty != null)
+          if (booking.status != Enum$BookingStatus.CANCELLED &&
+              selectedProperty != null)
             IconButton(
               icon: const Icon(Icons.share),
               onPressed: () => _shareInvoice(selectedProperty),
@@ -274,7 +294,10 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                     color: statusColor.withValues(alpha: 0.05),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppTheme.radiusMd),
-                      side: BorderSide(color: statusColor.withValues(alpha: 0.3), width: 1),
+                      side: BorderSide(
+                        color: statusColor.withValues(alpha: 0.3),
+                        width: 1,
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(AppTheme.spacingMd),
@@ -291,10 +314,15 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 3,
+                                ),
                                 decoration: BoxDecoration(
                                   color: statusColor.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                                  borderRadius: BorderRadius.circular(
+                                    AppTheme.radiusSm,
+                                  ),
                                 ),
                                 child: Text(
                                   statusLabel.toUpperCase(),
@@ -342,9 +370,14 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                               ),
                               if (booking.Guest?.phone != null)
                                 IconButton(
-                                  icon: const Icon(Icons.call, color: Colors.blue),
+                                  icon: const Icon(
+                                    Icons.call,
+                                    color: Colors.blue,
+                                  ),
                                   onPressed: () async {
-                                    final uri = Uri.parse('tel:${booking.Guest!.phone}');
+                                    final uri = Uri.parse(
+                                      'tel:${booking.Guest!.phone}',
+                                    );
                                     if (await canLaunchUrl(uri)) {
                                       await launchUrl(uri);
                                     }
@@ -363,19 +396,39 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                           ),
                           const SizedBox(height: 8),
                           if (booking.Guest?.phone != null) ...[
-                            _buildInfoRow(Icons.phone_outlined, 'Phone', booking.Guest!.phone!, ext),
+                            _buildInfoRow(
+                              Icons.phone_outlined,
+                              'Phone',
+                              booking.Guest!.phone!,
+                              ext,
+                            ),
                             const SizedBox(height: 6),
                           ],
                           if (booking.Guest?.email != null) ...[
-                            _buildInfoRow(Icons.email_outlined, 'Email', booking.Guest!.email!, ext),
+                            _buildInfoRow(
+                              Icons.email_outlined,
+                              'Email',
+                              booking.Guest!.email!,
+                              ext,
+                            ),
                             const SizedBox(height: 6),
                           ],
                           if (booking.Guest?.address != null) ...[
-                            _buildInfoRow(Icons.location_on_outlined, 'Address', booking.Guest!.address!, ext),
+                            _buildInfoRow(
+                              Icons.location_on_outlined,
+                              'Address',
+                              booking.Guest!.address!,
+                              ext,
+                            ),
                             const SizedBox(height: 6),
                           ],
                           if (booking.Guest?.gstin != null) ...[
-                            _buildInfoRow(Icons.receipt_long_outlined, 'GSTIN', booking.Guest!.gstin!, ext),
+                            _buildInfoRow(
+                              Icons.receipt_long_outlined,
+                              'GSTIN',
+                              booking.Guest!.gstin!,
+                              ext,
+                            ),
                             const SizedBox(height: 6),
                           ],
                           _buildInfoRow(
@@ -411,17 +464,29 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                               _buildDateBlock('CHECK-IN', checkIn, ext),
                               Column(
                                 children: [
-                                  const Icon(Icons.arrow_forward, color: Colors.grey, size: 16),
+                                  const Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.grey,
+                                    size: 16,
+                                  ),
                                   const SizedBox(height: 2),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: theme.colorScheme.surfaceContainerHighest,
+                                      color: theme
+                                          .colorScheme
+                                          .surfaceContainerHighest,
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
                                       '$nights Nights',
-                                      style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold),
+                                      style: theme.textTheme.labelSmall
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
                                 ],
@@ -438,8 +503,14 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                             ),
                           ),
                           const SizedBox(height: 6),
-                          if (booking.BookingRoom == null || booking.BookingRoom!.isEmpty)
-                            Text('No rooms assigned yet', style: theme.textTheme.bodySmall?.copyWith(color: ext.textMuted))
+                          if (booking.BookingRoom == null ||
+                              booking.BookingRoom!.isEmpty)
+                            Text(
+                              'No rooms assigned yet',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: ext.textMuted,
+                              ),
+                            )
                           else
                             ...booking.BookingRoom!.map((br) {
                               if (br == null) return const SizedBox.shrink();
@@ -447,31 +518,58 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                                 margin: const EdgeInsets.only(bottom: 6),
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                                  color: theme
+                                      .colorScheme
+                                      .surfaceContainerHighest
+                                      .withValues(alpha: 0.3),
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: ext.borderLight, width: 0.5),
+                                  border: Border.all(
+                                    color: ext.borderLight,
+                                    width: 0.5,
+                                  ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const Icon(Icons.bed, size: 16, color: Colors.blue),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          'Room ${br.Room?.roomNumber ?? 'TBD'}',
-                                          style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          '(${br.RoomType?.name ?? 'Standard'})',
-                                          style: theme.textTheme.bodySmall?.copyWith(color: ext.textMuted),
-                                        ),
-                                      ],
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.bed,
+                                            size: 16,
+                                            color: Colors.blue,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            'Room ${br.Room?.roomNumber ?? 'TBD'}',
+                                            style: theme.textTheme.bodyMedium
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                          const SizedBox(width: 6),
+                                          Expanded(
+                                            child: Text(
+                                              '(${br.RoomType?.name ?? 'Standard'})',
+                                              style: theme.textTheme.bodySmall
+                                                  ?.copyWith(
+                                                    color: ext.textMuted,
+                                                  ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                    const SizedBox(width: 8),
                                     Text(
                                       '₹${(br.priceOverride ?? br.RoomType?.defaultPrice ?? 0.0).toStringAsFixed(0)} / night',
-                                      style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -501,15 +599,22 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: isPaid ? Colors.green.withValues(alpha: 0.1) : Colors.orange.withValues(alpha: 0.1),
+                                  color: isPaid
+                                      ? Colors.green.withValues(alpha: 0.1)
+                                      : Colors.orange.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
                                   isPaid ? 'PAID' : 'PENDING',
                                   style: theme.textTheme.labelSmall?.copyWith(
-                                    color: isPaid ? Colors.green : Colors.orange,
+                                    color: isPaid
+                                        ? Colors.green
+                                        : Colors.orange,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -517,29 +622,58 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                             ],
                           ),
                           const Divider(),
-                          _buildBillingRow('Total Booking Amount', totalAmount, theme, ext, isBold: true),
+                          _buildBillingRow(
+                            'Total Booking Amount',
+                            totalAmount,
+                            theme,
+                            ext,
+                            isBold: true,
+                          ),
                           const SizedBox(height: 6),
-                          _buildBillingRow('Total Amount Paid', totalPaid, theme, ext, color: Colors.green),
+                          _buildBillingRow(
+                            'Total Amount Paid',
+                            totalPaid,
+                            theme,
+                            ext,
+                            color: Colors.green,
+                          ),
                           const SizedBox(height: 6),
-                          _buildBillingRow('Balance Due', balanceDue, theme, ext, color: balanceDue > 0 ? Colors.red : Colors.green, isBold: true),
-                          
+                          _buildBillingRow(
+                            'Balance Due',
+                            balanceDue,
+                            theme,
+                            ext,
+                            color: balanceDue > 0 ? Colors.red : Colors.green,
+                            isBold: true,
+                          ),
+
                           const SizedBox(height: 16),
-                          if (balanceDue > 0 && booking.status != Enum$BookingStatus.CANCELLED)
+                          if (balanceDue > 0 &&
+                              booking.status != Enum$BookingStatus.CANCELLED)
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton.icon(
                                 icon: const Icon(Icons.add_card),
                                 label: const Text('Record Payment'),
-                                onPressed: () => _showRecordPaymentDialog(context, totalAmount, totalPaid),
+                                onPressed: () => _showRecordPaymentDialog(
+                                  context,
+                                  totalAmount,
+                                  totalPaid,
+                                ),
                                 style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               ),
                             ),
 
                           // Payments Log
-                          if (booking.Payment != null && booking.Payment!.any((p) => p != null)) ...[
+                          if (booking.Payment != null &&
+                              booking.Payment!.any((p) => p != null)) ...[
                             const SizedBox(height: 16),
                             Text(
                               'PAYMENT HISTORY',
@@ -558,41 +692,95 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                               children: [
                                 TableRow(
                                   decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(color: ext.borderLight)),
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: ext.borderLight,
+                                      ),
+                                    ),
                                   ),
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 6),
-                                      child: Text('DATE', style: theme.textTheme.labelSmall?.copyWith(color: ext.textMuted)),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 6,
+                                      ),
+                                      child: Text(
+                                        'DATE',
+                                        style: theme.textTheme.labelSmall
+                                            ?.copyWith(color: ext.textMuted),
+                                      ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 6),
-                                      child: Text('METHOD', style: theme.textTheme.labelSmall?.copyWith(color: ext.textMuted)),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 6,
+                                      ),
+                                      child: Text(
+                                        'METHOD',
+                                        style: theme.textTheme.labelSmall
+                                            ?.copyWith(color: ext.textMuted),
+                                      ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 6),
-                                      child: Text('AMOUNT', style: theme.textTheme.labelSmall?.copyWith(color: ext.textMuted), textAlign: TextAlign.right),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 6,
+                                      ),
+                                      child: Text(
+                                        'AMOUNT',
+                                        style: theme.textTheme.labelSmall
+                                            ?.copyWith(color: ext.textMuted),
+                                        textAlign: TextAlign.right,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 ...booking.Payment!.map((p) {
-                                  if (p == null) return const TableRow(children: [SizedBox(), SizedBox(), SizedBox()]);
+                                  if (p == null) {
+                                    return const TableRow(
+                                      children: [
+                                        SizedBox(),
+                                        SizedBox(),
+                                        SizedBox(),
+                                      ],
+                                    );
+                                  }
                                   final pDate = p.createdAt != null
-                                      ? DateFormat('dd MMM hh:mm a').format(DateTime.parse(p.createdAt!).toLocal())
+                                      ? DateFormat('dd MMM hh:mm a').format(
+                                          DateTime.parse(
+                                            p.createdAt!,
+                                          ).toLocal(),
+                                        )
                                       : 'TBD';
                                   return TableRow(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 6),
-                                        child: Text(pDate, style: theme.textTheme.bodySmall),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 6,
+                                        ),
+                                        child: Text(
+                                          pDate,
+                                          style: theme.textTheme.bodySmall,
+                                        ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 6),
-                                        child: Text(p.method, style: theme.textTheme.bodySmall),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 6,
+                                        ),
+                                        child: Text(
+                                          p.method,
+                                          style: theme.textTheme.bodySmall,
+                                        ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 6),
-                                        child: Text('₹${p.amount.toStringAsFixed(0)}', style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.right),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 6,
+                                        ),
+                                        child: Text(
+                                          '₹${p.amount.toStringAsFixed(0)}',
+                                          style: theme.textTheme.bodySmall
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                          textAlign: TextAlign.right,
+                                        ),
                                       ),
                                     ],
                                   );
@@ -622,43 +810,67 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                               ),
                             ),
                             const Divider(),
-                            if (booking.status == Enum$BookingStatus.CONFIRMED) ...[
+                            if (booking.status ==
+                                Enum$BookingStatus.CONFIRMED) ...[
                               ElevatedButton.icon(
                                 icon: const Icon(Icons.login),
                                 label: const Text('Check In Guest'),
-                                onPressed: () => _updateStatus(Enum$BookingStatus.CHECKED_IN),
+                                onPressed: () => _updateStatus(
+                                  Enum$BookingStatus.CHECKED_IN,
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green,
                                   foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 8),
                             ],
-                            if (booking.status == Enum$BookingStatus.CHECKED_IN) ...[
+                            if (booking.status ==
+                                Enum$BookingStatus.CHECKED_IN) ...[
                               ElevatedButton.icon(
                                 icon: const Icon(Icons.logout),
                                 label: const Text('Check Out Guest'),
-                                onPressed: () => _updateStatus(Enum$BookingStatus.CHECKED_OUT),
+                                onPressed: () => _updateStatus(
+                                  Enum$BookingStatus.CHECKED_OUT,
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.grey[700],
                                   foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 8),
                             ],
                             if (booking.status == Enum$BookingStatus.CONFIRMED)
                               OutlinedButton.icon(
-                                icon: const Icon(Icons.cancel_outlined, color: Colors.red),
-                                label: const Text('Cancel Booking', style: TextStyle(color: Colors.red)),
+                                icon: const Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.red,
+                                ),
+                                label: const Text(
+                                  'Cancel Booking',
+                                  style: TextStyle(color: Colors.red),
+                                ),
                                 onPressed: _cancelBooking,
                                 style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
                                   side: const BorderSide(color: Colors.red),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               ),
                           ],
@@ -671,7 +883,12 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
     );
   }
 
-  Widget _buildInfoRow(IconData icon, String label, String value, AppColorsExtension ext) {
+  Widget _buildInfoRow(
+    IconData icon,
+    String label,
+    String value,
+    AppColorsExtension ext,
+  ) {
     final theme = Theme.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -680,7 +897,10 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
         const SizedBox(width: 8),
         Text(
           '$label: ',
-          style: theme.textTheme.bodySmall?.copyWith(color: ext.textMuted, fontWeight: FontWeight.bold),
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: ext.textMuted,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Expanded(
           child: Text(
@@ -699,16 +919,25 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
       children: [
         Text(
           title,
-          style: theme.textTheme.labelSmall?.copyWith(color: ext.textMuted, fontWeight: FontWeight.bold, fontSize: 8),
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: ext.textMuted,
+            fontWeight: FontWeight.bold,
+            fontSize: 8,
+          ),
         ),
         const SizedBox(height: 2),
         Text(
           DateFormat('dd MMM yyyy').format(date),
-          style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w900),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w900,
+          ),
         ),
         Text(
           DateFormat('EEEE, hh:mm a').format(date),
-          style: theme.textTheme.labelSmall?.copyWith(color: ext.textMuted, fontSize: 9),
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: ext.textMuted,
+            fontSize: 9,
+          ),
         ),
       ],
     );

@@ -385,7 +385,7 @@ class DashboardScreen extends ConsumerWidget {
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 3,
+              crossAxisCount: 4,
               crossAxisSpacing: AppTheme.spacingSm,
               mainAxisSpacing: AppTheme.spacingSm,
               childAspectRatio: 1.1,
@@ -404,26 +404,16 @@ class DashboardScreen extends ConsumerWidget {
                 ),
                 _buildActionTile(
                   context,
+                  Icons.receipt_long,
+                  'Bookings',
+                  onTap: () => context.go('/bookings/list'),
+                ),
+                _buildActionTile(
+                  context,
                   Icons.cleaning_services_outlined,
                   'Cleaning',
                   onTap: () => context.go('/housekeeping'),
                 ),
-                // _buildActionTile(
-                //   context,
-                //   Icons.receipt_long_outlined,
-                //   'Billing',
-                //   onTap: () {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       SnackBar(
-                //         content: const Text(
-                //           'Billing module coming soon in Phase 2',
-                //         ),
-                //         backgroundColor: theme.colorScheme.secondary,
-                //         behavior: SnackBarBehavior.floating,
-                //       ),
-                //     );
-                //   },
-                // ),
               ],
             ),
           ],
@@ -806,7 +796,7 @@ class DashboardScreen extends ConsumerWidget {
               },
             ),
             const SizedBox(height: AppTheme.spacingLg),
-             OutlinedButton(
+            OutlinedButton(
               onPressed: () => context.push('/inventory'),
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: theme.colorScheme.primary),
