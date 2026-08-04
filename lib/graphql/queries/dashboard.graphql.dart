@@ -2068,6 +2068,13 @@ const documentNodeQueryGetBookings = DocumentNode(definitions: [
                 selectionSet: null,
               ),
               FieldNode(
+                name: NameNode(value: 'priceOverride'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
                 name: NameNode(value: 'Room'),
                 alias: null,
                 arguments: [],
@@ -3157,6 +3164,7 @@ class Query$GetBookings$bookings$BookingRoom {
     required this.status,
     this.checkInDate,
     this.checkOutDate,
+    this.priceOverride,
     this.Room,
     this.RoomType,
     this.$__typename = 'BookingRoom',
@@ -3170,6 +3178,7 @@ class Query$GetBookings$bookings$BookingRoom {
     final l$status = json['status'];
     final l$checkInDate = json['checkInDate'];
     final l$checkOutDate = json['checkOutDate'];
+    final l$priceOverride = json['priceOverride'];
     final l$Room = json['Room'];
     final l$RoomType = json['RoomType'];
     final l$$__typename = json['__typename'];
@@ -3180,6 +3189,7 @@ class Query$GetBookings$bookings$BookingRoom {
       status: fromJson$Enum$BookingStatus((l$status as String)),
       checkInDate: (l$checkInDate as String?),
       checkOutDate: (l$checkOutDate as String?),
+      priceOverride: (l$priceOverride as num?)?.toDouble(),
       Room: l$Room == null
           ? null
           : Query$GetBookings$bookings$BookingRoom$Room.fromJson(
@@ -3204,6 +3214,8 @@ class Query$GetBookings$bookings$BookingRoom {
 
   final String? checkOutDate;
 
+  final double? priceOverride;
+
   final Query$GetBookings$bookings$BookingRoom$Room? Room;
 
   final Query$GetBookings$bookings$BookingRoom$RoomType? RoomType;
@@ -3224,6 +3236,8 @@ class Query$GetBookings$bookings$BookingRoom {
     _resultData['checkInDate'] = l$checkInDate;
     final l$checkOutDate = checkOutDate;
     _resultData['checkOutDate'] = l$checkOutDate;
+    final l$priceOverride = priceOverride;
+    _resultData['priceOverride'] = l$priceOverride;
     final l$Room = Room;
     _resultData['Room'] = l$Room?.toJson();
     final l$RoomType = RoomType;
@@ -3241,6 +3255,7 @@ class Query$GetBookings$bookings$BookingRoom {
     final l$status = status;
     final l$checkInDate = checkInDate;
     final l$checkOutDate = checkOutDate;
+    final l$priceOverride = priceOverride;
     final l$Room = Room;
     final l$RoomType = RoomType;
     final l$$__typename = $__typename;
@@ -3251,6 +3266,7 @@ class Query$GetBookings$bookings$BookingRoom {
       l$status,
       l$checkInDate,
       l$checkOutDate,
+      l$priceOverride,
       l$Room,
       l$RoomType,
       l$$__typename,
@@ -3294,6 +3310,11 @@ class Query$GetBookings$bookings$BookingRoom {
     final l$checkOutDate = checkOutDate;
     final lOther$checkOutDate = other.checkOutDate;
     if (l$checkOutDate != lOther$checkOutDate) {
+      return false;
+    }
+    final l$priceOverride = priceOverride;
+    final lOther$priceOverride = other.priceOverride;
+    if (l$priceOverride != lOther$priceOverride) {
       return false;
     }
     final l$Room = Room;
@@ -3341,6 +3362,7 @@ abstract class CopyWith$Query$GetBookings$bookings$BookingRoom<TRes> {
     Enum$BookingStatus? status,
     String? checkInDate,
     String? checkOutDate,
+    double? priceOverride,
     Query$GetBookings$bookings$BookingRoom$Room? Room,
     Query$GetBookings$bookings$BookingRoom$RoomType? RoomType,
     String? $__typename,
@@ -3369,6 +3391,7 @@ class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom<TRes>
     Object? status = _undefined,
     Object? checkInDate = _undefined,
     Object? checkOutDate = _undefined,
+    Object? priceOverride = _undefined,
     Object? Room = _undefined,
     Object? RoomType = _undefined,
     Object? $__typename = _undefined,
@@ -3388,6 +3411,9 @@ class _CopyWithImpl$Query$GetBookings$bookings$BookingRoom<TRes>
         checkOutDate: checkOutDate == _undefined
             ? _instance.checkOutDate
             : (checkOutDate as String?),
+        priceOverride: priceOverride == _undefined
+            ? _instance.priceOverride
+            : (priceOverride as double?),
         Room: Room == _undefined
             ? _instance.Room
             : (Room as Query$GetBookings$bookings$BookingRoom$Room?),
@@ -3431,6 +3457,7 @@ class _CopyWithStubImpl$Query$GetBookings$bookings$BookingRoom<TRes>
     Enum$BookingStatus? status,
     String? checkInDate,
     String? checkOutDate,
+    double? priceOverride,
     Query$GetBookings$bookings$BookingRoom$Room? Room,
     Query$GetBookings$bookings$BookingRoom$RoomType? RoomType,
     String? $__typename,
@@ -6582,6 +6609,3010 @@ class _CopyWithStubImpl$Mutation$UpdateRoom$updateRoom<TRes>
     Enum$RoomStatus? status,
     Enum$HousekeepingStatus? housekeepingStatus,
     bool? priorityCleaning,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Query$GetGuests {
+  Query$GetGuests({
+    required this.guests,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$GetGuests.fromJson(Map<String, dynamic> json) {
+    final l$guests = json['guests'];
+    final l$$__typename = json['__typename'];
+    return Query$GetGuests(
+      guests: (l$guests as List<dynamic>)
+          .map((e) =>
+              Query$GetGuests$guests.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Query$GetGuests$guests> guests;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$guests = guests;
+    _resultData['guests'] = l$guests.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$guests = guests;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$guests.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetGuests) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$guests = guests;
+    final lOther$guests = other.guests;
+    if (l$guests.length != lOther$guests.length) {
+      return false;
+    }
+    for (int i = 0; i < l$guests.length; i++) {
+      final l$guests$entry = l$guests[i];
+      final lOther$guests$entry = lOther$guests[i];
+      if (l$guests$entry != lOther$guests$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetGuests on Query$GetGuests {
+  CopyWith$Query$GetGuests<Query$GetGuests> get copyWith =>
+      CopyWith$Query$GetGuests(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetGuests<TRes> {
+  factory CopyWith$Query$GetGuests(
+    Query$GetGuests instance,
+    TRes Function(Query$GetGuests) then,
+  ) = _CopyWithImpl$Query$GetGuests;
+
+  factory CopyWith$Query$GetGuests.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetGuests;
+
+  TRes call({
+    List<Query$GetGuests$guests>? guests,
+    String? $__typename,
+  });
+  TRes guests(
+      Iterable<Query$GetGuests$guests> Function(
+              Iterable<CopyWith$Query$GetGuests$guests<Query$GetGuests$guests>>)
+          _fn);
+}
+
+class _CopyWithImpl$Query$GetGuests<TRes>
+    implements CopyWith$Query$GetGuests<TRes> {
+  _CopyWithImpl$Query$GetGuests(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetGuests _instance;
+
+  final TRes Function(Query$GetGuests) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? guests = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetGuests(
+        guests: guests == _undefined || guests == null
+            ? _instance.guests
+            : (guests as List<Query$GetGuests$guests>),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  TRes guests(
+          Iterable<Query$GetGuests$guests> Function(
+                  Iterable<
+                      CopyWith$Query$GetGuests$guests<Query$GetGuests$guests>>)
+              _fn) =>
+      call(
+          guests:
+              _fn(_instance.guests.map((e) => CopyWith$Query$GetGuests$guests(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl$Query$GetGuests<TRes>
+    implements CopyWith$Query$GetGuests<TRes> {
+  _CopyWithStubImpl$Query$GetGuests(this._res);
+
+  TRes _res;
+
+  call({
+    List<Query$GetGuests$guests>? guests,
+    String? $__typename,
+  }) =>
+      _res;
+
+  guests(_fn) => _res;
+}
+
+const documentNodeQueryGetGuests = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetGuests'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'guests'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'phone'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Query$GetGuests _parserFn$Query$GetGuests(Map<String, dynamic> data) =>
+    Query$GetGuests.fromJson(data);
+typedef OnQueryComplete$Query$GetGuests = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetGuests?,
+);
+
+class Options$Query$GetGuests extends graphql.QueryOptions<Query$GetGuests> {
+  Options$Query$GetGuests({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetGuests? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetGuests? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null ? null : _parserFn$Query$GetGuests(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetGuests,
+          parserFn: _parserFn$Query$GetGuests,
+        );
+
+  final OnQueryComplete$Query$GetGuests? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetGuests
+    extends graphql.WatchQueryOptions<Query$GetGuests> {
+  WatchOptions$Query$GetGuests({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetGuests? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetGuests,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetGuests,
+        );
+}
+
+class FetchMoreOptions$Query$GetGuests extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetGuests({required graphql.UpdateQuery updateQuery})
+      : super(
+          updateQuery: updateQuery,
+          document: documentNodeQueryGetGuests,
+        );
+}
+
+extension ClientExtension$Query$GetGuests on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetGuests>> query$GetGuests(
+          [Options$Query$GetGuests? options]) async =>
+      await this.query(options ?? Options$Query$GetGuests());
+
+  graphql.ObservableQuery<Query$GetGuests> watchQuery$GetGuests(
+          [WatchOptions$Query$GetGuests? options]) =>
+      this.watchQuery(options ?? WatchOptions$Query$GetGuests());
+
+  void writeQuery$GetGuests({
+    required Query$GetGuests data,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+            operation: graphql.Operation(document: documentNodeQueryGetGuests)),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+
+  Query$GetGuests? readQuery$GetGuests({bool optimistic = true}) {
+    final result = this.readQuery(
+      graphql.Request(
+          operation: graphql.Operation(document: documentNodeQueryGetGuests)),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$GetGuests.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetGuests> useQuery$GetGuests(
+        [Options$Query$GetGuests? options]) =>
+    graphql_flutter.useQuery(options ?? Options$Query$GetGuests());
+graphql.ObservableQuery<Query$GetGuests> useWatchQuery$GetGuests(
+        [WatchOptions$Query$GetGuests? options]) =>
+    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$GetGuests());
+
+class Query$GetGuests$Widget extends graphql_flutter.Query<Query$GetGuests> {
+  Query$GetGuests$Widget({
+    widgets.Key? key,
+    Options$Query$GetGuests? options,
+    required graphql_flutter.QueryBuilder<Query$GetGuests> builder,
+  }) : super(
+          key: key,
+          options: options ?? Options$Query$GetGuests(),
+          builder: builder,
+        );
+}
+
+class Query$GetGuests$guests {
+  Query$GetGuests$guests({
+    required this.id,
+    required this.name,
+    this.phone,
+    this.email,
+    this.$__typename = 'Guest',
+  });
+
+  factory Query$GetGuests$guests.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$phone = json['phone'];
+    final l$email = json['email'];
+    final l$$__typename = json['__typename'];
+    return Query$GetGuests$guests(
+      id: (l$id as String),
+      name: (l$name as String),
+      phone: (l$phone as String?),
+      email: (l$email as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final String? phone;
+
+  final String? email;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$phone = phone;
+    _resultData['phone'] = l$phone;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$phone = phone;
+    final l$email = email;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$phone,
+      l$email,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Query$GetGuests$guests) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$GetGuests$guests on Query$GetGuests$guests {
+  CopyWith$Query$GetGuests$guests<Query$GetGuests$guests> get copyWith =>
+      CopyWith$Query$GetGuests$guests(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Query$GetGuests$guests<TRes> {
+  factory CopyWith$Query$GetGuests$guests(
+    Query$GetGuests$guests instance,
+    TRes Function(Query$GetGuests$guests) then,
+  ) = _CopyWithImpl$Query$GetGuests$guests;
+
+  factory CopyWith$Query$GetGuests$guests.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetGuests$guests;
+
+  TRes call({
+    String? id,
+    String? name,
+    String? phone,
+    String? email,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Query$GetGuests$guests<TRes>
+    implements CopyWith$Query$GetGuests$guests<TRes> {
+  _CopyWithImpl$Query$GetGuests$guests(
+    this._instance,
+    this._then,
+  );
+
+  final Query$GetGuests$guests _instance;
+
+  final TRes Function(Query$GetGuests$guests) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? phone = _undefined,
+    Object? email = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query$GetGuests$guests(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        phone: phone == _undefined ? _instance.phone : (phone as String?),
+        email: email == _undefined ? _instance.email : (email as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Query$GetGuests$guests<TRes>
+    implements CopyWith$Query$GetGuests$guests<TRes> {
+  _CopyWithStubImpl$Query$GetGuests$guests(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    String? phone,
+    String? email,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$CreateGuest {
+  factory Variables$Mutation$CreateGuest(
+          {required Input$CreateGuestInput input}) =>
+      Variables$Mutation$CreateGuest._({
+        r'input': input,
+      });
+
+  Variables$Mutation$CreateGuest._(this._$data);
+
+  factory Variables$Mutation$CreateGuest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$CreateGuestInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$CreateGuest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$CreateGuestInput get input =>
+      (_$data['input'] as Input$CreateGuestInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$CreateGuest<Variables$Mutation$CreateGuest>
+      get copyWith => CopyWith$Variables$Mutation$CreateGuest(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$CreateGuest) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$CreateGuest<TRes> {
+  factory CopyWith$Variables$Mutation$CreateGuest(
+    Variables$Mutation$CreateGuest instance,
+    TRes Function(Variables$Mutation$CreateGuest) then,
+  ) = _CopyWithImpl$Variables$Mutation$CreateGuest;
+
+  factory CopyWith$Variables$Mutation$CreateGuest.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$CreateGuest;
+
+  TRes call({Input$CreateGuestInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$CreateGuest<TRes>
+    implements CopyWith$Variables$Mutation$CreateGuest<TRes> {
+  _CopyWithImpl$Variables$Mutation$CreateGuest(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$CreateGuest _instance;
+
+  final TRes Function(Variables$Mutation$CreateGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$CreateGuest._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$CreateGuestInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$CreateGuest<TRes>
+    implements CopyWith$Variables$Mutation$CreateGuest<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$CreateGuest(this._res);
+
+  TRes _res;
+
+  call({Input$CreateGuestInput? input}) => _res;
+}
+
+class Mutation$CreateGuest {
+  Mutation$CreateGuest({
+    required this.createGuest,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$CreateGuest.fromJson(Map<String, dynamic> json) {
+    final l$createGuest = json['createGuest'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateGuest(
+      createGuest: Mutation$CreateGuest$createGuest.fromJson(
+          (l$createGuest as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$CreateGuest$createGuest createGuest;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$createGuest = createGuest;
+    _resultData['createGuest'] = l$createGuest.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$createGuest = createGuest;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$createGuest,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateGuest) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createGuest = createGuest;
+    final lOther$createGuest = other.createGuest;
+    if (l$createGuest != lOther$createGuest) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateGuest on Mutation$CreateGuest {
+  CopyWith$Mutation$CreateGuest<Mutation$CreateGuest> get copyWith =>
+      CopyWith$Mutation$CreateGuest(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$CreateGuest<TRes> {
+  factory CopyWith$Mutation$CreateGuest(
+    Mutation$CreateGuest instance,
+    TRes Function(Mutation$CreateGuest) then,
+  ) = _CopyWithImpl$Mutation$CreateGuest;
+
+  factory CopyWith$Mutation$CreateGuest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$CreateGuest;
+
+  TRes call({
+    Mutation$CreateGuest$createGuest? createGuest,
+    String? $__typename,
+  });
+  CopyWith$Mutation$CreateGuest$createGuest<TRes> get createGuest;
+}
+
+class _CopyWithImpl$Mutation$CreateGuest<TRes>
+    implements CopyWith$Mutation$CreateGuest<TRes> {
+  _CopyWithImpl$Mutation$CreateGuest(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateGuest _instance;
+
+  final TRes Function(Mutation$CreateGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createGuest = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateGuest(
+        createGuest: createGuest == _undefined || createGuest == null
+            ? _instance.createGuest
+            : (createGuest as Mutation$CreateGuest$createGuest),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$CreateGuest$createGuest<TRes> get createGuest {
+    final local$createGuest = _instance.createGuest;
+    return CopyWith$Mutation$CreateGuest$createGuest(
+        local$createGuest, (e) => call(createGuest: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$CreateGuest<TRes>
+    implements CopyWith$Mutation$CreateGuest<TRes> {
+  _CopyWithStubImpl$Mutation$CreateGuest(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$CreateGuest$createGuest? createGuest,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$CreateGuest$createGuest<TRes> get createGuest =>
+      CopyWith$Mutation$CreateGuest$createGuest.stub(_res);
+}
+
+const documentNodeMutationCreateGuest = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateGuest'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'CreateGuestInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createGuest'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'phone'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Mutation$CreateGuest _parserFn$Mutation$CreateGuest(
+        Map<String, dynamic> data) =>
+    Mutation$CreateGuest.fromJson(data);
+typedef OnMutationCompleted$Mutation$CreateGuest = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$CreateGuest?,
+);
+
+class Options$Mutation$CreateGuest
+    extends graphql.MutationOptions<Mutation$CreateGuest> {
+  Options$Mutation$CreateGuest({
+    String? operationName,
+    required Variables$Mutation$CreateGuest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$CreateGuest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$CreateGuest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$CreateGuest>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null ? null : _parserFn$Mutation$CreateGuest(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationCreateGuest,
+          parserFn: _parserFn$Mutation$CreateGuest,
+        );
+
+  final OnMutationCompleted$Mutation$CreateGuest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$CreateGuest
+    extends graphql.WatchQueryOptions<Mutation$CreateGuest> {
+  WatchOptions$Mutation$CreateGuest({
+    String? operationName,
+    required Variables$Mutation$CreateGuest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$CreateGuest? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationCreateGuest,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$CreateGuest,
+        );
+}
+
+extension ClientExtension$Mutation$CreateGuest on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$CreateGuest>> mutate$CreateGuest(
+          Options$Mutation$CreateGuest options) async =>
+      await this.mutate(options);
+
+  graphql.ObservableQuery<Mutation$CreateGuest> watchMutation$CreateGuest(
+          WatchOptions$Mutation$CreateGuest options) =>
+      this.watchMutation(options);
+}
+
+class Mutation$CreateGuest$HookResult {
+  Mutation$CreateGuest$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$CreateGuest runMutation;
+
+  final graphql.QueryResult<Mutation$CreateGuest> result;
+}
+
+Mutation$CreateGuest$HookResult useMutation$CreateGuest(
+    [WidgetOptions$Mutation$CreateGuest? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$CreateGuest());
+  return Mutation$CreateGuest$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$CreateGuest> useWatchMutation$CreateGuest(
+        WatchOptions$Mutation$CreateGuest options) =>
+    graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$CreateGuest
+    extends graphql.MutationOptions<Mutation$CreateGuest> {
+  WidgetOptions$Mutation$CreateGuest({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$CreateGuest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$CreateGuest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$CreateGuest>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null ? null : _parserFn$Mutation$CreateGuest(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationCreateGuest,
+          parserFn: _parserFn$Mutation$CreateGuest,
+        );
+
+  final OnMutationCompleted$Mutation$CreateGuest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$CreateGuest
+    = graphql.MultiSourceResult<Mutation$CreateGuest> Function(
+  Variables$Mutation$CreateGuest, {
+  Object? optimisticResult,
+  Mutation$CreateGuest? typedOptimisticResult,
+});
+typedef Builder$Mutation$CreateGuest = widgets.Widget Function(
+  RunMutation$Mutation$CreateGuest,
+  graphql.QueryResult<Mutation$CreateGuest>?,
+);
+
+class Mutation$CreateGuest$Widget
+    extends graphql_flutter.Mutation<Mutation$CreateGuest> {
+  Mutation$CreateGuest$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$CreateGuest? options,
+    required Builder$Mutation$CreateGuest builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$CreateGuest(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$CreateGuest$createGuest {
+  Mutation$CreateGuest$createGuest({
+    required this.id,
+    required this.name,
+    this.phone,
+    this.email,
+    this.$__typename = 'Guest',
+  });
+
+  factory Mutation$CreateGuest$createGuest.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$phone = json['phone'];
+    final l$email = json['email'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateGuest$createGuest(
+      id: (l$id as String),
+      name: (l$name as String),
+      phone: (l$phone as String?),
+      email: (l$email as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String name;
+
+  final String? phone;
+
+  final String? email;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$phone = phone;
+    _resultData['phone'] = l$phone;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$phone = phone;
+    final l$email = email;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$phone,
+      l$email,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateGuest$createGuest) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateGuest$createGuest
+    on Mutation$CreateGuest$createGuest {
+  CopyWith$Mutation$CreateGuest$createGuest<Mutation$CreateGuest$createGuest>
+      get copyWith => CopyWith$Mutation$CreateGuest$createGuest(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$CreateGuest$createGuest<TRes> {
+  factory CopyWith$Mutation$CreateGuest$createGuest(
+    Mutation$CreateGuest$createGuest instance,
+    TRes Function(Mutation$CreateGuest$createGuest) then,
+  ) = _CopyWithImpl$Mutation$CreateGuest$createGuest;
+
+  factory CopyWith$Mutation$CreateGuest$createGuest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$CreateGuest$createGuest;
+
+  TRes call({
+    String? id,
+    String? name,
+    String? phone,
+    String? email,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$CreateGuest$createGuest<TRes>
+    implements CopyWith$Mutation$CreateGuest$createGuest<TRes> {
+  _CopyWithImpl$Mutation$CreateGuest$createGuest(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateGuest$createGuest _instance;
+
+  final TRes Function(Mutation$CreateGuest$createGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? phone = _undefined,
+    Object? email = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateGuest$createGuest(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        phone: phone == _undefined ? _instance.phone : (phone as String?),
+        email: email == _undefined ? _instance.email : (email as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$CreateGuest$createGuest<TRes>
+    implements CopyWith$Mutation$CreateGuest$createGuest<TRes> {
+  _CopyWithStubImpl$Mutation$CreateGuest$createGuest(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? name,
+    String? phone,
+    String? email,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$CreateBooking {
+  factory Variables$Mutation$CreateBooking(
+          {required Input$CreateBookingInput input}) =>
+      Variables$Mutation$CreateBooking._({
+        r'input': input,
+      });
+
+  Variables$Mutation$CreateBooking._(this._$data);
+
+  factory Variables$Mutation$CreateBooking.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$CreateBookingInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$CreateBooking._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$CreateBookingInput get input =>
+      (_$data['input'] as Input$CreateBookingInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$CreateBooking<Variables$Mutation$CreateBooking>
+      get copyWith => CopyWith$Variables$Mutation$CreateBooking(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$CreateBooking) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$CreateBooking<TRes> {
+  factory CopyWith$Variables$Mutation$CreateBooking(
+    Variables$Mutation$CreateBooking instance,
+    TRes Function(Variables$Mutation$CreateBooking) then,
+  ) = _CopyWithImpl$Variables$Mutation$CreateBooking;
+
+  factory CopyWith$Variables$Mutation$CreateBooking.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$CreateBooking;
+
+  TRes call({Input$CreateBookingInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$CreateBooking<TRes>
+    implements CopyWith$Variables$Mutation$CreateBooking<TRes> {
+  _CopyWithImpl$Variables$Mutation$CreateBooking(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$CreateBooking _instance;
+
+  final TRes Function(Variables$Mutation$CreateBooking) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) =>
+      _then(Variables$Mutation$CreateBooking._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$CreateBookingInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$CreateBooking<TRes>
+    implements CopyWith$Variables$Mutation$CreateBooking<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$CreateBooking(this._res);
+
+  TRes _res;
+
+  call({Input$CreateBookingInput? input}) => _res;
+}
+
+class Mutation$CreateBooking {
+  Mutation$CreateBooking({
+    required this.createBooking,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$CreateBooking.fromJson(Map<String, dynamic> json) {
+    final l$createBooking = json['createBooking'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateBooking(
+      createBooking: Mutation$CreateBooking$createBooking.fromJson(
+          (l$createBooking as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$CreateBooking$createBooking createBooking;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$createBooking = createBooking;
+    _resultData['createBooking'] = l$createBooking.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$createBooking = createBooking;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$createBooking,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateBooking) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createBooking = createBooking;
+    final lOther$createBooking = other.createBooking;
+    if (l$createBooking != lOther$createBooking) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateBooking on Mutation$CreateBooking {
+  CopyWith$Mutation$CreateBooking<Mutation$CreateBooking> get copyWith =>
+      CopyWith$Mutation$CreateBooking(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$CreateBooking<TRes> {
+  factory CopyWith$Mutation$CreateBooking(
+    Mutation$CreateBooking instance,
+    TRes Function(Mutation$CreateBooking) then,
+  ) = _CopyWithImpl$Mutation$CreateBooking;
+
+  factory CopyWith$Mutation$CreateBooking.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$CreateBooking;
+
+  TRes call({
+    Mutation$CreateBooking$createBooking? createBooking,
+    String? $__typename,
+  });
+  CopyWith$Mutation$CreateBooking$createBooking<TRes> get createBooking;
+}
+
+class _CopyWithImpl$Mutation$CreateBooking<TRes>
+    implements CopyWith$Mutation$CreateBooking<TRes> {
+  _CopyWithImpl$Mutation$CreateBooking(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateBooking _instance;
+
+  final TRes Function(Mutation$CreateBooking) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createBooking = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateBooking(
+        createBooking: createBooking == _undefined || createBooking == null
+            ? _instance.createBooking
+            : (createBooking as Mutation$CreateBooking$createBooking),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$CreateBooking$createBooking<TRes> get createBooking {
+    final local$createBooking = _instance.createBooking;
+    return CopyWith$Mutation$CreateBooking$createBooking(
+        local$createBooking, (e) => call(createBooking: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$CreateBooking<TRes>
+    implements CopyWith$Mutation$CreateBooking<TRes> {
+  _CopyWithStubImpl$Mutation$CreateBooking(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$CreateBooking$createBooking? createBooking,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$CreateBooking$createBooking<TRes> get createBooking =>
+      CopyWith$Mutation$CreateBooking$createBooking.stub(_res);
+}
+
+const documentNodeMutationCreateBooking = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateBooking'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'CreateBookingInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createBooking'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'guestId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'propertyId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkInDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkOutDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'adults'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'children'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'totalAmount'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'notes'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Mutation$CreateBooking _parserFn$Mutation$CreateBooking(
+        Map<String, dynamic> data) =>
+    Mutation$CreateBooking.fromJson(data);
+typedef OnMutationCompleted$Mutation$CreateBooking = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$CreateBooking?,
+);
+
+class Options$Mutation$CreateBooking
+    extends graphql.MutationOptions<Mutation$CreateBooking> {
+  Options$Mutation$CreateBooking({
+    String? operationName,
+    required Variables$Mutation$CreateBooking variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$CreateBooking? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$CreateBooking? onCompleted,
+    graphql.OnMutationUpdate<Mutation$CreateBooking>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$CreateBooking(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationCreateBooking,
+          parserFn: _parserFn$Mutation$CreateBooking,
+        );
+
+  final OnMutationCompleted$Mutation$CreateBooking? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$CreateBooking
+    extends graphql.WatchQueryOptions<Mutation$CreateBooking> {
+  WatchOptions$Mutation$CreateBooking({
+    String? operationName,
+    required Variables$Mutation$CreateBooking variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$CreateBooking? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationCreateBooking,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$CreateBooking,
+        );
+}
+
+extension ClientExtension$Mutation$CreateBooking on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$CreateBooking>> mutate$CreateBooking(
+          Options$Mutation$CreateBooking options) async =>
+      await this.mutate(options);
+
+  graphql.ObservableQuery<Mutation$CreateBooking> watchMutation$CreateBooking(
+          WatchOptions$Mutation$CreateBooking options) =>
+      this.watchMutation(options);
+}
+
+class Mutation$CreateBooking$HookResult {
+  Mutation$CreateBooking$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$CreateBooking runMutation;
+
+  final graphql.QueryResult<Mutation$CreateBooking> result;
+}
+
+Mutation$CreateBooking$HookResult useMutation$CreateBooking(
+    [WidgetOptions$Mutation$CreateBooking? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$CreateBooking());
+  return Mutation$CreateBooking$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$CreateBooking> useWatchMutation$CreateBooking(
+        WatchOptions$Mutation$CreateBooking options) =>
+    graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$CreateBooking
+    extends graphql.MutationOptions<Mutation$CreateBooking> {
+  WidgetOptions$Mutation$CreateBooking({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$CreateBooking? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$CreateBooking? onCompleted,
+    graphql.OnMutationUpdate<Mutation$CreateBooking>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$CreateBooking(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationCreateBooking,
+          parserFn: _parserFn$Mutation$CreateBooking,
+        );
+
+  final OnMutationCompleted$Mutation$CreateBooking? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$CreateBooking
+    = graphql.MultiSourceResult<Mutation$CreateBooking> Function(
+  Variables$Mutation$CreateBooking, {
+  Object? optimisticResult,
+  Mutation$CreateBooking? typedOptimisticResult,
+});
+typedef Builder$Mutation$CreateBooking = widgets.Widget Function(
+  RunMutation$Mutation$CreateBooking,
+  graphql.QueryResult<Mutation$CreateBooking>?,
+);
+
+class Mutation$CreateBooking$Widget
+    extends graphql_flutter.Mutation<Mutation$CreateBooking> {
+  Mutation$CreateBooking$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$CreateBooking? options,
+    required Builder$Mutation$CreateBooking builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$CreateBooking(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$CreateBooking$createBooking {
+  Mutation$CreateBooking$createBooking({
+    required this.id,
+    required this.guestId,
+    required this.propertyId,
+    this.status,
+    required this.checkInDate,
+    required this.checkOutDate,
+    this.adults,
+    this.children,
+    this.totalAmount,
+    this.notes,
+    this.$__typename = 'Booking',
+  });
+
+  factory Mutation$CreateBooking$createBooking.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$guestId = json['guestId'];
+    final l$propertyId = json['propertyId'];
+    final l$status = json['status'];
+    final l$checkInDate = json['checkInDate'];
+    final l$checkOutDate = json['checkOutDate'];
+    final l$adults = json['adults'];
+    final l$children = json['children'];
+    final l$totalAmount = json['totalAmount'];
+    final l$notes = json['notes'];
+    final l$$__typename = json['__typename'];
+    return Mutation$CreateBooking$createBooking(
+      id: (l$id as String),
+      guestId: (l$guestId as String),
+      propertyId: (l$propertyId as String),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$BookingStatus((l$status as String)),
+      checkInDate: (l$checkInDate as String),
+      checkOutDate: (l$checkOutDate as String),
+      adults: (l$adults as int?),
+      children: (l$children as int?),
+      totalAmount: (l$totalAmount as num?)?.toDouble(),
+      notes: (l$notes as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String guestId;
+
+  final String propertyId;
+
+  final Enum$BookingStatus? status;
+
+  final String checkInDate;
+
+  final String checkOutDate;
+
+  final int? adults;
+
+  final int? children;
+
+  final double? totalAmount;
+
+  final String? notes;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$guestId = guestId;
+    _resultData['guestId'] = l$guestId;
+    final l$propertyId = propertyId;
+    _resultData['propertyId'] = l$propertyId;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$BookingStatus(l$status);
+    final l$checkInDate = checkInDate;
+    _resultData['checkInDate'] = l$checkInDate;
+    final l$checkOutDate = checkOutDate;
+    _resultData['checkOutDate'] = l$checkOutDate;
+    final l$adults = adults;
+    _resultData['adults'] = l$adults;
+    final l$children = children;
+    _resultData['children'] = l$children;
+    final l$totalAmount = totalAmount;
+    _resultData['totalAmount'] = l$totalAmount;
+    final l$notes = notes;
+    _resultData['notes'] = l$notes;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$guestId = guestId;
+    final l$propertyId = propertyId;
+    final l$status = status;
+    final l$checkInDate = checkInDate;
+    final l$checkOutDate = checkOutDate;
+    final l$adults = adults;
+    final l$children = children;
+    final l$totalAmount = totalAmount;
+    final l$notes = notes;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$guestId,
+      l$propertyId,
+      l$status,
+      l$checkInDate,
+      l$checkOutDate,
+      l$adults,
+      l$children,
+      l$totalAmount,
+      l$notes,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$CreateBooking$createBooking) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$guestId = guestId;
+    final lOther$guestId = other.guestId;
+    if (l$guestId != lOther$guestId) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$checkInDate = checkInDate;
+    final lOther$checkInDate = other.checkInDate;
+    if (l$checkInDate != lOther$checkInDate) {
+      return false;
+    }
+    final l$checkOutDate = checkOutDate;
+    final lOther$checkOutDate = other.checkOutDate;
+    if (l$checkOutDate != lOther$checkOutDate) {
+      return false;
+    }
+    final l$adults = adults;
+    final lOther$adults = other.adults;
+    if (l$adults != lOther$adults) {
+      return false;
+    }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (l$children != lOther$children) {
+      return false;
+    }
+    final l$totalAmount = totalAmount;
+    final lOther$totalAmount = other.totalAmount;
+    if (l$totalAmount != lOther$totalAmount) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$CreateBooking$createBooking
+    on Mutation$CreateBooking$createBooking {
+  CopyWith$Mutation$CreateBooking$createBooking<
+          Mutation$CreateBooking$createBooking>
+      get copyWith => CopyWith$Mutation$CreateBooking$createBooking(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$CreateBooking$createBooking<TRes> {
+  factory CopyWith$Mutation$CreateBooking$createBooking(
+    Mutation$CreateBooking$createBooking instance,
+    TRes Function(Mutation$CreateBooking$createBooking) then,
+  ) = _CopyWithImpl$Mutation$CreateBooking$createBooking;
+
+  factory CopyWith$Mutation$CreateBooking$createBooking.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$CreateBooking$createBooking;
+
+  TRes call({
+    String? id,
+    String? guestId,
+    String? propertyId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    int? adults,
+    int? children,
+    double? totalAmount,
+    String? notes,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$CreateBooking$createBooking<TRes>
+    implements CopyWith$Mutation$CreateBooking$createBooking<TRes> {
+  _CopyWithImpl$Mutation$CreateBooking$createBooking(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$CreateBooking$createBooking _instance;
+
+  final TRes Function(Mutation$CreateBooking$createBooking) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? guestId = _undefined,
+    Object? propertyId = _undefined,
+    Object? status = _undefined,
+    Object? checkInDate = _undefined,
+    Object? checkOutDate = _undefined,
+    Object? adults = _undefined,
+    Object? children = _undefined,
+    Object? totalAmount = _undefined,
+    Object? notes = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$CreateBooking$createBooking(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        guestId: guestId == _undefined || guestId == null
+            ? _instance.guestId
+            : (guestId as String),
+        propertyId: propertyId == _undefined || propertyId == null
+            ? _instance.propertyId
+            : (propertyId as String),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$BookingStatus?),
+        checkInDate: checkInDate == _undefined || checkInDate == null
+            ? _instance.checkInDate
+            : (checkInDate as String),
+        checkOutDate: checkOutDate == _undefined || checkOutDate == null
+            ? _instance.checkOutDate
+            : (checkOutDate as String),
+        adults: adults == _undefined ? _instance.adults : (adults as int?),
+        children:
+            children == _undefined ? _instance.children : (children as int?),
+        totalAmount: totalAmount == _undefined
+            ? _instance.totalAmount
+            : (totalAmount as double?),
+        notes: notes == _undefined ? _instance.notes : (notes as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$CreateBooking$createBooking<TRes>
+    implements CopyWith$Mutation$CreateBooking$createBooking<TRes> {
+  _CopyWithStubImpl$Mutation$CreateBooking$createBooking(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? guestId,
+    String? propertyId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    int? adults,
+    int? children,
+    double? totalAmount,
+    String? notes,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Mutation$UpdateBooking {
+  factory Variables$Mutation$UpdateBooking({
+    required String id,
+    required Input$UpdateBookingInput input,
+  }) =>
+      Variables$Mutation$UpdateBooking._({
+        r'id': id,
+        r'input': input,
+      });
+
+  Variables$Mutation$UpdateBooking._(this._$data);
+
+  factory Variables$Mutation$UpdateBooking.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = (l$id as String);
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$UpdateBookingInput.fromJson((l$input as Map<String, dynamic>));
+    return Variables$Mutation$UpdateBooking._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get id => (_$data['id'] as String);
+
+  Input$UpdateBookingInput get input =>
+      (_$data['input'] as Input$UpdateBookingInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = l$id;
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UpdateBooking<Variables$Mutation$UpdateBooking>
+      get copyWith => CopyWith$Variables$Mutation$UpdateBooking(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$UpdateBooking) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$input = input;
+    return Object.hashAll([
+      l$id,
+      l$input,
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UpdateBooking<TRes> {
+  factory CopyWith$Variables$Mutation$UpdateBooking(
+    Variables$Mutation$UpdateBooking instance,
+    TRes Function(Variables$Mutation$UpdateBooking) then,
+  ) = _CopyWithImpl$Variables$Mutation$UpdateBooking;
+
+  factory CopyWith$Variables$Mutation$UpdateBooking.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UpdateBooking;
+
+  TRes call({
+    String? id,
+    Input$UpdateBookingInput? input,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$UpdateBooking<TRes>
+    implements CopyWith$Variables$Mutation$UpdateBooking<TRes> {
+  _CopyWithImpl$Variables$Mutation$UpdateBooking(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$UpdateBooking _instance;
+
+  final TRes Function(Variables$Mutation$UpdateBooking) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? input = _undefined,
+  }) =>
+      _then(Variables$Mutation$UpdateBooking._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as String),
+        if (input != _undefined && input != null)
+          'input': (input as Input$UpdateBookingInput),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UpdateBooking<TRes>
+    implements CopyWith$Variables$Mutation$UpdateBooking<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UpdateBooking(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    Input$UpdateBookingInput? input,
+  }) =>
+      _res;
+}
+
+class Mutation$UpdateBooking {
+  Mutation$UpdateBooking({
+    required this.updateBooking,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UpdateBooking.fromJson(Map<String, dynamic> json) {
+    final l$updateBooking = json['updateBooking'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateBooking(
+      updateBooking: Mutation$UpdateBooking$updateBooking.fromJson(
+          (l$updateBooking as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$UpdateBooking$updateBooking updateBooking;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateBooking = updateBooking;
+    _resultData['updateBooking'] = l$updateBooking.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateBooking = updateBooking;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateBooking,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateBooking) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateBooking = updateBooking;
+    final lOther$updateBooking = other.updateBooking;
+    if (l$updateBooking != lOther$updateBooking) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateBooking on Mutation$UpdateBooking {
+  CopyWith$Mutation$UpdateBooking<Mutation$UpdateBooking> get copyWith =>
+      CopyWith$Mutation$UpdateBooking(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$UpdateBooking<TRes> {
+  factory CopyWith$Mutation$UpdateBooking(
+    Mutation$UpdateBooking instance,
+    TRes Function(Mutation$UpdateBooking) then,
+  ) = _CopyWithImpl$Mutation$UpdateBooking;
+
+  factory CopyWith$Mutation$UpdateBooking.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateBooking;
+
+  TRes call({
+    Mutation$UpdateBooking$updateBooking? updateBooking,
+    String? $__typename,
+  });
+  CopyWith$Mutation$UpdateBooking$updateBooking<TRes> get updateBooking;
+}
+
+class _CopyWithImpl$Mutation$UpdateBooking<TRes>
+    implements CopyWith$Mutation$UpdateBooking<TRes> {
+  _CopyWithImpl$Mutation$UpdateBooking(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateBooking _instance;
+
+  final TRes Function(Mutation$UpdateBooking) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateBooking = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateBooking(
+        updateBooking: updateBooking == _undefined || updateBooking == null
+            ? _instance.updateBooking
+            : (updateBooking as Mutation$UpdateBooking$updateBooking),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith$Mutation$UpdateBooking$updateBooking<TRes> get updateBooking {
+    final local$updateBooking = _instance.updateBooking;
+    return CopyWith$Mutation$UpdateBooking$updateBooking(
+        local$updateBooking, (e) => call(updateBooking: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$UpdateBooking<TRes>
+    implements CopyWith$Mutation$UpdateBooking<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateBooking(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$UpdateBooking$updateBooking? updateBooking,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith$Mutation$UpdateBooking$updateBooking<TRes> get updateBooking =>
+      CopyWith$Mutation$UpdateBooking$updateBooking.stub(_res);
+}
+
+const documentNodeMutationUpdateBooking = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'UpdateBooking'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'UpdateBookingInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'updateBooking'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'guestId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'propertyId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'status'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkInDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'checkOutDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'adults'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'children'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'totalAmount'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'notes'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+Mutation$UpdateBooking _parserFn$Mutation$UpdateBooking(
+        Map<String, dynamic> data) =>
+    Mutation$UpdateBooking.fromJson(data);
+typedef OnMutationCompleted$Mutation$UpdateBooking = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$UpdateBooking?,
+);
+
+class Options$Mutation$UpdateBooking
+    extends graphql.MutationOptions<Mutation$UpdateBooking> {
+  Options$Mutation$UpdateBooking({
+    String? operationName,
+    required Variables$Mutation$UpdateBooking variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateBooking? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UpdateBooking? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UpdateBooking>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$UpdateBooking(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationUpdateBooking,
+          parserFn: _parserFn$Mutation$UpdateBooking,
+        );
+
+  final OnMutationCompleted$Mutation$UpdateBooking? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$UpdateBooking
+    extends graphql.WatchQueryOptions<Mutation$UpdateBooking> {
+  WatchOptions$Mutation$UpdateBooking({
+    String? operationName,
+    required Variables$Mutation$UpdateBooking variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateBooking? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationUpdateBooking,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$UpdateBooking,
+        );
+}
+
+extension ClientExtension$Mutation$UpdateBooking on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$UpdateBooking>> mutate$UpdateBooking(
+          Options$Mutation$UpdateBooking options) async =>
+      await this.mutate(options);
+
+  graphql.ObservableQuery<Mutation$UpdateBooking> watchMutation$UpdateBooking(
+          WatchOptions$Mutation$UpdateBooking options) =>
+      this.watchMutation(options);
+}
+
+class Mutation$UpdateBooking$HookResult {
+  Mutation$UpdateBooking$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$UpdateBooking runMutation;
+
+  final graphql.QueryResult<Mutation$UpdateBooking> result;
+}
+
+Mutation$UpdateBooking$HookResult useMutation$UpdateBooking(
+    [WidgetOptions$Mutation$UpdateBooking? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$UpdateBooking());
+  return Mutation$UpdateBooking$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$UpdateBooking> useWatchMutation$UpdateBooking(
+        WatchOptions$Mutation$UpdateBooking options) =>
+    graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$UpdateBooking
+    extends graphql.MutationOptions<Mutation$UpdateBooking> {
+  WidgetOptions$Mutation$UpdateBooking({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UpdateBooking? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UpdateBooking? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UpdateBooking>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$UpdateBooking(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationUpdateBooking,
+          parserFn: _parserFn$Mutation$UpdateBooking,
+        );
+
+  final OnMutationCompleted$Mutation$UpdateBooking? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$UpdateBooking
+    = graphql.MultiSourceResult<Mutation$UpdateBooking> Function(
+  Variables$Mutation$UpdateBooking, {
+  Object? optimisticResult,
+  Mutation$UpdateBooking? typedOptimisticResult,
+});
+typedef Builder$Mutation$UpdateBooking = widgets.Widget Function(
+  RunMutation$Mutation$UpdateBooking,
+  graphql.QueryResult<Mutation$UpdateBooking>?,
+);
+
+class Mutation$UpdateBooking$Widget
+    extends graphql_flutter.Mutation<Mutation$UpdateBooking> {
+  Mutation$UpdateBooking$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$UpdateBooking? options,
+    required Builder$Mutation$UpdateBooking builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$UpdateBooking(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$UpdateBooking$updateBooking {
+  Mutation$UpdateBooking$updateBooking({
+    required this.id,
+    required this.guestId,
+    required this.propertyId,
+    this.status,
+    required this.checkInDate,
+    required this.checkOutDate,
+    this.adults,
+    this.children,
+    this.totalAmount,
+    this.notes,
+    this.$__typename = 'Booking',
+  });
+
+  factory Mutation$UpdateBooking$updateBooking.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$guestId = json['guestId'];
+    final l$propertyId = json['propertyId'];
+    final l$status = json['status'];
+    final l$checkInDate = json['checkInDate'];
+    final l$checkOutDate = json['checkOutDate'];
+    final l$adults = json['adults'];
+    final l$children = json['children'];
+    final l$totalAmount = json['totalAmount'];
+    final l$notes = json['notes'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UpdateBooking$updateBooking(
+      id: (l$id as String),
+      guestId: (l$guestId as String),
+      propertyId: (l$propertyId as String),
+      status: l$status == null
+          ? null
+          : fromJson$Enum$BookingStatus((l$status as String)),
+      checkInDate: (l$checkInDate as String),
+      checkOutDate: (l$checkOutDate as String),
+      adults: (l$adults as int?),
+      children: (l$children as int?),
+      totalAmount: (l$totalAmount as num?)?.toDouble(),
+      notes: (l$notes as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String guestId;
+
+  final String propertyId;
+
+  final Enum$BookingStatus? status;
+
+  final String checkInDate;
+
+  final String checkOutDate;
+
+  final int? adults;
+
+  final int? children;
+
+  final double? totalAmount;
+
+  final String? notes;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$guestId = guestId;
+    _resultData['guestId'] = l$guestId;
+    final l$propertyId = propertyId;
+    _resultData['propertyId'] = l$propertyId;
+    final l$status = status;
+    _resultData['status'] =
+        l$status == null ? null : toJson$Enum$BookingStatus(l$status);
+    final l$checkInDate = checkInDate;
+    _resultData['checkInDate'] = l$checkInDate;
+    final l$checkOutDate = checkOutDate;
+    _resultData['checkOutDate'] = l$checkOutDate;
+    final l$adults = adults;
+    _resultData['adults'] = l$adults;
+    final l$children = children;
+    _resultData['children'] = l$children;
+    final l$totalAmount = totalAmount;
+    _resultData['totalAmount'] = l$totalAmount;
+    final l$notes = notes;
+    _resultData['notes'] = l$notes;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$guestId = guestId;
+    final l$propertyId = propertyId;
+    final l$status = status;
+    final l$checkInDate = checkInDate;
+    final l$checkOutDate = checkOutDate;
+    final l$adults = adults;
+    final l$children = children;
+    final l$totalAmount = totalAmount;
+    final l$notes = notes;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$guestId,
+      l$propertyId,
+      l$status,
+      l$checkInDate,
+      l$checkOutDate,
+      l$adults,
+      l$children,
+      l$totalAmount,
+      l$notes,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$UpdateBooking$updateBooking) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$guestId = guestId;
+    final lOther$guestId = other.guestId;
+    if (l$guestId != lOther$guestId) {
+      return false;
+    }
+    final l$propertyId = propertyId;
+    final lOther$propertyId = other.propertyId;
+    if (l$propertyId != lOther$propertyId) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$checkInDate = checkInDate;
+    final lOther$checkInDate = other.checkInDate;
+    if (l$checkInDate != lOther$checkInDate) {
+      return false;
+    }
+    final l$checkOutDate = checkOutDate;
+    final lOther$checkOutDate = other.checkOutDate;
+    if (l$checkOutDate != lOther$checkOutDate) {
+      return false;
+    }
+    final l$adults = adults;
+    final lOther$adults = other.adults;
+    if (l$adults != lOther$adults) {
+      return false;
+    }
+    final l$children = children;
+    final lOther$children = other.children;
+    if (l$children != lOther$children) {
+      return false;
+    }
+    final l$totalAmount = totalAmount;
+    final lOther$totalAmount = other.totalAmount;
+    if (l$totalAmount != lOther$totalAmount) {
+      return false;
+    }
+    final l$notes = notes;
+    final lOther$notes = other.notes;
+    if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UpdateBooking$updateBooking
+    on Mutation$UpdateBooking$updateBooking {
+  CopyWith$Mutation$UpdateBooking$updateBooking<
+          Mutation$UpdateBooking$updateBooking>
+      get copyWith => CopyWith$Mutation$UpdateBooking$updateBooking(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$UpdateBooking$updateBooking<TRes> {
+  factory CopyWith$Mutation$UpdateBooking$updateBooking(
+    Mutation$UpdateBooking$updateBooking instance,
+    TRes Function(Mutation$UpdateBooking$updateBooking) then,
+  ) = _CopyWithImpl$Mutation$UpdateBooking$updateBooking;
+
+  factory CopyWith$Mutation$UpdateBooking$updateBooking.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UpdateBooking$updateBooking;
+
+  TRes call({
+    String? id,
+    String? guestId,
+    String? propertyId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    int? adults,
+    int? children,
+    double? totalAmount,
+    String? notes,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Mutation$UpdateBooking$updateBooking<TRes>
+    implements CopyWith$Mutation$UpdateBooking$updateBooking<TRes> {
+  _CopyWithImpl$Mutation$UpdateBooking$updateBooking(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$UpdateBooking$updateBooking _instance;
+
+  final TRes Function(Mutation$UpdateBooking$updateBooking) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? guestId = _undefined,
+    Object? propertyId = _undefined,
+    Object? status = _undefined,
+    Object? checkInDate = _undefined,
+    Object? checkOutDate = _undefined,
+    Object? adults = _undefined,
+    Object? children = _undefined,
+    Object? totalAmount = _undefined,
+    Object? notes = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$UpdateBooking$updateBooking(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        guestId: guestId == _undefined || guestId == null
+            ? _instance.guestId
+            : (guestId as String),
+        propertyId: propertyId == _undefined || propertyId == null
+            ? _instance.propertyId
+            : (propertyId as String),
+        status: status == _undefined
+            ? _instance.status
+            : (status as Enum$BookingStatus?),
+        checkInDate: checkInDate == _undefined || checkInDate == null
+            ? _instance.checkInDate
+            : (checkInDate as String),
+        checkOutDate: checkOutDate == _undefined || checkOutDate == null
+            ? _instance.checkOutDate
+            : (checkOutDate as String),
+        adults: adults == _undefined ? _instance.adults : (adults as int?),
+        children:
+            children == _undefined ? _instance.children : (children as int?),
+        totalAmount: totalAmount == _undefined
+            ? _instance.totalAmount
+            : (totalAmount as double?),
+        notes: notes == _undefined ? _instance.notes : (notes as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Mutation$UpdateBooking$updateBooking<TRes>
+    implements CopyWith$Mutation$UpdateBooking$updateBooking<TRes> {
+  _CopyWithStubImpl$Mutation$UpdateBooking$updateBooking(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? guestId,
+    String? propertyId,
+    Enum$BookingStatus? status,
+    String? checkInDate,
+    String? checkOutDate,
+    int? adults,
+    int? children,
+    double? totalAmount,
+    String? notes,
     String? $__typename,
   }) =>
       _res;

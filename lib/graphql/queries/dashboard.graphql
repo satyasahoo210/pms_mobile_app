@@ -56,6 +56,7 @@ query GetBookings($propertyId: String, $guestId: String) {
       status
       checkInDate
       checkOutDate
+      priceOverride
       Room {
         id
         roomNumber
@@ -106,5 +107,53 @@ mutation UpdateRoom($id: ID!, $input: UpdateRoomInput!) {
     status
     housekeepingStatus
     priorityCleaning
+  }
+}
+
+query GetGuests {
+  guests {
+    id
+    name
+    phone
+    email
+  }
+}
+
+mutation CreateGuest($input: CreateGuestInput!) {
+  createGuest(input: $input) {
+    id
+    name
+    phone
+    email
+  }
+}
+
+mutation CreateBooking($input: CreateBookingInput!) {
+  createBooking(input: $input) {
+    id
+    guestId
+    propertyId
+    status
+    checkInDate
+    checkOutDate
+    adults
+    children
+    totalAmount
+    notes
+  }
+}
+
+mutation UpdateBooking($id: ID!, $input: UpdateBookingInput!) {
+  updateBooking(id: $id, input: $input) {
+    id
+    guestId
+    propertyId
+    status
+    checkInDate
+    checkOutDate
+    adults
+    children
+    totalAmount
+    notes
   }
 }

@@ -9,6 +9,8 @@ import 'package:pms_admin/features/auth/presentation/login_screen.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:pms_admin/features/housekeeping/presentation/housekeeping_screen.dart';
 import 'package:pms_admin/features/calendar/presentation/calendar_screen.dart';
+import 'package:pms_admin/features/bookings/presentation/booking_screen.dart';
+import 'package:pms_admin/graphql/queries/dashboard.graphql.dart';
 
 // Helper class to convert a Riverpod stream/provider into a Listenable for GoRouter
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -70,7 +72,7 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const DashboardScreen(),
           ),
           GoRoute(
-            path: '/bookings',
+            path: '/calendar',
             builder: (context, state) => const CalendarScreen(),
           ),
           GoRoute(
@@ -83,6 +85,13 @@ final appRouterNotifierProvider = Provider<GoRouter>((ref) {
                 const PlaceholderScreen(title: 'More & Settings'),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/bookings',
+        builder: (context, state) {
+          final booking = state.extra as Query$GetBookings$bookings?;
+          return BookingScreen(existingBooking: booking);
+        },
       ),
     ],
   );
@@ -101,7 +110,7 @@ class MainNavigationShell extends ConsumerWidget {
 
     int calculateSelectedIndex(String location) {
       if (location.startsWith('/dashboard')) return 0;
-      if (location.startsWith('/bookings')) return 1;
+      if (location.startsWith('/calendar')) return 1;
       if (location.startsWith('/housekeeping')) return 2;
       if (location.startsWith('/more')) return 3;
       return 0;
@@ -113,7 +122,7 @@ class MainNavigationShell extends ConsumerWidget {
           context.go('/dashboard');
           break;
         case 1:
-          context.go('/bookings');
+          context.go('/calendar');
           break;
         case 2:
           context.go('/housekeeping');

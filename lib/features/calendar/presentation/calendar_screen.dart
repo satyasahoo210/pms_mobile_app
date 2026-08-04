@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
 import 'package:pms_admin/features/dashboard/presentation/dashboard_controller.dart';
@@ -474,8 +475,9 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
     ); // inclusive end date boundary
 
     for (final booking in bookings) {
-      if (booking.status == Enum$BookingStatus.CANCELLED)
+      if (booking.status == Enum$BookingStatus.CANCELLED) {
         continue; // Skip cancelled bookings on tape chart
+      }
 
       final checkIn = DateTime.parse(booking.checkInDate);
       final checkOut = DateTime.parse(booking.checkOutDate);
@@ -830,6 +832,14 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
             ),
           ),
           actions: [
+            TextButton.icon(
+              icon: const Icon(Icons.edit, size: 16),
+              label: const Text('Edit'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                context.push('/bookings', extra: booking);
+              },
+            ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: const Text('Close'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:pms_admin/core/theme/app_theme.dart';
 import 'package:pms_admin/core/widgets/empty_state_widget.dart';
@@ -389,21 +390,33 @@ class DashboardScreen extends ConsumerWidget {
                   context,
                   Icons.add_circle_outline,
                   'New Booking',
+                  onTap: () => context.push('/bookings'),
                 ),
                 _buildActionTile(
                   context,
                   Icons.how_to_reg_outlined,
                   'Check-In',
+                  onTap: () => context.go('/calendar'),
                 ),
                 _buildActionTile(
                   context,
                   Icons.cleaning_services_outlined,
                   'Cleaning',
+                  onTap: () => context.go('/housekeeping'),
                 ),
                 _buildActionTile(
                   context,
                   Icons.receipt_long_outlined,
                   'Billing',
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('Billing module coming soon in Phase 2'),
+                        backgroundColor: theme.colorScheme.secondary,
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -413,14 +426,17 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildActionTile(BuildContext context, IconData icon, String label) {
+  Widget _buildActionTile(
+    BuildContext context,
+    IconData icon,
+    String label, {
+    required VoidCallback onTap,
+  }) {
     final theme = Theme.of(context);
     final ext = theme.extension<AppColorsExtension>()!;
 
     return InkWell(
-      onTap: () {
-        // Quick Action Triggers
-      },
+      onTap: onTap,
       borderRadius: BorderRadius.circular(AppTheme.radiusDefault),
       child: Container(
         decoration: BoxDecoration(

@@ -244,7 +244,7 @@ class AppTheme {
         outlineVariant: _lightOutlineVariant,
       ),
       textTheme: _buildTextTheme(),
-      extensions: <ThemeExtension<dynamic>>[lightColors],
+      extensions: const <ThemeExtension<dynamic>>[lightColors],
       scaffoldBackgroundColor: _lightBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: _lightSurface,
@@ -279,7 +279,7 @@ class AppTheme {
         outlineVariant: _darkOutlineVariant,
       ),
       textTheme: _buildTextTheme(),
-      extensions: <ThemeExtension<dynamic>>[darkColors],
+      extensions: const <ThemeExtension<dynamic>>[darkColors],
       scaffoldBackgroundColor: _darkBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: _darkSurface,

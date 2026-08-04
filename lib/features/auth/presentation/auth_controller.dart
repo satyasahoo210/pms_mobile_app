@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pms_admin/core/storage/secure_storage_service.dart';
 import 'package:pms_admin/core/storage/storage_keys.dart';
+import 'package:pms_admin/core/utils/logger.dart';
 import 'package:pms_admin/features/auth/data/auth_repository.dart';
 import 'package:pms_admin/features/auth/domain/auth_models.dart';
 
@@ -14,28 +15,46 @@ class AuthController extends StateNotifier<AuthState> {
   }
 
   Future<void> initializeSession() async {
+    appLog('[AuthController] initializeSession started.');
     state = AuthState.authenticating();
     try {
       final token = await _storage.read(StorageKeys.accessToken);
       final userJsonStr = await _storage.read(StorageKeys.userProfile);
 
       if (token != null && userJsonStr != null) {
-        final user = User.fromJson(jsonDecode(userJsonStr) as Map<String, dynamic>);
+        final user = User.fromJson(
+          jsonDecode(userJsonStr) as Map<String, dynamic>,
+        );
+        appLog(
+          '[AuthController] initializeSession: found valid session for user: ${user.email}',
+        );
         state = AuthState.authenticated(user);
       } else {
+        appLog(
+          '[AuthController] initializeSession: no token or profile found in storage.',
+        );
         final refreshToken = await _storage.read(StorageKeys.refreshToken);
         if (refreshToken != null) {
+          appLog(
+            '[AuthController] initializeSession: attempting refresh using refreshToken.',
+          );
           final success = await refreshSession(refreshToken);
-          if (success) return;
+          if (success) {
+            appLog('[AuthController] initializeSession: refresh succeeded.');
+            return;
+          }
         }
+        appLog('[AuthController] initializeSession: unauthenticated.');
         state = AuthState.unauthenticated();
       }
     } catch (e) {
+      appLog('[AuthController] initializeSession failed: $e');
       state = AuthState.unauthenticated();
     }
   }
 
   Future<bool> refreshSession(String refreshToken) async {
+    appLog('[AuthController] refreshSession started.');
     try {
       final data = await _repository.refresh(refreshToken);
       final newAccessToken = data['access_token'] as String;
@@ -47,15 +66,20 @@ class AuthController extends StateNotifier<AuthState> {
       await _storage.write(StorageKeys.userProfile, jsonEncode(user.toJson()));
       await _storage.write(StorageKeys.tenantId, user.tenantId);
 
+      appLog(
+        '[AuthController] refreshSession succeeded for user: ${user.email}',
+      );
       state = AuthState.authenticated(user);
       return true;
     } catch (e) {
+      appLog('[AuthController] refreshSession failed: $e');
       logout();
       return false;
     }
   }
 
   Future<void> login(String email, String password) async {
+    appLog('[AuthController] login started for: $email');
     state = AuthState.authenticating();
     try {
       final data = await _repository.login(email, password);
@@ -68,20 +92,26 @@ class AuthController extends StateNotifier<AuthState> {
       await _storage.write(StorageKeys.userProfile, jsonEncode(user.toJson()));
       await _storage.write(StorageKeys.tenantId, user.tenantId);
 
+      appLog('[AuthController] login succeeded for: ${user.email}');
       state = AuthState.authenticated(user);
     } catch (e) {
+      appLog('[AuthController] login failed: $e');
       state = AuthState.error(e.toString().replaceAll('Exception:', '').trim());
     }
   }
 
   Future<void> logout() async {
+    appLog('[AuthController] logout started.');
     state = AuthState.authenticating();
     try {
       await _storage.delete(StorageKeys.accessToken);
       await _storage.delete(StorageKeys.refreshToken);
       await _storage.delete(StorageKeys.userProfile);
       await _storage.delete(StorageKeys.tenantId);
-    } catch (_) {}
+      appLog('[AuthController] logout storage cleared.');
+    } catch (e) {
+      appLog('[AuthController] logout storage clear failed: $e');
+    }
     state = AuthState.unauthenticated();
   }
 
@@ -95,8 +125,10 @@ class AuthController extends StateNotifier<AuthState> {
   }
 }
 
-final authControllerProvider = StateNotifierProvider<AuthController, AuthState>((ref) {
-  final repository = ref.watch(authRepositoryProvider);
-  final storage = ref.watch(secureStorageProvider);
-  return AuthController(repository, storage);
-});
+final authControllerProvider = StateNotifierProvider<AuthController, AuthState>(
+  (ref) {
+    final repository = ref.watch(authRepositoryProvider);
+    final storage = ref.watch(secureStorageProvider);
+    return AuthController(repository, storage);
+  },
+);
