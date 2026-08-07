@@ -20,6 +20,13 @@ final bookingsListProvider = FutureProvider<List<Query$GetBookings$bookings>>((r
   return repo.getBookings(selectedProperty.id);
 });
 
+final servicesProvider = FutureProvider.autoDispose<List<Query$GetServices$services>>((ref) async {
+  final selectedProperty = ref.watch(selectedPropertyProvider);
+  if (selectedProperty == null) return [];
+  final repo = ref.watch(bookingsRepositoryProvider);
+  return repo.getServices(selectedProperty.id);
+});
+
 class BookingsController extends StateNotifier<AsyncValue<void>> {
   final BookingsRepository _repository;
   final Ref _ref;
@@ -113,6 +120,14 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
     }
   }
 
+  void _invalidateAll() {
+    _ref.invalidate(dashboardStatsProvider);
+    _ref.invalidate(upcomingArrivalsProvider);
+    _ref.invalidate(recentActivityProvider);
+    _ref.invalidate(calendarDataProvider);
+    _ref.invalidate(bookingsListProvider);
+  }
+
   Future<bool> createPayment(Input$CreatePaymentInput input) async {
     appLog(
       '[BookingsController] createPayment started. Booking: ${input.bookingId}, Amount: ${input.amount}',
@@ -122,14 +137,123 @@ class BookingsController extends StateNotifier<AsyncValue<void>> {
       await _repository.createPayment(input);
       appLog('[BookingsController] createPayment succeeded.');
       state = const AsyncValue.data(null);
-      _ref.invalidate(dashboardStatsProvider);
-      _ref.invalidate(upcomingArrivalsProvider);
-      _ref.invalidate(recentActivityProvider);
-      _ref.invalidate(calendarDataProvider);
-      _ref.invalidate(bookingsListProvider);
+      _invalidateAll();
       return true;
     } catch (e, stack) {
       appLog('[BookingsController] createPayment failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> addBookingRoom({
+    required String bookingId,
+    String? roomId,
+    required String roomTypeId,
+    String? checkInDate,
+    String? checkOutDate,
+    double? priceOverride,
+  }) async {
+    state = const AsyncValue.loading();
+    try {
+      final createdRoom = await _repository.addBookingRoom(
+        bookingId: bookingId,
+        roomId: roomId,
+        roomTypeId: roomTypeId,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+      );
+      if (priceOverride != null) {
+        await _repository.updateBookingRoom(
+          createdRoom.id,
+          Input$UpdateBookingRoomInput(priceOverride: priceOverride),
+        );
+      }
+      state = const AsyncValue.data(null);
+      _invalidateAll();
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] addBookingRoom failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> updateBookingRoom(String id, Input$UpdateBookingRoomInput input) async {
+    state = const AsyncValue.loading();
+    try {
+      await _repository.updateBookingRoom(id, input);
+      state = const AsyncValue.data(null);
+      _invalidateAll();
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] updateBookingRoom failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> deleteBookingRoom(String id) async {
+    state = const AsyncValue.loading();
+    try {
+      await _repository.deleteBookingRoom(id);
+      state = const AsyncValue.data(null);
+      _invalidateAll();
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] deleteBookingRoom failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> addBookingService({
+    required String bookingId,
+    required String serviceId,
+    required int quantity,
+    required double totalPrice,
+  }) async {
+    state = const AsyncValue.loading();
+    try {
+      await _repository.addBookingService(
+        bookingId: bookingId,
+        serviceId: serviceId,
+        quantity: quantity,
+        totalPrice: totalPrice,
+      );
+      state = const AsyncValue.data(null);
+      _invalidateAll();
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] addBookingService failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> updateBookingService(String id, Input$UpdateBookingServiceInput input) async {
+    state = const AsyncValue.loading();
+    try {
+      await _repository.updateBookingService(id, input);
+      state = const AsyncValue.data(null);
+      _invalidateAll();
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] updateBookingService failed: $e');
+      state = AsyncValue.error(e, stack);
+      return false;
+    }
+  }
+
+  Future<bool> deleteBookingService(String id) async {
+    state = const AsyncValue.loading();
+    try {
+      await _repository.deleteBookingService(id);
+      state = const AsyncValue.data(null);
+      _invalidateAll();
+      return true;
+    } catch (e, stack) {
+      appLog('[BookingsController] deleteBookingService failed: $e');
       state = AsyncValue.error(e, stack);
       return false;
     }

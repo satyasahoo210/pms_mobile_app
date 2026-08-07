@@ -41,6 +41,8 @@ query GetBookings($propertyId: String, $guestId: String) {
     checkOutDate
     adults
     children
+    discountAmount
+    discountType
     totalAmount
     notes
     Guest {
@@ -74,6 +76,18 @@ query GetBookings($propertyId: String, $guestId: String) {
         id
         name
         defaultPrice
+      }
+    }
+    BookingService {
+      id
+      bookingId
+      serviceId
+      quantity
+      totalPrice
+      Service {
+        id
+        name
+        price
       }
     }
   }
@@ -182,4 +196,64 @@ mutation CreatePayment($input: CreatePaymentInput!) {
     method
     status
   }
+}
+
+query GetServices($propertyId: String!) {
+  services(propertyId: $propertyId) {
+    id
+    name
+    price
+    propertyId
+    category
+  }
+}
+
+mutation AddBookingRoom($bookingId: ID!, $roomId: ID, $roomTypeId: ID!, $checkInDate: String, $checkOutDate: String) {
+  addBookingRoom(bookingId: $bookingId, roomId: $roomId, roomTypeId: $roomTypeId, checkInDate: $checkInDate, checkOutDate: $checkOutDate) {
+    id
+    bookingId
+    roomTypeId
+    roomId
+    priceOverride
+    status
+    checkInDate
+    checkOutDate
+  }
+}
+
+mutation UpdateBookingRoom($id: ID!, $input: UpdateBookingRoomInput!) {
+  updateBookingRoom(id: $id, input: $input) {
+    id
+    roomId
+    roomTypeId
+    priceOverride
+    checkInDate
+    checkOutDate
+  }
+}
+
+mutation DeleteBookingRoom($id: ID!) {
+  deleteBookingRoom(id: $id)
+}
+
+mutation AddBookingService($bookingId: ID!, $serviceId: ID!, $quantity: Int!, $totalPrice: Float!) {
+  addBookingService(bookingId: $bookingId, serviceId: $serviceId, quantity: $quantity, totalPrice: $totalPrice) {
+    id
+    bookingId
+    serviceId
+    quantity
+    totalPrice
+  }
+}
+
+mutation UpdateBookingService($id: ID!, $input: UpdateBookingServiceInput!) {
+  updateBookingService(id: $id, input: $input) {
+    id
+    quantity
+    totalPrice
+  }
+}
+
+mutation DeleteBookingService($id: ID!) {
+  deleteBookingService(id: $id)
 }

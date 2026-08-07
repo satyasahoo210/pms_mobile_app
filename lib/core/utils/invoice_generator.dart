@@ -146,10 +146,22 @@ InvoiceTotals calculateBookingInvoiceTotals(
   }
 
   final double totalRoomCharges = roomSubtotal * nights;
-  const double serviceSubtotal = 0.0;
+  double serviceSubtotal = 0.0;
+  for (final s in booking.BookingService ?? []) {
+    if (s != null) {
+      serviceSubtotal += s.totalPrice;
+    }
+  }
+
   final double subtotal = totalRoomCharges + serviceSubtotal;
 
-  const double discountAmount = 0.0;
+  double discountAmount = 0.0;
+  if (booking.discountType == 'PERCENTAGE') {
+    discountAmount = (subtotal * (booking.discountAmount ?? 0.0)) / 100;
+  } else if (booking.discountType == 'FIXED') {
+    discountAmount = booking.discountAmount ?? 0.0;
+  }
+
   final double taxPercentage = property.taxPercentage ?? 0.0;
   final double taxRate = taxPercentage / 100;
   final double tax = (subtotal - discountAmount) * taxRate;
@@ -427,6 +439,39 @@ Future<pw.Document> generateInvoicePDF({
                     ],
                   );
                 }),
+                ...(booking.BookingService ?? []).map((s) {
+                  if (s == null) {
+                    return pw.TableRow(
+                      children: [pw.Container(), pw.Container()],
+                    );
+                  }
+                  final serviceName = s.Service?.name ?? 'Service';
+                  final qty = s.quantity;
+                  final unitPrice = s.Service?.price ?? 0.0;
+                  final total = s.totalPrice;
+
+                  return pw.TableRow(
+                    children: [
+                      pw.Padding(
+                        padding: const pw.EdgeInsets.all(5),
+                        child: pw.Text(
+                          '$serviceName x $qty @ INR ${unitPrice.toStringAsFixed(2)}',
+                          style: const pw.TextStyle(fontSize: 8),
+                        ),
+                      ),
+                      pw.Padding(
+                        padding: const pw.EdgeInsets.all(5),
+                        child: pw.Align(
+                          alignment: pw.Alignment.centerRight,
+                          child: pw.Text(
+                            'INR ${total.toStringAsFixed(2)}',
+                            style: const pw.TextStyle(fontSize: 8),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
               ],
             ),
             pw.SizedBox(height: 15),
@@ -467,6 +512,8 @@ Future<pw.Document> generateInvoicePDF({
                     child: pw.Column(
                       children: [
                         _buildTotalRow('Sub Total:', totals.subtotal),
+                        if (totals.discount > 0)
+                          _buildTotalRow('Discount:', -totals.discount),
                         if (totals.tax > 0)
                           _buildTotalRow(
                             'Tax (${property.taxPercentage}%):',
