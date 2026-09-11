@@ -18,38 +18,22 @@ class AuthController extends StateNotifier<AuthState> {
     appLog('[AuthController] initializeSession started.');
     state = AuthState.authenticating();
     try {
-      final token = await _storage.read(StorageKeys.accessToken);
-      final userJsonStr = await _storage.read(StorageKeys.userProfile);
-
-      if (token != null && userJsonStr != null) {
-        final user = User.fromJson(
-          jsonDecode(userJsonStr) as Map<String, dynamic>,
-        );
+      final refreshToken = await _storage.read(StorageKeys.refreshToken);
+      if (refreshToken != null) {
         appLog(
-          '[AuthController] initializeSession: found valid session for user: ${user.email}',
+          '[AuthController] initializeSession: attempting refresh using refreshToken.',
         );
-        state = AuthState.authenticated(user);
-      } else {
-        appLog(
-          '[AuthController] initializeSession: no token or profile found in storage.',
-        );
-        final refreshToken = await _storage.read(StorageKeys.refreshToken);
-        if (refreshToken != null) {
-          appLog(
-            '[AuthController] initializeSession: attempting refresh using refreshToken.',
-          );
-          final success = await refreshSession(refreshToken);
-          if (success) {
-            appLog('[AuthController] initializeSession: refresh succeeded.');
-            return;
-          }
+        final success = await refreshSession(refreshToken);
+        if (success) {
+          appLog('[AuthController] initializeSession: refresh succeeded.');
+          return;
         }
-        appLog('[AuthController] initializeSession: unauthenticated.');
-        state = AuthState.unauthenticated();
       }
+      appLog('[AuthController] initializeSession: unauthenticated.');
+      await logout();
     } catch (e) {
       appLog('[AuthController] initializeSession failed: $e');
-      state = AuthState.unauthenticated();
+      await logout();
     }
   }
 

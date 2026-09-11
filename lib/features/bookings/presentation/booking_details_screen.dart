@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +23,7 @@ class BookingDetailsScreen extends ConsumerStatefulWidget {
 
 class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
   bool _isLoading = false;
+  bool? _showTax;
 
   Color _getStatusColor(Enum$BookingStatus? status) {
     switch (status) {
@@ -53,20 +55,27 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
     }
   }
 
-  Future<void> _updateStatus(Enum$BookingStatus status) async {
+  Future<void> _updateStatus(Enum$BookingStatus status, Query$GetBookings$bookings booking) async {
     setState(() => _isLoading = true);
     final success = await ref
         .read(bookingsControllerProvider.notifier)
         .updateBooking(
-          widget.booking.id,
+          booking.id,
           Input$UpdateBookingInput(
             status: status,
-            checkInDate: widget.booking.checkInDate,
-            checkOutDate: widget.booking.checkOutDate,
-            adults: widget.booking.adults,
-            children: widget.booking.children,
+            checkInDate: booking.checkInDate,
+            checkOutDate: booking.checkOutDate,
+            adults: booking.adults,
+            children: booking.children,
+            notes: booking.notes,
+            discountAmount: booking.discountAmount,
+            discountType: booking.discountType,
+            waiveLastDayCharge: booking.waiveLastDayCharge,
           ),
         );
+    if (success) {
+      await ref.read(bookingsListProvider.future);
+    }
     setState(() => _isLoading = false);
 
     if (success && mounted) {
@@ -107,6 +116,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
       final success = await ref
           .read(bookingsControllerProvider.notifier)
           .cancelBooking(widget.booking.id);
+      if (success) {
+        await ref.read(bookingsListProvider.future);
+      }
       setState(() => _isLoading = false);
 
       if (success && mounted) {
@@ -244,8 +256,18 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                           Input$UpdateBookingInput(
                             checkInDate: tempCheckIn.toIso8601String(),
                             checkOutDate: tempCheckOut.toIso8601String(),
+                            adults: booking.adults,
+                            children: booking.children,
+                            status: booking.status,
+                            notes: booking.notes,
+                            discountAmount: booking.discountAmount,
+                            discountType: booking.discountType,
+                            waiveLastDayCharge: booking.waiveLastDayCharge,
                           ),
                         );
+                    if (success) {
+                      await ref.read(bookingsListProvider.future);
+                    }
                     setState(() => _isLoading = false);
                     if (success && mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -474,6 +496,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                           checkOutDate: tempCheckOut.toIso8601String(),
                           priceOverride: priceOverrideVal,
                         );
+                    if (success) {
+                      await ref.read(bookingsListProvider.future);
+                    }
                     setState(() => _isLoading = false);
                     if (success && mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -704,6 +729,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                             priceOverride: priceOverrideVal,
                           ),
                         );
+                    if (success) {
+                      await ref.read(bookingsListProvider.future);
+                    }
                     setState(() => _isLoading = false);
                     if (success && mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -750,6 +778,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
       final success = await ref
           .read(bookingsControllerProvider.notifier)
           .deleteBookingRoom(bookingRoom.id);
+      if (success) {
+        await ref.read(bookingsListProvider.future);
+      }
       setState(() => _isLoading = false);
 
       if (success && mounted) {
@@ -819,10 +850,20 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                           .updateBooking(
                             booking.id,
                             Input$UpdateBookingInput(
+                              checkInDate: booking.checkInDate,
+                              checkOutDate: booking.checkOutDate,
+                              adults: booking.adults,
+                              children: booking.children,
+                              status: booking.status,
+                              notes: booking.notes,
                               discountAmount: 0.0,
                               discountType: null,
+                              waiveLastDayCharge: booking.waiveLastDayCharge,
                             ),
                           );
+                      if (success) {
+                        await ref.read(bookingsListProvider.future);
+                      }
                       setState(() => _isLoading = false);
                       if (success && mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -847,10 +888,20 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                         .updateBooking(
                           booking.id,
                           Input$UpdateBookingInput(
+                            checkInDate: booking.checkInDate,
+                            checkOutDate: booking.checkOutDate,
+                            adults: booking.adults,
+                            children: booking.children,
+                            status: booking.status,
+                            notes: booking.notes,
                             discountAmount: discountVal,
                             discountType: discountType,
+                            waiveLastDayCharge: booking.waiveLastDayCharge,
                           ),
                         );
+                    if (success) {
+                      await ref.read(bookingsListProvider.future);
+                    }
                     setState(() => _isLoading = false);
                     if (success && mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -959,6 +1010,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                           quantity: qty,
                           totalPrice: total,
                         );
+                    if (success) {
+                      await ref.read(bookingsListProvider.future);
+                    }
                     setState(() => _isLoading = false);
                     if (success && mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -1040,6 +1094,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                             totalPrice: total,
                           ),
                         );
+                    if (success) {
+                      await ref.read(bookingsListProvider.future);
+                    }
                     setState(() => _isLoading = false);
                     if (success && mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -1086,6 +1143,9 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
       final success = await ref
           .read(bookingsControllerProvider.notifier)
           .deleteBookingService(serviceItem.id);
+      if (success) {
+        await ref.read(bookingsListProvider.future);
+      }
       setState(() => _isLoading = false);
 
       if (success && mounted) {
@@ -1168,13 +1228,16 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                         status: Enum$PaymentStatus.PAID,
                       ),
                     )
-                    .then((success) {
-                      if (success && context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Payment recorded successfully'),
-                          ),
-                        );
+                    .then((success) async {
+                      if (success) {
+                        await ref.read(bookingsListProvider.future);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Payment recorded successfully'),
+                            ),
+                          );
+                        }
                       }
                     });
               },
@@ -1193,15 +1256,20 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
     );
   }
 
-  Future<void> _shareInvoice(Query$GetProperties$properties property) async {
+  Future<void> _shareInvoice(
+    Query$GetProperties$properties property,
+    Query$GetBookings$bookings booking,
+    bool showTax,
+  ) async {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Generating and sharing invoice...')),
     );
 
     try {
       await shareInvoiceViaWhatsApp(
-        booking: widget.booking,
+        booking: booking,
         property: property,
+        showTax: showTax,
       );
     } catch (e) {
       if (mounted) {
@@ -1235,8 +1303,20 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
     final checkOut = DateTime.parse(booking.checkOutDate).toLocal();
     final nights = checkOut.difference(checkIn).inDays;
 
+    Map<String, dynamic>? settings;
+    if (selectedProperty?.settings != null) {
+      try {
+        settings = jsonDecode(selectedProperty!.settings!) as Map<String, dynamic>;
+      } catch (_) {}
+    }
+
+    if (_showTax == null && selectedProperty != null) {
+      _showTax = settings?['defaultTaxEnabled'] != false;
+    }
+    final showTax = _showTax ?? true;
+
     final totals = selectedProperty != null
-        ? calculateBookingInvoiceTotals(booking, selectedProperty)
+        ? calculateBookingInvoiceTotals(booking, selectedProperty, showTax: showTax)
         : null;
 
     // Calculate billing
@@ -1261,7 +1341,7 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
               selectedProperty != null)
             IconButton(
               icon: const Icon(Icons.share),
-              onPressed: () => _shareInvoice(selectedProperty),
+              onPressed: () => _shareInvoice(selectedProperty, booking, showTax),
               tooltip: 'Share Invoice',
             ),
         ],
@@ -1800,16 +1880,105 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                                 ),
                               ],
                             ),
-                            if (totals.tax > 0) ...[
+                            if (showTax) ...[
                               const SizedBox(height: 6),
                               _buildBillingRow(
-                                'Tax (${selectedProperty?.taxPercentage ?? 0}%)',
+                                'Tax (${settings?['taxAmount'] ?? selectedProperty?.taxPercentage ?? 0}%)',
                                 totals.tax,
                                 theme,
                                 ext,
                               ),
                             ],
                             const Divider(),
+                            if (booking.status != Enum$BookingStatus.CANCELLED) ...[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 24,
+                                        width: 24,
+                                        child: Checkbox(
+                                          value: booking.waiveLastDayCharge ?? false,
+                                          onChanged: (val) async {
+                                            if (val != null) {
+                                              setState(() => _isLoading = true);
+                                              final success = await ref
+                                                  .read(bookingsControllerProvider.notifier)
+                                                  .updateBooking(
+                                                    booking.id,
+                                                    Input$UpdateBookingInput(
+                                                      checkInDate: booking.checkInDate,
+                                                      checkOutDate: booking.checkOutDate,
+                                                      adults: booking.adults,
+                                                      children: booking.children,
+                                                      status: booking.status,
+                                                      notes: booking.notes,
+                                                      discountAmount: booking.discountAmount,
+                                                      discountType: booking.discountType,
+                                                      waiveLastDayCharge: val,
+                                                    ),
+                                                  );
+                                              if (success) {
+                                                await ref.read(bookingsListProvider.future);
+                                              }
+                                              setState(() => _isLoading = false);
+                                              if (success && mounted) {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      val
+                                                          ? 'Last day charges waived'
+                                                          : 'Last day charges reinstated',
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        'Waive Day',
+                                        style: theme.textTheme.labelSmall?.copyWith(
+                                          color: ext.textMuted,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 24,
+                                        width: 24,
+                                        child: Checkbox(
+                                          value: showTax,
+                                          onChanged: (val) {
+                                            if (val != null) {
+                                              setState(() {
+                                                _showTax = val;
+                                              });
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        'Inc. Tax',
+                                        style: theme.textTheme.labelSmall?.copyWith(
+                                          color: ext.textMuted,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Divider(),
+                            ],
                             _buildBillingRow(
                               'Grand Total',
                               totals.total,
@@ -2031,6 +2200,7 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                                 label: const Text('Check In Guest'),
                                 onPressed: () => _updateStatus(
                                   Enum$BookingStatus.CHECKED_IN,
+                                  booking,
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green,
@@ -2052,6 +2222,7 @@ class _BookingDetailsScreenState extends ConsumerState<BookingDetailsScreen> {
                                 label: const Text('Check Out Guest'),
                                 onPressed: () => _updateStatus(
                                   Enum$BookingStatus.CHECKED_OUT,
+                                  booking,
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.grey[700],

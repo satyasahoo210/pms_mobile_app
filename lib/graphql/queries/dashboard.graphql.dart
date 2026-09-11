@@ -2124,6 +2124,13 @@ const documentNodeQueryGetBookings = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'waiveLastDayCharge'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'Guest'),
             alias: null,
             arguments: [],
@@ -2632,6 +2639,7 @@ class Query$GetBookings$bookings {
     this.discountType,
     this.totalAmount,
     this.notes,
+    this.waiveLastDayCharge,
     this.Guest,
     this.Payment,
     this.BookingRoom,
@@ -2652,6 +2660,7 @@ class Query$GetBookings$bookings {
     final l$discountType = json['discountType'];
     final l$totalAmount = json['totalAmount'];
     final l$notes = json['notes'];
+    final l$waiveLastDayCharge = json['waiveLastDayCharge'];
     final l$Guest = json['Guest'];
     final l$Payment = json['Payment'];
     final l$BookingRoom = json['BookingRoom'];
@@ -2672,6 +2681,7 @@ class Query$GetBookings$bookings {
       discountType: (l$discountType as String?),
       totalAmount: (l$totalAmount as num?)?.toDouble(),
       notes: (l$notes as String?),
+      waiveLastDayCharge: (l$waiveLastDayCharge as bool?),
       Guest: l$Guest == null
           ? null
           : Query$GetBookings$bookings$Guest.fromJson(
@@ -2722,6 +2732,8 @@ class Query$GetBookings$bookings {
 
   final String? notes;
 
+  final bool? waiveLastDayCharge;
+
   final Query$GetBookings$bookings$Guest? Guest;
 
   final List<Query$GetBookings$bookings$Payment?>? Payment;
@@ -2759,6 +2771,8 @@ class Query$GetBookings$bookings {
     _resultData['totalAmount'] = l$totalAmount;
     final l$notes = notes;
     _resultData['notes'] = l$notes;
+    final l$waiveLastDayCharge = waiveLastDayCharge;
+    _resultData['waiveLastDayCharge'] = l$waiveLastDayCharge;
     final l$Guest = Guest;
     _resultData['Guest'] = l$Guest?.toJson();
     final l$Payment = Payment;
@@ -2788,6 +2802,7 @@ class Query$GetBookings$bookings {
     final l$discountType = discountType;
     final l$totalAmount = totalAmount;
     final l$notes = notes;
+    final l$waiveLastDayCharge = waiveLastDayCharge;
     final l$Guest = Guest;
     final l$Payment = Payment;
     final l$BookingRoom = BookingRoom;
@@ -2806,6 +2821,7 @@ class Query$GetBookings$bookings {
       l$discountType,
       l$totalAmount,
       l$notes,
+      l$waiveLastDayCharge,
       l$Guest,
       l$Payment == null ? null : Object.hashAll(l$Payment.map((v) => v)),
       l$BookingRoom == null
@@ -2885,6 +2901,11 @@ class Query$GetBookings$bookings {
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (l$notes != lOther$notes) {
+      return false;
+    }
+    final l$waiveLastDayCharge = waiveLastDayCharge;
+    final lOther$waiveLastDayCharge = other.waiveLastDayCharge;
+    if (l$waiveLastDayCharge != lOther$waiveLastDayCharge) {
       return false;
     }
     final l$Guest = Guest;
@@ -2980,6 +3001,7 @@ abstract class CopyWith$Query$GetBookings$bookings<TRes> {
     String? discountType,
     double? totalAmount,
     String? notes,
+    bool? waiveLastDayCharge,
     Query$GetBookings$bookings$Guest? Guest,
     List<Query$GetBookings$bookings$Payment?>? Payment,
     List<Query$GetBookings$bookings$BookingRoom?>? BookingRoom,
@@ -3033,6 +3055,7 @@ class _CopyWithImpl$Query$GetBookings$bookings<TRes>
     Object? discountType = _undefined,
     Object? totalAmount = _undefined,
     Object? notes = _undefined,
+    Object? waiveLastDayCharge = _undefined,
     Object? Guest = _undefined,
     Object? Payment = _undefined,
     Object? BookingRoom = _undefined,
@@ -3069,6 +3092,9 @@ class _CopyWithImpl$Query$GetBookings$bookings<TRes>
             ? _instance.totalAmount
             : (totalAmount as double?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
+        waiveLastDayCharge: waiveLastDayCharge == _undefined
+            ? _instance.waiveLastDayCharge
+            : (waiveLastDayCharge as bool?),
         Guest: Guest == _undefined
             ? _instance.Guest
             : (Guest as Query$GetBookings$bookings$Guest?),
@@ -3157,6 +3183,7 @@ class _CopyWithStubImpl$Query$GetBookings$bookings<TRes>
     String? discountType,
     double? totalAmount,
     String? notes,
+    bool? waiveLastDayCharge,
     Query$GetBookings$bookings$Guest? Guest,
     List<Query$GetBookings$bookings$Payment?>? Payment,
     List<Query$GetBookings$bookings$BookingRoom?>? BookingRoom,
@@ -9048,6 +9075,13 @@ const documentNodeMutationCreateBooking = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'waiveLastDayCharge'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -9291,6 +9325,7 @@ class Mutation$CreateBooking$createBooking {
     this.children,
     this.totalAmount,
     this.notes,
+    this.waiveLastDayCharge,
     this.$__typename = 'Booking',
   });
 
@@ -9306,6 +9341,7 @@ class Mutation$CreateBooking$createBooking {
     final l$children = json['children'];
     final l$totalAmount = json['totalAmount'];
     final l$notes = json['notes'];
+    final l$waiveLastDayCharge = json['waiveLastDayCharge'];
     final l$$__typename = json['__typename'];
     return Mutation$CreateBooking$createBooking(
       id: (l$id as String),
@@ -9320,6 +9356,7 @@ class Mutation$CreateBooking$createBooking {
       children: (l$children as int?),
       totalAmount: (l$totalAmount as num?)?.toDouble(),
       notes: (l$notes as String?),
+      waiveLastDayCharge: (l$waiveLastDayCharge as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -9343,6 +9380,8 @@ class Mutation$CreateBooking$createBooking {
   final double? totalAmount;
 
   final String? notes;
+
+  final bool? waiveLastDayCharge;
 
   final String $__typename;
 
@@ -9369,6 +9408,8 @@ class Mutation$CreateBooking$createBooking {
     _resultData['totalAmount'] = l$totalAmount;
     final l$notes = notes;
     _resultData['notes'] = l$notes;
+    final l$waiveLastDayCharge = waiveLastDayCharge;
+    _resultData['waiveLastDayCharge'] = l$waiveLastDayCharge;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -9386,6 +9427,7 @@ class Mutation$CreateBooking$createBooking {
     final l$children = children;
     final l$totalAmount = totalAmount;
     final l$notes = notes;
+    final l$waiveLastDayCharge = waiveLastDayCharge;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -9398,6 +9440,7 @@ class Mutation$CreateBooking$createBooking {
       l$children,
       l$totalAmount,
       l$notes,
+      l$waiveLastDayCharge,
       l$$__typename,
     ]);
   }
@@ -9461,6 +9504,11 @@ class Mutation$CreateBooking$createBooking {
     if (l$notes != lOther$notes) {
       return false;
     }
+    final l$waiveLastDayCharge = waiveLastDayCharge;
+    final lOther$waiveLastDayCharge = other.waiveLastDayCharge;
+    if (l$waiveLastDayCharge != lOther$waiveLastDayCharge) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -9500,6 +9548,7 @@ abstract class CopyWith$Mutation$CreateBooking$createBooking<TRes> {
     int? children,
     double? totalAmount,
     String? notes,
+    bool? waiveLastDayCharge,
     String? $__typename,
   });
 }
@@ -9528,6 +9577,7 @@ class _CopyWithImpl$Mutation$CreateBooking$createBooking<TRes>
     Object? children = _undefined,
     Object? totalAmount = _undefined,
     Object? notes = _undefined,
+    Object? waiveLastDayCharge = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$CreateBooking$createBooking(
@@ -9554,6 +9604,9 @@ class _CopyWithImpl$Mutation$CreateBooking$createBooking<TRes>
             ? _instance.totalAmount
             : (totalAmount as double?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
+        waiveLastDayCharge: waiveLastDayCharge == _undefined
+            ? _instance.waiveLastDayCharge
+            : (waiveLastDayCharge as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -9577,6 +9630,7 @@ class _CopyWithStubImpl$Mutation$CreateBooking$createBooking<TRes>
     int? children,
     double? totalAmount,
     String? notes,
+    bool? waiveLastDayCharge,
     String? $__typename,
   }) =>
       _res;
@@ -9959,6 +10013,13 @@ const documentNodeMutationUpdateBooking = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'waiveLastDayCharge'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -10202,6 +10263,7 @@ class Mutation$UpdateBooking$updateBooking {
     this.children,
     this.totalAmount,
     this.notes,
+    this.waiveLastDayCharge,
     this.$__typename = 'Booking',
   });
 
@@ -10217,6 +10279,7 @@ class Mutation$UpdateBooking$updateBooking {
     final l$children = json['children'];
     final l$totalAmount = json['totalAmount'];
     final l$notes = json['notes'];
+    final l$waiveLastDayCharge = json['waiveLastDayCharge'];
     final l$$__typename = json['__typename'];
     return Mutation$UpdateBooking$updateBooking(
       id: (l$id as String),
@@ -10231,6 +10294,7 @@ class Mutation$UpdateBooking$updateBooking {
       children: (l$children as int?),
       totalAmount: (l$totalAmount as num?)?.toDouble(),
       notes: (l$notes as String?),
+      waiveLastDayCharge: (l$waiveLastDayCharge as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -10254,6 +10318,8 @@ class Mutation$UpdateBooking$updateBooking {
   final double? totalAmount;
 
   final String? notes;
+
+  final bool? waiveLastDayCharge;
 
   final String $__typename;
 
@@ -10280,6 +10346,8 @@ class Mutation$UpdateBooking$updateBooking {
     _resultData['totalAmount'] = l$totalAmount;
     final l$notes = notes;
     _resultData['notes'] = l$notes;
+    final l$waiveLastDayCharge = waiveLastDayCharge;
+    _resultData['waiveLastDayCharge'] = l$waiveLastDayCharge;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -10297,6 +10365,7 @@ class Mutation$UpdateBooking$updateBooking {
     final l$children = children;
     final l$totalAmount = totalAmount;
     final l$notes = notes;
+    final l$waiveLastDayCharge = waiveLastDayCharge;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -10309,6 +10378,7 @@ class Mutation$UpdateBooking$updateBooking {
       l$children,
       l$totalAmount,
       l$notes,
+      l$waiveLastDayCharge,
       l$$__typename,
     ]);
   }
@@ -10372,6 +10442,11 @@ class Mutation$UpdateBooking$updateBooking {
     if (l$notes != lOther$notes) {
       return false;
     }
+    final l$waiveLastDayCharge = waiveLastDayCharge;
+    final lOther$waiveLastDayCharge = other.waiveLastDayCharge;
+    if (l$waiveLastDayCharge != lOther$waiveLastDayCharge) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -10411,6 +10486,7 @@ abstract class CopyWith$Mutation$UpdateBooking$updateBooking<TRes> {
     int? children,
     double? totalAmount,
     String? notes,
+    bool? waiveLastDayCharge,
     String? $__typename,
   });
 }
@@ -10439,6 +10515,7 @@ class _CopyWithImpl$Mutation$UpdateBooking$updateBooking<TRes>
     Object? children = _undefined,
     Object? totalAmount = _undefined,
     Object? notes = _undefined,
+    Object? waiveLastDayCharge = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation$UpdateBooking$updateBooking(
@@ -10465,6 +10542,9 @@ class _CopyWithImpl$Mutation$UpdateBooking$updateBooking<TRes>
             ? _instance.totalAmount
             : (totalAmount as double?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
+        waiveLastDayCharge: waiveLastDayCharge == _undefined
+            ? _instance.waiveLastDayCharge
+            : (waiveLastDayCharge as bool?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -10488,6 +10568,7 @@ class _CopyWithStubImpl$Mutation$UpdateBooking$updateBooking<TRes>
     int? children,
     double? totalAmount,
     String? notes,
+    bool? waiveLastDayCharge,
     String? $__typename,
   }) =>
       _res;

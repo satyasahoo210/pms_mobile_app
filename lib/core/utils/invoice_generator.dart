@@ -110,10 +110,52 @@ class InvoiceTotals {
   });
 }
 
+int getRoomStayNights({
+  required Query$GetBookings$bookings$BookingRoom item,
+  required Query$GetBookings$bookings booking,
+  required Query$GetProperties$properties property,
+}) {
+  final bookingCheckInDate = DateTime.parse(booking.checkInDate).toLocal();
+  final bookingCheckOutDate = DateTime.parse(booking.checkOutDate).toLocal();
+
+  final checkOutTimeStr = DateFormat('HH:mm:ss').format(bookingCheckOutDate);
+
+  Map<String, dynamic>? settings;
+  if (property.settings != null) {
+    try {
+      settings = jsonDecode(property.settings!) as Map<String, dynamic>;
+    } catch (_) {}
+  }
+
+  String propCheckOutTime = settings?['checkoutTime'] ?? '07:00:00';
+  if (propCheckOutTime.split(':').length == 2) {
+    propCheckOutTime = '$propCheckOutTime:00';
+  }
+
+  final itemCheckIn = item.checkInDate != null
+      ? DateTime.parse(item.checkInDate!).toLocal()
+      : bookingCheckInDate;
+  final itemCheckOut = item.checkOutDate != null
+      ? DateTime.parse(item.checkOutDate!).toLocal()
+      : bookingCheckOutDate;
+
+  int roomNights = differenceInCalendarDays(itemCheckOut, itemCheckIn);
+
+  if (checkOutTimeStr.compareTo(propCheckOutTime) > 0) {
+    roomNights += 1;
+  }
+  if (booking.waiveLastDayCharge == true) {
+    roomNights -= 1;
+  }
+
+  return math.max(1, roomNights);
+}
+
 InvoiceTotals calculateBookingInvoiceTotals(
   Query$GetBookings$bookings booking,
-  Query$GetProperties$properties property,
-) {
+  Query$GetProperties$properties property, {
+  bool showTax = true,
+}) {
   final checkIn = DateTime.parse(booking.checkInDate).toLocal();
   final checkOut = DateTime.parse(booking.checkOutDate).toLocal();
 
@@ -134,6 +176,10 @@ InvoiceTotals calculateBookingInvoiceTotals(
 
   if (checkOutTimeStr.compareTo(propCheckOutTime) > 0) {
     nights += 1;
+  }
+
+  if (booking.waiveLastDayCharge == true) {
+    nights -= 1;
   }
 
   nights = math.max(1, nights);
@@ -162,9 +208,9 @@ InvoiceTotals calculateBookingInvoiceTotals(
     discountAmount = booking.discountAmount ?? 0.0;
   }
 
-  final double taxPercentage = property.taxPercentage ?? 0.0;
+  final double taxPercentage = (settings?['taxAmount'] as num?)?.toDouble() ?? (property.taxPercentage ?? 0.0);
   final double taxRate = taxPercentage / 100;
-  final double tax = (subtotal - discountAmount) * taxRate;
+  final double tax = showTax ? (subtotal - discountAmount) * taxRate : 0.0;
 
   final double grandTotal = subtotal - discountAmount + tax;
 
@@ -195,12 +241,20 @@ InvoiceTotals calculateBookingInvoiceTotals(
 Future<pw.Document> generateInvoicePDF({
   required Query$GetBookings$bookings booking,
   required Query$GetProperties$properties property,
+  bool showTax = true,
 }) async {
   final pdf = pw.Document();
 
   final checkIn = DateTime.parse(booking.checkInDate).toLocal();
   final checkOut = DateTime.parse(booking.checkOutDate).toLocal();
-  final totals = calculateBookingInvoiceTotals(booking, property);
+  final totals = calculateBookingInvoiceTotals(booking, property, showTax: showTax);
+
+  Map<String, dynamic>? settings;
+  if (property.settings != null) {
+    try {
+      settings = jsonDecode(property.settings!) as Map<String, dynamic>;
+    } catch (_) {}
+  }
 
   // Load logo image
   final logoBytes = await rootBundle.load('assets/images/logo_large.png');
@@ -408,14 +462,25 @@ Future<pw.Document> generateInvoicePDF({
                       children: [pw.Container(), pw.Container()],
                     );
                   }
-                  final roomNights = totals.nights;
+                  final itemCheckIn = a.checkInDate != null
+                      ? DateTime.parse(a.checkInDate!).toLocal()
+                      : checkIn;
+                  final itemCheckOut = a.checkOutDate != null
+                      ? DateTime.parse(a.checkOutDate!).toLocal()
+                      : checkOut;
+
+                  final roomNights = getRoomStayNights(
+                    item: a,
+                    booking: booking,
+                    property: property,
+                  );
                   final roomNum = a.Room?.roomNumber ?? 'N/A';
                   final roomType = a.RoomType?.name ?? 'Standard';
                   final rate =
                       a.priceOverride ?? a.RoomType?.defaultPrice ?? 0.0;
                   final total = rate * roomNights;
                   final datesStr =
-                      '${DateFormat('dd MMM yyyy').format(checkIn)} - ${DateFormat('dd MMM yyyy').format(checkOut)}';
+                      '${DateFormat('dd MMM yyyy').format(itemCheckIn)} - ${DateFormat('dd MMM yyyy').format(itemCheckOut)}';
 
                   return pw.TableRow(
                     children: [
@@ -514,9 +579,9 @@ Future<pw.Document> generateInvoicePDF({
                         _buildTotalRow('Sub Total:', totals.subtotal),
                         if (totals.discount > 0)
                           _buildTotalRow('Discount:', -totals.discount),
-                        if (totals.tax > 0)
+                        if (totals.tax > 0 || showTax)
                           _buildTotalRow(
-                            'Tax (${property.taxPercentage}%):',
+                            'Tax (${settings?['taxAmount'] ?? property.taxPercentage}%):',
                             totals.tax,
                           ),
                         pw.Divider(
@@ -757,8 +822,13 @@ pw.Widget _buildTotalRow(String label, double value, {bool isBold = false}) {
 Future<void> shareInvoiceViaWhatsApp({
   required Query$GetBookings$bookings booking,
   required Query$GetProperties$properties property,
+  bool showTax = true,
 }) async {
-  final pdf = await generateInvoicePDF(booking: booking, property: property);
+  final pdf = await generateInvoicePDF(
+    booking: booking,
+    property: property,
+    showTax: showTax,
+  );
 
   final output = await getTemporaryDirectory();
   final fileName =

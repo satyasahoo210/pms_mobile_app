@@ -45,6 +45,7 @@ query GetBookings($propertyId: String, $guestId: String) {
     discountType
     totalAmount
     notes
+    waiveLastDayCharge
     Guest {
       id
       name
@@ -164,6 +165,7 @@ mutation CreateBooking($input: CreateBookingInput!) {
     children
     totalAmount
     notes
+    waiveLastDayCharge
   }
 }
 
@@ -179,6 +181,7 @@ mutation UpdateBooking($id: ID!, $input: UpdateBookingInput!) {
     children
     totalAmount
     notes
+    waiveLastDayCharge
   }
 }
 
